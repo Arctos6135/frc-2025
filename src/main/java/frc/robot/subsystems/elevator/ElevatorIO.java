@@ -22,7 +22,7 @@ public class ElevatorIO {
 
     // % Max Volts
     public double rightVoltage;
-    public double leftVoltage; 
+    public double leftVoltage;
   }
 
   public void updateInputs(ElevatorInputs inputs) {}

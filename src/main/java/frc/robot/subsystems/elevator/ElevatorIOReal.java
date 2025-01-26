@@ -1,17 +1,17 @@
 package frc.robot.subsystems.elevator;
 
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-
+import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.ElevatorConstants;
 
 public class ElevatorIOReal extends ElevatorIO {
   private final SparkMax leftMotor = new SparkMax(CANConstants.ELEVATOR_LEFT, MotorType.kBrushless);
-  private final SparkMax rightMotor = new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
+  private final SparkMax rightMotor =
+      new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
@@ -20,30 +20,32 @@ public class ElevatorIOReal extends ElevatorIO {
     // Left Motor Configuration
     SparkMaxConfig leftConfig = new SparkMaxConfig();
     leftConfig
-      .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-      .idleMode(IdleMode.kBrake)
-      .inverted(false);
-    
-    leftConfig.encoder
-      .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
-      .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
-    
+        .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
+        .idleMode(IdleMode.kBrake)
+        .inverted(false);
+
+    leftConfig
+        .encoder
+        .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
+        .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
+
     leftMotor.configure(leftConfig, null, null);
-    
+
     // Right Motor Configuration
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
-      .follow(leftMotor) // follow the other motor
-      .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-      .idleMode(IdleMode.kBrake)
-      .inverted(true); // inverted
-    
-    rightConfig.encoder
-      .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
-      .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
-    
+        .follow(leftMotor) // follow the other motor
+        .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
+        .idleMode(IdleMode.kBrake)
+        .inverted(true); // inverted
+
+    rightConfig
+        .encoder
+        .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
+        .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
+
     rightMotor.configure(rightConfig, null, null);
-    
+
     leftEncoder = leftMotor.getEncoder();
     rightEncoder = rightMotor.getEncoder();
   }
