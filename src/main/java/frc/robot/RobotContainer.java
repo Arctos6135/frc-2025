@@ -8,7 +8,8 @@ import frc.robot.commands.TeleopDrive;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.DrivetrainIO;
-
+import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIO;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
@@ -22,10 +23,12 @@ public class RobotContainer {
 
   public Drivetrain drivetrain;
   public TeleopDrive teleopDrive;
+  public Elevator elevator;
 
   public RobotContainer() {
-    if (RobotBase.isReal()){
+    if (RobotBase.isReal()) {
       drivetrain = new Drivetrain(new DrivetrainIO());
+      elevator = new Elevator(new ElevatorIO());
     }
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);

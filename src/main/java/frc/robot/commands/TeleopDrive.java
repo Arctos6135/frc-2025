@@ -4,7 +4,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import java.util.function.DoubleSupplier;
 import swervelib.math.SwerveMath;
 
 public class TeleopDrive extends Command {
@@ -23,10 +22,13 @@ public class TeleopDrive extends Command {
     drivetrain.swerveDrive.drive(
         SwerveMath.scaleTranslation(
             new Translation2d(
-                controller.getRawAxis(XboxController.Axis.kLeftX.value) * drivetrain.swerveDrive.getMaximumChassisVelocity(),
-                controller.getRawAxis(XboxController.Axis.kLeftY.value) * drivetrain.swerveDrive.getMaximumChassisVelocity()),
+                controller.getRawAxis(XboxController.Axis.kLeftX.value)
+                    * drivetrain.swerveDrive.getMaximumChassisVelocity(),
+                controller.getRawAxis(XboxController.Axis.kLeftY.value)
+                    * drivetrain.swerveDrive.getMaximumChassisVelocity()),
             0.8),
-        Math.pow(controller.getRawAxis(XboxController.Axis.kRightX.value), 3) * drivetrain.swerveDrive.getMaximumChassisAngularVelocity(),
+        Math.pow(controller.getRawAxis(XboxController.Axis.kRightX.value), 3)
+            * drivetrain.swerveDrive.getMaximumChassisAngularVelocity(),
         true,
         false);
   }
