@@ -1,10 +1,9 @@
 package frc.robot.subsystems.intake;
 
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
+import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
@@ -42,5 +41,5 @@ public class Intake extends SubsystemBase {
 
   public double getFilteredCurrent() {
     return medianCurrent;
-}
+  }
 }

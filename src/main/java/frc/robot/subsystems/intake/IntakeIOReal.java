@@ -1,15 +1,13 @@
 package frc.robot.subsystems.intake;
 
-import org.littletonrobotics.junction.Logger;
-
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-
+import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.IntakeConstants;
+import org.littletonrobotics.junction.Logger;
 
 public class IntakeIOReal extends IntakeIO {
   private final SparkMax motor = new SparkMax(CANConstants.INTAKE_MOTOR, MotorType.kBrushless);
@@ -19,13 +17,14 @@ public class IntakeIOReal extends IntakeIO {
   public IntakeIOReal() {
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig
-      .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
-      .inverted(false)
-      .idleMode(IdleMode.kBrake);
-    
-    motorConfig.encoder
-      .positionConversionFactor(IntakeConstants.POSITION_CONVERSION_FACTOR)
-      .velocityConversionFactor(IntakeConstants.VELOCITY_CONVERSION_FACTOR);
+        .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
+        .inverted(false)
+        .idleMode(IdleMode.kBrake);
+
+    motorConfig
+        .encoder
+        .positionConversionFactor(IntakeConstants.POSITION_CONVERSION_FACTOR)
+        .velocityConversionFactor(IntakeConstants.VELOCITY_CONVERSION_FACTOR);
 
     motor.configure(motorConfig, null, null);
     encoder = motor.getEncoder();

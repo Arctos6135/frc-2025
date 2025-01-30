@@ -19,13 +19,17 @@ public class TeleopDrive extends Command {
     addRequirements(drivetrain);
   }
 
+  public double nearZero(double num) {
+    return Math.abs(num) > 0.05 ? num : 0;
+  }
+
   @Override
   public void execute() {
     swerveDrive.drive(
         new Translation2d(
-            controller.getLeftX() * swerveDrive.getMaximumChassisVelocity(),
-            controller.getRightX() * swerveDrive.getMaximumChassisVelocity()),
-        controller.getRightX() * swerveDrive.getMaximumChassisAngularVelocity(),
+            nearZero(controller.getLeftX()) * swerveDrive.getMaximumChassisVelocity(),
+            nearZero(controller.getLeftY()) * swerveDrive.getMaximumChassisVelocity()),
+        nearZero(controller.getRightX() * swerveDrive.getMaximumChassisAngularVelocity()),
         true,
         false);
   }

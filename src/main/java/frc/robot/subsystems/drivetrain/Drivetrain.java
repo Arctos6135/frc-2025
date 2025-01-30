@@ -26,8 +26,10 @@ public class Drivetrain extends SubsystemBase {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    swerveDrive.setHeadingCorrection(false);
-    swerveDrive.setCosineCompensator(false);
+    swerveDrive.setHeadingCorrection(true);
+    swerveDrive.setCosineCompensator(true);
+
+    swerveDrive.
   }
 
   @Override
