@@ -34,6 +34,7 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void robotInit() {
+    m_robotContainer = new RobotContainer();
     // Set up data receivers & replay source
     if (isReal()) {
       // Running on a real robot, log to a USB stick ("/U/logs")
@@ -52,8 +53,6 @@ public class Robot extends LoggedRobot {
 
     // Start AdvantageKit logger
     Logger.start();
-
-    m_robotContainer = new RobotContainer();
   }
 
   /** This function is called periodically during all modes. */

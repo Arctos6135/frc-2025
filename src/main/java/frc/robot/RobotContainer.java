@@ -8,16 +8,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.subsystems.drivetrain.DrivetrainIO;
 import frc.robot.subsystems.drivetrain.DrivetrainIOReal;
-import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.IntakeIO;
-
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
-
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeIO;
 import java.io.File;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
@@ -29,20 +25,19 @@ public class RobotContainer {
   public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public Drivetrain drivetrain;
+  public final Drivetrain drivetrain =
+      new Drivetrain(new DrivetrainIOReal(), new File(Filesystem.getDeployDirectory(), "swerve"));
   public TeleopDrive teleopDrive;
   public Intake intake;
   public Elevator elevator;
 
   public RobotContainer() {
     if (RobotBase.isReal()) {
-      drivetrain = new Drivetrain(new DrivetrainIOReal(new File(Filesystem.getDeployDirectory(), "swerve")));
-      intake = new Intake(new IntakeIO());
-      elevator = new Elevator(new ElevatorIO());
+      this.intake = new Intake(new IntakeIO());
+      this.elevator = new Elevator(new ElevatorIO());
     }
 
-    teleopDrive = new TeleopDrive(drivetrain, driverController);
-    drivetrain.setDefaultCommand(teleopDrive);
+    drivetrain.setDefaultCommand(new TeleopDrive(drivetrain, driverController));
 
     configureAuto();
     configureBindings();
