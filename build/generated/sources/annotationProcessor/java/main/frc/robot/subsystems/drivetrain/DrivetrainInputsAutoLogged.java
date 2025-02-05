@@ -5,32 +5,23 @@ import java.lang.Override;
 import org.littletonrobotics.junction.LogTable;
 import org.littletonrobotics.junction.inputs.LoggableInputs;
 
-public class DrivetrainInputsAutoLogged extends DrivetrainIO.DrivetrainInputs implements LoggableInputs, Cloneable {
+public class DrivetrainInputsAutoLogged extends Drivetrain.DrivetrainInputs implements LoggableInputs, Cloneable {
   @Override
   public void toLog(LogTable table) {
-    table.put("MeasuredStates", measuredStates);
-    table.put("DesiredStates", desiredStates);
-    table.put("MeasuredChassisSpeeds", measuredChassisSpeeds);
-    table.put("DesiredChassisSpeeds", desiredChassisSpeeds);
-    table.put("RobotRotation", robotRotation);
+    table.put("DriveVoltages", driveVoltages);
+    table.put("AngleVoltages", angleVoltages);
   }
 
   @Override
   public void fromLog(LogTable table) {
-    measuredStates = table.get("MeasuredStates", measuredStates);
-    desiredStates = table.get("DesiredStates", desiredStates);
-    measuredChassisSpeeds = table.get("MeasuredChassisSpeeds", measuredChassisSpeeds);
-    desiredChassisSpeeds = table.get("DesiredChassisSpeeds", desiredChassisSpeeds);
-    robotRotation = table.get("RobotRotation", robotRotation);
+    driveVoltages = table.get("DriveVoltages", driveVoltages);
+    angleVoltages = table.get("AngleVoltages", angleVoltages);
   }
 
   public DrivetrainInputsAutoLogged clone() {
     DrivetrainInputsAutoLogged copy = new DrivetrainInputsAutoLogged();
-    copy.measuredStates = this.measuredStates.clone();
-    copy.desiredStates = this.desiredStates.clone();
-    copy.measuredChassisSpeeds = this.measuredChassisSpeeds;
-    copy.desiredChassisSpeeds = this.desiredChassisSpeeds;
-    copy.robotRotation = this.robotRotation;
+    copy.driveVoltages = this.driveVoltages.clone();
+    copy.angleVoltages = this.angleVoltages.clone();
     return copy;
   }
 }

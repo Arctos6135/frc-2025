@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.subsystems.drivetrain.DrivetrainIOReal;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.intake.Intake;
@@ -26,7 +25,7 @@ public class RobotContainer {
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
   public final Drivetrain drivetrain =
-      new Drivetrain(new DrivetrainIOReal(), new File(Filesystem.getDeployDirectory(), "swerve"));
+      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
   public TeleopDrive teleopDrive;
   public Intake intake;
   public Elevator elevator;
