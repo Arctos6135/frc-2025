@@ -26,7 +26,7 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     io.updateInputs(inputs);
     medianCurrent = filter.calculate(inputs.current);
-    io.setVoltage(pidController.calculate(inputs.speed));
+    io.setVoltage(pidController.calculate(getVelocity()));
 
     Logger.processInputs("Intake", inputs);
     Logger.recordOutput("Intake/Filtered Current", medianCurrent);
