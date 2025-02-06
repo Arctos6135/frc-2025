@@ -1,7 +1,5 @@
 package frc.robot.constants;
 
-import edu.wpi.first.math.util.Units;
-
 public class IntakeConstants {
   public static final int CURRENT_LIMIT = 30;
 
