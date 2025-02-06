@@ -27,9 +27,9 @@ public class TeleopDrive extends Command {
   public void execute() {
     swerveDrive.drive(
         new Translation2d(
-            nearZero(controller.getLeftX()) * swerveDrive.getMaximumChassisVelocity(),
+            nearZero(-controller.getLeftX()) * swerveDrive.getMaximumChassisVelocity(),
             nearZero(controller.getLeftY()) * swerveDrive.getMaximumChassisVelocity()),
-        nearZero(controller.getRightX() * swerveDrive.getMaximumChassisAngularVelocity()),
+        nearZero(-controller.getRightX() * swerveDrive.getMaximumChassisAngularVelocity()),
         true,
         false);
   }
