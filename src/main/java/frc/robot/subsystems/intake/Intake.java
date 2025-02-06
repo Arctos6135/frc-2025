@@ -1,12 +1,15 @@
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
+  private final PIDController pidController;
 
   private final IntakeInputsAutoLogged inputs = new IntakeInputsAutoLogged();
 
@@ -16,12 +19,14 @@ public class Intake extends SubsystemBase {
 
   public Intake(IntakeIO io) {
     this.io = io;
+    pidController = new PIDController(IntakeConstants.PID_CONSTANTS[0], IntakeConstants.PID_CONSTANTS[1], IntakeConstants.PID_CONSTANTS[2]);
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
     medianCurrent = filter.calculate(inputs.current);
+    io.setVoltage(pidController.calculate(inputs.speed));
 
     Logger.processInputs("Intake", inputs);
     Logger.recordOutput("Intake/Filtered Current", medianCurrent);
@@ -32,6 +37,14 @@ public class Intake extends SubsystemBase {
    */
   public double getVelocity() {
     return inputs.speed;
+  }
+
+  /**
+   * Set the target rotational speed of the intake.
+   * @param rps rotations per second.
+   */
+  public void setRPS(double rps) {
+    pidController.setSetpoint(rps);
   }
 
   public void setVoltage(double voltage) {
