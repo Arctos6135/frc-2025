@@ -47,6 +47,14 @@ public class Intake extends SubsystemBase {
     pidController.setSetpoint(rps);
   }
 
+  /**
+   * Set the target rotational speed of the intake.
+   * @param rpm rotations per minute.
+   */
+  public void setRPM(double rpm) { 
+    setRPS(rpm / 60);
+  }
+
   public void setVoltage(double voltage) {
     Logger.recordOutput("Intake/Voltage", voltage);
     io.setVoltage(voltage);
