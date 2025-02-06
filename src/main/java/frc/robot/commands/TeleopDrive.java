@@ -30,8 +30,8 @@ public class TeleopDrive extends Command {
   public void execute() {
     swerveDrive.driveFieldOriented(
         new ChassisSpeeds(
-            MathUtils.nearZero(-controller.getLeftX()) * maxSpeed,
             MathUtils.nearZero(controller.getLeftY()) * maxSpeed,
-            MathUtils.nearZero(-controller.getRightX()) * maxRotationalSpeed));
+            MathUtils.nearZero(controller.getLeftX()) * maxSpeed,
+            MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed));
   }
 }
