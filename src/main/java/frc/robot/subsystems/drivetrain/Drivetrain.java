@@ -22,8 +22,10 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void updateInputs(DrivetrainInputs inputs) {
-    inputs.driveVoltage = swerveDrive.swerveDriveConfiguration.modules[0].getDriveMotor().getVoltage();
-    inputs.angleVoltage = swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
+    inputs.driveVoltage =
+        swerveDrive.swerveDriveConfiguration.modules[0].getDriveMotor().getVoltage();
+    inputs.angleVoltage =
+        swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
   }
 
   private final DrivetrainInputsAutoLogged inputs = new DrivetrainInputsAutoLogged();

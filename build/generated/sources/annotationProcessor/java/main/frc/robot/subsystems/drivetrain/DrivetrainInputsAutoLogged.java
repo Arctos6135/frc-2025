@@ -8,20 +8,20 @@ import org.littletonrobotics.junction.inputs.LoggableInputs;
 public class DrivetrainInputsAutoLogged extends Drivetrain.DrivetrainInputs implements LoggableInputs, Cloneable {
   @Override
   public void toLog(LogTable table) {
-    table.put("DriveVoltages", driveVoltages);
-    table.put("AngleVoltages", angleVoltages);
+    table.put("DriveVoltage", driveVoltage);
+    table.put("AngleVoltage", angleVoltage);
   }
 
   @Override
   public void fromLog(LogTable table) {
-    driveVoltages = table.get("DriveVoltages", driveVoltages);
-    angleVoltages = table.get("AngleVoltages", angleVoltages);
+    driveVoltage = table.get("DriveVoltage", driveVoltage);
+    angleVoltage = table.get("AngleVoltage", angleVoltage);
   }
 
   public DrivetrainInputsAutoLogged clone() {
     DrivetrainInputsAutoLogged copy = new DrivetrainInputsAutoLogged();
-    copy.driveVoltages = this.driveVoltages.clone();
-    copy.angleVoltages = this.angleVoltages.clone();
+    copy.driveVoltage = this.driveVoltage;
+    copy.angleVoltage = this.angleVoltage;
     return copy;
   }
 }
