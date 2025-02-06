@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ElevatorDefault;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -29,17 +30,27 @@ public class RobotContainer {
 
   public final Drivetrain drivetrain =
       new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
-  public TeleopDrive teleopDrive;
-  public Intake intake;
-  public Elevator elevator;
+  public final Intake intake;
+  public final Elevator elevator;
+
+  public final TeleopDrive teleopDrive;
+  public final ElevatorDefault elevatorDefault;
 
   public RobotContainer() {
     if (RobotBase.isReal()) {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
     }
+    else {
+      this.intake = new Intake(new IntakeIO());
+      this.elevator = new Elevator(new ElevatorIO());
+    }
 
-    drivetrain.setDefaultCommand(new TeleopDrive(drivetrain, driverController));
+    teleopDrive = new TeleopDrive(drivetrain, driverController);
+    elevatorDefault = new ElevatorDefault(elevator);
+
+    drivetrain.setDefaultCommand(teleopDrive);
+    elevator.setDefaultCommand(elevatorDefault);
 
     configureAuto();
     configureBindings();
