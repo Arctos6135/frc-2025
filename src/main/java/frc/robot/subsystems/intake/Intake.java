@@ -3,7 +3,6 @@ package frc.robot.subsystems.intake;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import org.littletonrobotics.junction.Logger;
 
@@ -19,7 +18,11 @@ public class Intake extends SubsystemBase {
 
   public Intake(IntakeIO io) {
     this.io = io;
-    pidController = new PIDController(IntakeConstants.PID_CONSTANTS[0], IntakeConstants.PID_CONSTANTS[1], IntakeConstants.PID_CONSTANTS[2]);
+    pidController =
+        new PIDController(
+            IntakeConstants.PID_CONSTANTS[0],
+            IntakeConstants.PID_CONSTANTS[1],
+            IntakeConstants.PID_CONSTANTS[2]);
   }
 
   @Override
@@ -41,6 +44,7 @@ public class Intake extends SubsystemBase {
 
   /**
    * Set the target rotational speed of the intake.
+   *
    * @param rps rotations per second.
    */
   public void setRPS(double rps) {
