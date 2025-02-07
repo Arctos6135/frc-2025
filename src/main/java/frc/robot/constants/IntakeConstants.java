@@ -12,4 +12,6 @@ public class IntakeConstants {
   public static final double[] PID_CONSTANTS = {1.0, 0.0, 0.0};
 
   public static final int MEDIAN_FILTER_SIZE = 12;
+
+  public static final double INTAKE_RPS = 70.0;
 }
