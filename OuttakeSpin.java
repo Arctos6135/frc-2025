@@ -1,26 +1,29 @@
-// This code is in progress
-
 package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.command.button.Trigger;
+import frc.robot.subsystems.intake.Intake;
 
 public class OuttakeSpin {
 
   private Outtake outtake;
   private XboxController controllerButton;
 
-  whileTrue() { // button is being held down
-    // outtake spins at 12 Volts
+  public OuttakeSpin(Outtake outtakeType, XboxController controllerType) {
+    this.outtake = outtakeType;
+    this.controllerButton = controllerType;
   }
 
-  public OuttakeSpin(Outtake outtakeType, XboxController controllerType) {
-    outtake = outtakeType;
-    controllerButton = controllerType;
-  }
-  
-  @override
-  public void setVoltage(double amount) {
-    voltage = amount;
+  public void spin() {
+    if (controllerButton.getAButton()) {
+       whileTrue(controllerButton.getAButton()) {
+         outtake.setRPS(12.0);
+       }
+    }
+      
+    else {
+      io.setVoltage(0);
+    }
   }
 
 }
