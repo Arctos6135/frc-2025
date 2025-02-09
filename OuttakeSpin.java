@@ -15,15 +15,11 @@ public class OuttakeSpin {
   }
 
   public void spin() {
-    if (controllerButton.getAButton()) {
-       whileTrue(controllerButton.getAButton()) {
-         outtake.setRPS(12.0);
-       }
+    whileTrue(controllerButton.getAButton()) {
+      outtake.setRPS(12.0);
     }
-      
-    else {
-      io.setVoltage(0);
-    }
+    
+    io.setVoltage(0);    
   }
 
 }
