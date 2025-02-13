@@ -15,7 +15,7 @@ public class OuttakeSpin {
   }
 
   public void spin() {
-    whileTrue(controllerButton.getAButton()) {
+    whileTrue(()) { // Controller button specefic to outtake being held is boolean true
       outtake.setRPS(12.0);
     }
     
