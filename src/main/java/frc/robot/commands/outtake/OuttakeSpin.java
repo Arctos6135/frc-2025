@@ -1,4 +1,4 @@
-package frc.robot.subsystems.outtake;
+package frc.robot.commands.outtake;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.button.Trigger;
