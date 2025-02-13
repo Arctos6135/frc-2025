@@ -178,3 +178,6 @@ logs/
 ctre_sim/
 
 .VSCodeCounter/
+
+
+.gradle/
