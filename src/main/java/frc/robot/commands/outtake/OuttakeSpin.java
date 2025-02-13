@@ -1,10 +1,9 @@
-package frc.robot.commands.outtake;
+package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.command.button.Trigger;
-import frc.robot.subsystems.intake.Intake;
 
-public class OuttakeSpin {
+
+public class OuttakeSpin extends Command {
 
   private Outtake outtake;
   private XboxController controllerButton;
@@ -13,13 +12,18 @@ public class OuttakeSpin {
     this.outtake = outtakeType;
     this.controllerButton = controllerType;
   }
-
-  public void spin() {
-    whileTrue(()) { // Controller button specefic to outtake being held is boolean true
+  
+  @override
+  public void initialize(double speed) {
+    whileTrue(configureBindings()) {
       outtake.setRPS(12.0);
     }
-    
-    io.setVoltage(0);    
   }
+
+  @override
+  public void end() {
+    outtake.setRPS(0);
+  }
+
 
 }
