@@ -12,12 +12,10 @@ public class QuickOuttake extends Command {
   private final double duration;
 
   /**
-   * Run the outtake for a specified duration and
-   * then stop.
-   * 
-   * @param outtake  Outtake Subsystem
-   * @param duration The duration in seconds to run the
-   *                 outtake for.
+   * Run the outtake for a specified duration and then stop.
+   *
+   * @param outtake Outtake Subsystem
+   * @param duration The duration in seconds to run the outtake for.
    */
   public QuickOuttake(Outtake outtake, double duration) {
     this.outtake = outtake;

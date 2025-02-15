@@ -10,5 +10,5 @@ public class OuttakeConstants {
   public static final double OUTTAKE_RPS = 20;
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
 
-  public static final double[] PID_CONSTANTS = { 1.0, 0.0, 0.0 };
+  public static final double[] PID_CONSTANTS = {1.0, 0.0, 0.0};
 }

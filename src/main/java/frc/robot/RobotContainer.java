@@ -26,13 +26,16 @@ import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
-  public final XboxController driverController = new XboxController(ControllerConstants.DRIVER_CONTROLLER);
-  public final XboxController operatorController = new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
+  public final XboxController driverController =
+      new XboxController(ControllerConstants.DRIVER_CONTROLLER);
+  public final XboxController operatorController =
+      new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
   public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public final Drivetrain drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Drivetrain drivetrain =
+      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
@@ -62,7 +65,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorRightBumper =
+        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
@@ -74,8 +78,7 @@ public class RobotContainer {
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
   }
 
-  public void startMatch() {
-  }
+  public void startMatch() {}
 
   public Command getAutonomousCommand() {
     return autoChooser.get();
