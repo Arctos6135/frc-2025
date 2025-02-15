@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.outtake.OuttakeSpin;
+import frc.robot.commands.outtake.QuickOuttake;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
@@ -66,8 +67,10 @@ public class RobotContainer {
   private void configureBindings() {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
+    operatorA.whileTrue(new QuickOuttake(outtake));
   }
 
   private void configureAuto() {
