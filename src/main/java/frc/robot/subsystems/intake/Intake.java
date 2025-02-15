@@ -29,6 +29,7 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     io.updateInputs(inputs);
     medianCurrent = filter.calculate(inputs.current);
+
     io.setVoltage(pidController.calculate(getVelocity()));
 
     Logger.processInputs("Intake", inputs);
@@ -60,11 +61,17 @@ public class Intake extends SubsystemBase {
     setRPS(rpm / 60);
   }
 
+  /**
+   * Set the voltage of the intake motor.
+   *
+   * @param voltage voltage
+   */
   public void setVoltage(double voltage) {
     Logger.recordOutput("Intake/Voltage", voltage);
     io.setVoltage(voltage);
   }
 
+  /** Get the most up-to-date filtered current value. */
   public double getFilteredCurrent() {
     return medianCurrent;
   }
