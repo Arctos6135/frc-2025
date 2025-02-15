@@ -21,7 +21,6 @@ import frc.robot.subsystems.intake.IntakeIOReal;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIO;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
-
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -65,7 +64,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorRightBumper =
+        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
   }
