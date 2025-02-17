@@ -46,4 +46,7 @@ public class Elevator extends SubsystemBase {
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
   }
+  public double calculatePID(){
+    return pidController.calculate(getLeftPosition());
+  }
 }

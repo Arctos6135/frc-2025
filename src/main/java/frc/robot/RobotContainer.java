@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
+import frc.robot.commands.elevator.ManualElevator;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
@@ -33,7 +34,7 @@ public class RobotContainer {
   public final Elevator elevator;
 
   public final TeleopDrive teleopDrive;
-  public final ElevatorPositionSet elevatorDefault;
+  public final ManualElevator elevatorDefault;
 
   public RobotContainer() {
     if (RobotBase.isReal()) {
@@ -45,7 +46,7 @@ public class RobotContainer {
     }
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
-    elevatorDefault = new ElevatorPositionSet(elevator);
+    elevatorDefault = new ManualElevator(elevator, operatorController);
 
     drivetrain.setDefaultCommand(teleopDrive);
     elevator.setDefaultCommand(elevatorDefault);
