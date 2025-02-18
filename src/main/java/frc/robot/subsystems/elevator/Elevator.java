@@ -22,7 +22,7 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    io.setVoltage(pidController.calculate(inputs.leftPosition));
+    // io.setVoltage(pidController.calculate(inputs.leftPosition));
 
     Logger.processInputs("Elevator", inputs);
   }
@@ -46,7 +46,8 @@ public class Elevator extends SubsystemBase {
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
   }
-  public double calculatePID(){
+
+  public double calculatePID() {
     return pidController.calculate(getLeftPosition());
   }
 }
