@@ -22,15 +22,21 @@ public class ElevatorPositionSet extends Command {
   
   public void initialise(){
     elevator.setPosition(setpoint);
+    double targetAtSetpoint = 0;
   }
 
   @Override
   public void execute(){
       elevator.setVoltage(elevator.calculatePID());
+      if (pidController.atTarget())
+        timeAtTarget += 1;
+      else 
+        timeAtTarget = 0;
+      
   }
 
   @Override
   public boolean isFinished() {
-    return  MathUtils.nearZero(elevator.getLeftPosition() - setpoint) == 0;
+    return timeAtTarget >= 25;
   }
 }
