@@ -20,10 +20,8 @@ import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
-import frc.robot.subsystems.intake.IntakeIOReal;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIO;
-import frc.robot.subsystems.outtake.OuttakeIOReal;
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -47,9 +45,9 @@ public class RobotContainer {
 
   public RobotContainer() {
     if (RobotBase.isReal()) {
-      this.intake = new Intake(new IntakeIOReal());
+      this.intake = new Intake(new IntakeIO());
       this.elevator = new Elevator(new ElevatorIOReal());
-      this.outtake = new Outtake(new OuttakeIOReal());
+      this.outtake = new Outtake(new OuttakeIO());
     } else {
       this.intake = new Intake(new IntakeIO());
       this.elevator = new Elevator(new ElevatorIO());

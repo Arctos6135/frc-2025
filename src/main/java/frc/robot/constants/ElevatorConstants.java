@@ -4,7 +4,7 @@ public class ElevatorConstants {
   public static int CURRENT_LIMIT = 30;
 
   // TODO Put in the actual gearbox ratio.
-  public static final double GEARBOX_RATIO = 0;
+  public static final double GEARBOX_RATIO = 40;
 
   // Diameter of the gear attached to the motor in meters.
   public static final double GEAR_DIAMETER = 0.0635;
