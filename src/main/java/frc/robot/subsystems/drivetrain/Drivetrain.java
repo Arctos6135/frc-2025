@@ -19,6 +19,11 @@ public class Drivetrain extends SubsystemBase {
     public double driveVoltage;
     /** The voltage fo the front left angle motor. */
     public double angleVoltage;
+
+    public double frontLeftEncoderPosition;
+    public double frontRightEncoderPosition;
+    public double backLeftEncoderPosition;
+    public double backRightEncoderPosition;
   }
 
   public void updateInputs(DrivetrainInputs inputs) {
@@ -27,6 +32,14 @@ public class Drivetrain extends SubsystemBase {
     inputs.angleVoltage =
         swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
 
+    inputs.frontLeftEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[0].getAbsoluteEncoder().getAbsolutePosition();
+    inputs.frontRightEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[1].getAbsoluteEncoder().getAbsolutePosition();
+    inputs.backRightEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[2].getAbsoluteEncoder().getAbsolutePosition();
+    inputs.backLeftEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[3].getAbsoluteEncoder().getAbsolutePosition();
     // swerveDrive.addVisionMeasurement(
     // LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
   }

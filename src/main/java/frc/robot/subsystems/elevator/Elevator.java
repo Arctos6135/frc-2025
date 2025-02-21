@@ -41,6 +41,7 @@ public class Elevator extends SubsystemBase {
    */
   public void setPosition(double setpoint) {
     pidController.setSetpoint(setpoint);
+    Logger.recordOutput("Elevator/pidTarget", pidController.getSetpoint());
   }
 
   public boolean atSetpoint() {
@@ -52,6 +53,6 @@ public class Elevator extends SubsystemBase {
   }
 
   public double calculatePID() {
-    return pidController.calculate(getLeftPosition());
+    return pidController.calculate(inputs.leftPosition);
   }
 }
