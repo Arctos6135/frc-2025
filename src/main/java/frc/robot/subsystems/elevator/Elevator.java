@@ -43,6 +43,10 @@ public class Elevator extends SubsystemBase {
     pidController.setSetpoint(setpoint);
   }
 
+  public boolean atSetpoint() {
+    return pidController.atSetpoint();
+  }
+
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
   }

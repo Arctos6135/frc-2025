@@ -22,7 +22,7 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .inverted(false);
+        .inverted(true);
 
     leftConfig
         .encoder
@@ -34,10 +34,9 @@ public class ElevatorIOReal extends ElevatorIO {
     // Right Motor Configuration
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
-        .follow(leftMotor) // follow the other motor
+        .follow(leftMotor, true) // follow the other motor
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake)
-        .inverted(true); // inverted
+        .idleMode(IdleMode.kBrake);
 
     rightConfig
         .encoder

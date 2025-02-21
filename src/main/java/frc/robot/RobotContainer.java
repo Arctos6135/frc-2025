@@ -68,10 +68,10 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
-    Trigger operatorDpadDown = new Trigger(() -> driverController.getPOV() == 180);
-    Trigger operatorDpadUp = new Trigger(() -> driverController.getPOV() == 0);
-    Trigger operatorDpadRight = new Trigger(() -> driverController.getPOV() == 90);
-    Trigger operatorDpadLeft = new Trigger(() -> driverController.getPOV() == 270);
+    Trigger operatorDpadDown = new Trigger(() -> operatorController.getPOV() == 180);
+    Trigger operatorDpadUp = new Trigger(() -> operatorController.getPOV() == 0);
+    Trigger operatorDpadRight = new Trigger(() -> operatorController.getPOV() == 90);
+    Trigger operatorDpadLeft = new Trigger(() -> operatorController.getPOV() == 270);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
     operatorA.whileTrue(new QuickOuttake(outtake));

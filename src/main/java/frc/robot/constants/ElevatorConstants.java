@@ -18,7 +18,7 @@ public class ElevatorConstants {
   // The elevator height to score at each level.
   public static final double INTAKE_POSITION = 0.0; // this one should dbe right
   public static final double L1_HEIGHT = 0.0; // TODO
-  public static final double L2_HEIGHT = 1.0; // TODO
-  public static final double L3_HEIGHT = 2.0; // TODO
-  public static final double L4_HEIGHT = 3.0; // TODO
+  public static final double L2_HEIGHT = 0.2; // TODO
+  public static final double L3_HEIGHT = 0.4; // TODO
+  public static final double L4_HEIGHT = 0.6; // TODO
 }
