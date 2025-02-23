@@ -22,22 +22,19 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .inverted(false);
+        .inverted(true);
 
     leftConfig
         .encoder
         .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
-    leftMotor.configure(leftConfig, null, null);
-
     // Right Motor Configuration
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
-        .follow(leftMotor) // follow the other motor
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .inverted(true); // inverted
+        .follow(leftMotor, true); // follow the other motor
 
     rightConfig
         .encoder
@@ -45,6 +42,7 @@ public class ElevatorIOReal extends ElevatorIO {
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
     rightMotor.configure(rightConfig, null, null);
+    leftMotor.configure(leftConfig, null, null);
 
     leftEncoder = leftMotor.getEncoder();
     rightEncoder = rightMotor.getEncoder();
@@ -57,11 +55,11 @@ public class ElevatorIOReal extends ElevatorIO {
 
   @Override
   public void updateInputs(ElevatorInputs inputs) {
-    inputs.leftPosition = -leftEncoder.getPosition();
-    inputs.rightPosition = rightEncoder.getPosition();
+    inputs.leftPosition = leftEncoder.getPosition();
+    inputs.rightPosition = -rightEncoder.getPosition();
 
-    inputs.leftVelocity = -leftEncoder.getVelocity();
-    inputs.rightVelocity = rightEncoder.getVelocity();
+    inputs.leftVelocity = leftEncoder.getVelocity();
+    inputs.rightVelocity = -rightEncoder.getVelocity();
 
     inputs.leftCurrent = leftMotor.getOutputCurrent();
     inputs.rightCurrent = rightMotor.getOutputCurrent();
