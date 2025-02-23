@@ -25,10 +25,7 @@ public class ElevatorPositionSet extends Command {
 
   @Override
   public void execute() {
-    elevator.setVoltage(
-        -elevator.calculatePID()); // TODO figure out why i had to put a negative here and change it
-    // somewhere else for like better code
-    if (elevator.atSetpoint()) {
+    if (elevator.getLeftPosition() == setpoint) {
       endTime++;
     } else {
       endTime = 0;

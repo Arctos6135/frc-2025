@@ -7,16 +7,11 @@ import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
   public final ElevatorIO io;
-  public final PIDController pidController;
 
   public final ElevatorInputsAutoLogged inputs = new ElevatorInputsAutoLogged();
 
   public Elevator(ElevatorIO io) {
     this.io = io;
-
-    pidController =
-        new PIDController(
-            ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
   }
 
   @Override
@@ -40,19 +35,10 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    pidController.setSetpoint(setpoint);
-    Logger.recordOutput("Elevator/pidTarget", pidController.getSetpoint());
-  }
-
-  public boolean atSetpoint() {
-    return pidController.atSetpoint();
+    Logger.recordOutput("ElevatorTarget", setpoint);
   }
 
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
-  }
-
-  public double calculatePID() {
-    return pidController.calculate(inputs.leftPosition);
   }
 }
