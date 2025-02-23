@@ -11,7 +11,6 @@ import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
 import frc.robot.commands.outtake.OuttakeSpin;
-import frc.robot.commands.outtake.QuickOuttake;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -68,17 +67,25 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
-    Trigger operatorDpadDown = new Trigger(() -> driverController.getPOV() == 180);
-    Trigger operatorDpadUp = new Trigger(() -> driverController.getPOV() == 0);
-    Trigger operatorDpadRight = new Trigger(() -> driverController.getPOV() == 90);
-    Trigger operatorDpadLeft = new Trigger(() -> driverController.getPOV() == 270);
+    Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
+    Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
+    Trigger operatorY = new JoystickButton(operatorController, XboxController.Button.kY.value);
+    Trigger operatorDpadDown = new Trigger(() -> operatorController.getPOV() == 180);
+    Trigger operatorDpadUp = new Trigger(() -> operatorController.getPOV() == 0);
+    Trigger operatorDpadRight = new Trigger(() -> operatorController.getPOV() == 90);
+    Trigger operatorDpadLeft = new Trigger(() -> operatorController.getPOV() == 270);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
-    operatorA.whileTrue(new QuickOuttake(outtake));
+    // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+
+    operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+    operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
   }
 
   private void configureAuto() {
