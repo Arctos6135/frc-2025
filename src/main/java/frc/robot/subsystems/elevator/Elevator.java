@@ -1,8 +1,6 @@
 package frc.robot.subsystems.elevator;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.ElevatorConstants;
 import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
@@ -35,7 +33,8 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    Logger.recordOutput("ElevatorTarget", setpoint);
+    Logger.recordOutput("Elevator/TargetPosition", setpoint);
+    io.setPosition(setpoint);
   }
 
   public void setVoltage(double voltage) {

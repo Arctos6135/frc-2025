@@ -1,9 +1,9 @@
 package frc.robot.subsystems.elevator;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.constants.CANConstants;
@@ -25,8 +25,11 @@ public class ElevatorIOReal extends ElevatorIO {
         .idleMode(IdleMode.kBrake)
         .inverted(true)
         .closedLoop
-        .pidf(ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2], ElevatorConstants.PID[3]);
-
+        .pidf(
+            ElevatorConstants.PID[0],
+            ElevatorConstants.PID[1],
+            ElevatorConstants.PID[2],
+            ElevatorConstants.PID[3]);
 
     leftConfig
         .encoder
@@ -36,10 +39,9 @@ public class ElevatorIOReal extends ElevatorIO {
     // Right Motor Configuration
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
-        .follow(leftMotor) // follow the other motor
+        .follow(leftMotor, true) // follow the other motor
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake)
-        .inverted(true); // inverted
+        .idleMode(IdleMode.kBrake);
 
     rightConfig
         .encoder

@@ -32,6 +32,15 @@ public class Drivetrain extends SubsystemBase {
     inputs.angleVoltage =
         swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
 
+    inputs.frontLeftEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[0].getAbsolutePosition();
+    inputs.frontRightEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[1].getAbsolutePosition();
+    inputs.backLeftEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[2].getAbsolutePosition();
+    inputs.backRightEncoderPosition =
+        swerveDrive.swerveDriveConfiguration.modules[3].getAbsolutePosition();
+
     // swerveDrive.addVisionMeasurement(
     // LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
   }

@@ -25,7 +25,7 @@ public class ElevatorPositionSet extends Command {
 
   @Override
   public void execute() {
-    if (elevator.getLeftPosition() == setpoint) {
+    if (Math.abs(elevator.getLeftPosition() - setpoint) < 0.05) {
       endTime++;
     } else {
       endTime = 0;
