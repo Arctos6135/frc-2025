@@ -40,7 +40,6 @@ public class RobotContainer {
   public final Elevator elevator;
 
   public final TeleopDrive teleopDrive;
-  public final ManualElevator elevatorDefault;
 
   public RobotContainer() {
     if (RobotBase.isReal()) {
@@ -54,10 +53,8 @@ public class RobotContainer {
     }
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
-    elevatorDefault = new ManualElevator(elevator, operatorController);
-
     drivetrain.setDefaultCommand(teleopDrive);
-    elevator.setDefaultCommand(elevatorDefault);
+    elevator.setDefaultCommand(new ManualElevator(elevator, operatorController));
 
     configureAuto();
     configureBindings();

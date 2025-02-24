@@ -13,7 +13,7 @@ public class ElevatorPositionSet extends Command {
     this.elevator = elevator;
     this.setpoint = setpoint;
 
-    // addRequirements(elevator);
+    addRequirements(elevator);
   }
 
   // Sets the elevator setpoint to their corresponding scoring height.
