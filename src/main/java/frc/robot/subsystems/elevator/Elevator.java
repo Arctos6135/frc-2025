@@ -1,15 +1,20 @@
 package frc.robot.subsystems.elevator;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.ElevatorConstants;
 import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
   public final ElevatorIO io;
-
+  public final PIDController pidController;
   public final ElevatorInputsAutoLogged inputs = new ElevatorInputsAutoLogged();
 
   public Elevator(ElevatorIO io) {
     this.io = io;
+    pidController =
+        new PIDController(
+            ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
   }
 
   @Override
@@ -33,11 +38,19 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    Logger.recordOutput("Elevator/TargetPosition", setpoint);
-    io.setPosition(setpoint);
+    pidController.setSetpoint(setpoint);
+    Logger.recordOutput("Elevator/PIDTarget", pidController.getSetpoint());
+  }
+
+  public boolean atSetpoint() {
+    return pidController.atSetpoint();
   }
 
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
+  }
+
+  public double calculatePID() {
+    return pidController.calculate(inputs.leftPosition);
   }
 }

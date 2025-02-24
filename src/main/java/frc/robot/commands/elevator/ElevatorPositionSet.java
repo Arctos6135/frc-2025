@@ -25,7 +25,9 @@ public class ElevatorPositionSet extends Command {
 
   @Override
   public void execute() {
-    if (Math.abs(elevator.getLeftPosition() - setpoint) < 0.05) {
+    elevator.setVoltage(elevator.calculatePID());
+    
+    if (elevator.atSetpoint()) {
       endTime++;
     } else {
       endTime = 0;

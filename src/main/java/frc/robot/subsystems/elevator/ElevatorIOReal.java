@@ -1,7 +1,6 @@
 package frc.robot.subsystems.elevator;
 
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -23,13 +22,7 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .inverted(true)
-        .closedLoop
-        .pidf(
-            ElevatorConstants.PID[0],
-            ElevatorConstants.PID[1],
-            ElevatorConstants.PID[2],
-            ElevatorConstants.PID[3]);
+        .inverted(true);
 
     leftConfig
         .encoder
@@ -58,11 +51,6 @@ public class ElevatorIOReal extends ElevatorIO {
   @Override
   public void setVoltage(double voltage) {
     leftMotor.setVoltage(voltage);
-  }
-
-  @Override
-  public void setPosition(double position) {
-    leftMotor.getClosedLoopController().setReference(position, ControlType.kPosition);
   }
 
   @Override
