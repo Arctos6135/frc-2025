@@ -18,7 +18,8 @@ public class Elevator extends SubsystemBase {
         new PIDController(
             ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
 
-    feedForward = new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
+    feedForward =
+        new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
   }
 
   @Override

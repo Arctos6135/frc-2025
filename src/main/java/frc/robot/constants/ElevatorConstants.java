@@ -21,12 +21,13 @@ public class ElevatorConstants {
   public static final double[] PID = {112.0884, 0.0, 0.0, 0.0};
 
   // Feedforward values
-  public static final double ks = 0.0;  
-  public static final double kg = 0.0;
-  public static final double kv = 0.0;
+  public static final double ks = -0.1;
+  public static final double kg = -0.15;
+  public static final double kv = 25.0;
+  public static final double ka = 1.2;
 
   // Hopefully m/s
-  public static final double ELEVATOR_MAX_SPEED = 1.5;
+  public static final double ELEVATOR_MAX_SPEED = 0.5;
 
   // The linear model representing the elevator motor.
   public static final LinearSystem<N3, N1, N1> ELEVATOR_LINEAR_SYSTEM =
