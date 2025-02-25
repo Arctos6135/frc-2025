@@ -5,13 +5,15 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import com.revrobotics.spark.CANSparkMax;
+import com.revrobotics.spark.CANSparkLowLevel.MotorType;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.ElevatorConstants;
 
 public class ElevatorIOReal extends ElevatorIO {
   private final SparkMax leftMotor = new SparkMax(CANConstants.ELEVATOR_LEFT, MotorType.kBrushless);
-  private final SparkMax rightMotor =
-      new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
+  private final SparkMax rightMotor = new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
@@ -22,7 +24,13 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .inverted(true);
+        .inverted(true)
+
+        // setting up soft limits, soft stops are not set up on elevator rightMotor because if follows leftMotor
+        .enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true)
+        .enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true)
+        .setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ElevatorConstants.ELEVATOR_MAX)
+        .setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ElevatorConstants.ELEVATOR_MIN);
 
     leftConfig
         .encoder
@@ -34,7 +42,9 @@ public class ElevatorIOReal extends ElevatorIO {
     rightConfig
         .follow(leftMotor, true) // follow the other motor
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake);
+        .idleMode(IdleMode.kBrake)
+        .enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false)
+        .enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
 
     rightConfig
         .encoder
