@@ -18,7 +18,8 @@ public class ElevatorPositionSet extends Command {
 
   // Sets the elevator setpoint to their corresponding scoring height.
 
-  public void initialise() {
+  @Override
+  public void initialize() {
     elevator.setPosition(setpoint);
     endTime = 0;
   }
@@ -26,7 +27,7 @@ public class ElevatorPositionSet extends Command {
   @Override
   public void execute() {
     elevator.setVoltage(elevator.calculatePID());
-    
+
     if (elevator.atSetpoint()) {
       endTime++;
     } else {

@@ -43,11 +43,11 @@ public class ElevatorConstants {
   // The elevator height to score at each level.
   public static final double INTAKE_POSITION = 0.0; // this one should be right
   public static final double L1_HEIGHT = 0.0; // TODO
-  public static final double L2_HEIGHT = -0.2; // TODO
-  public static final double L3_HEIGHT = -0.3; // TODO
-  public static final double L4_HEIGHT = -0.4; // TODO
+  public static final double L2_HEIGHT = -0.105;
+  public static final double L3_HEIGHT = -0.260;
+  public static final double L4_HEIGHT = -0.45; // Its really 0.47 but didnt want to hit hardstop
 
-  //min and max for soft stop
-  public static final double ELEVATOR_MAX = 0.5; //hopefully this is right
+  // min and max for soft stop
+  public static final double ELEVATOR_MAX = 0.45; // hopefully this is right
   public static final double ELEVATOR_MIN = 0; // TODO
 }
