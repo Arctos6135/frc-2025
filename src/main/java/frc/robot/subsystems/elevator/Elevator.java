@@ -1,5 +1,6 @@
 package frc.robot.subsystems.elevator;
 
+import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
@@ -8,6 +9,7 @@ import org.littletonrobotics.junction.Logger;
 public class Elevator extends SubsystemBase {
   public final ElevatorIO io;
   public final PIDController pidController;
+  public final ElevatorFeedforward feedForward;
   public final ElevatorInputsAutoLogged inputs = new ElevatorInputsAutoLogged();
 
   public Elevator(ElevatorIO io) {
@@ -15,6 +17,8 @@ public class Elevator extends SubsystemBase {
     pidController =
         new PIDController(
             ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
+
+    feedForward = new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
   }
 
   @Override

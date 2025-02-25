@@ -2,6 +2,7 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.ElevatorConstants;
 import frc.robot.subsystems.elevator.Elevator;
 
 public class ManualElevator extends Command {
@@ -17,7 +18,8 @@ public class ManualElevator extends Command {
 
   @Override
   public void execute() {
-    elevator.setVoltage(12 * operatorController.getLeftY());
+    // elevator.setVoltage(elevator.feedForward.calculate(operatorController.getLeftY() * ElevatorConstants.ELEVATOR_MAX_SPEED, 0));
+    elevator.setVoltage(Math.pow(operatorController.getLeftY(), 3) * 4);
   }
 
   @Override
