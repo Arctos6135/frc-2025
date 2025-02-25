@@ -46,4 +46,8 @@ public class ElevatorConstants {
   public static final double L2_HEIGHT = -0.2; // TODO
   public static final double L3_HEIGHT = -0.3; // TODO
   public static final double L4_HEIGHT = -0.4; // TODO
+
+  //min and max for soft stop
+  public static final double ELEVATOR_MAX = 0.5; //hopefully this is right
+  public static final double ELEVATOR_MIN = 0; // TODO
 }
