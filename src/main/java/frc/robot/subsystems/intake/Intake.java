@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    medianCurrent = filter.calculate(inputs.current);
+    medianCurrent = filter.calculate(inputs.leftCurrent);
 
     io.setVoltage(pidController.calculate(getVelocity()));
 
@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase {
    * @return in meters of tread per second
    */
   public double getVelocity() {
-    return inputs.speed;
+    return inputs.leftSpeed;
   }
 
   /**
