@@ -26,7 +26,8 @@ public class ElevatorIOReal extends ElevatorIO {
         .inverted(true)
 
     // setting up soft limits, soft stops are not set up on elevator rightMotor because it follows leftMotor
-    .softLimit.forwardSoftLimitEnabled(true)
+    .softLimit
+    .forwardSoftLimitEnabled(true)
     .reverseSoftLimitEnabled(true)
     .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
     .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
@@ -42,7 +43,8 @@ public class ElevatorIOReal extends ElevatorIO {
         .follow(leftMotor, true) // follows the other motor but inverted
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
         .idleMode(IdleMode.kBrake)
-        .softLimit.forwardSoftLimitEnabled(false)
+        .softLimit
+        .forwardSoftLimitEnabled(false)
         .reverseSoftLimitEnabled(false);
 
     rightConfig
