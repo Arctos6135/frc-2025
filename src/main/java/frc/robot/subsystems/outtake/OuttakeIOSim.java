@@ -21,6 +21,9 @@ public class OuttakeIOSim extends OuttakeIO {
 
     @Override
     public void updateInputs(OuttakeInputs inputs) {
+        leftMotor.update(0.02); // Assumes uniform timestep.
+        rightMotor.update(0.02);
+
         inputs.leftPosition = leftMotor.getAngularPositionRotations() * OuttakeConstants.POSITION_CONVERSION_FACTOR;
         inputs.rightPosition = rightMotor.getAngularPositionRotations() * OuttakeConstants.POSITION_CONVERSION_FACTOR;
 

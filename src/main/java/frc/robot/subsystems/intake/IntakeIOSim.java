@@ -21,6 +21,9 @@ public class IntakeIOSim extends IntakeIO {
 
     @Override
     public void updateInputs(IntakeInputs inputs) {
+        leftMotor.update(0.02); // Assumes uniform timestep.
+        rightMotor.update(0.02);
+
         inputs.leftSpeed = leftMotor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR;
         inputs.rightSpeed = rightMotor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR;
 

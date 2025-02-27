@@ -22,6 +22,9 @@ public class ElevatorIOSim extends ElevatorIO {
 
     @Override
     public void updateInputs(ElevatorInputs inputs) {
+        leftMotor.update(0.02); // Assumes uniform timestep.
+        rightMotor.update(0.02);
+
         // Meters.
         inputs.leftPosition = leftMotor.getAngularPositionRotations() * ElevatorConstants.POSITION_CONVERSION_FACTOR;
         inputs.rightPosition = rightMotor.getAngularPositionRotations() * ElevatorConstants.POSITION_CONVERSION_FACTOR;
