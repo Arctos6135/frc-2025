@@ -13,5 +13,5 @@ public class IntakeConstants {
 
   public static final int MEDIAN_FILTER_SIZE = 12;
 
-  public static final double INTAKE_RPS = 70.0;
+  public static final double INTAKE_RPS = 60.0;
 }

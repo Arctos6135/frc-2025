@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
+import frc.robot.commands.intake.IntakeMove;
 import frc.robot.commands.outtake.OuttakeSpin;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
@@ -67,10 +68,14 @@ public class RobotContainer {
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
     Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
     Trigger operatorY = new JoystickButton(operatorController, XboxController.Button.kY.value);
+
     Trigger operatorDpadDown = new Trigger(() -> operatorController.getPOV() == 180);
     Trigger operatorDpadUp = new Trigger(() -> operatorController.getPOV() == 0);
     Trigger operatorDpadRight = new Trigger(() -> operatorController.getPOV() == 90);
     Trigger operatorDpadLeft = new Trigger(() -> operatorController.getPOV() == 270);
+
+    Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
+    Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
     // operatorA.whileTrue(new QuickOuttake(outtake));
@@ -83,6 +88,9 @@ public class RobotContainer {
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+
+    operatorLeftTrigger.whileTrue(new IntakeMove(intake));
+    operatorRightTrigger.whileTrue(new OuttakeSpin(outtake));
   }
 
   private void configureAuto() {
