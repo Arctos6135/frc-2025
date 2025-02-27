@@ -18,10 +18,14 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
+import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
+import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIO;
+import frc.robot.subsystems.outtake.OuttakeIOSim;
+
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -48,9 +52,9 @@ public class RobotContainer {
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIO());
     } else {
-      this.intake = new Intake(new IntakeIO());
-      this.elevator = new Elevator(new ElevatorIO());
-      this.outtake = new Outtake(new OuttakeIO());
+      this.intake = new Intake(new IntakeIOSim());
+      this.elevator = new Elevator(new ElevatorIOSim());
+      this.outtake = new Outtake(new OuttakeIOSim());
     }
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
