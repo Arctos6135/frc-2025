@@ -17,6 +17,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
+import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
 import frc.robot.subsystems.outtake.Outtake;
@@ -48,7 +49,7 @@ public class RobotContainer {
       this.outtake = new Outtake(new OuttakeIO());
     } else {
       this.intake = new Intake(new IntakeIO());
-      this.elevator = new Elevator(new ElevatorIO());
+      this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIO());
     }
 
