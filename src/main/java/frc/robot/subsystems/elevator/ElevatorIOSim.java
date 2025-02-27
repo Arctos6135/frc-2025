@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import frc.robot.constants.ElevatorConstants;
 
 public class ElevatorIOSim extends ElevatorIO {
-    private DCMotorSim leftMotor;
-    private DCMotorSim rightMotor;
+    private final DCMotorSim leftMotor;
+    private final DCMotorSim rightMotor;
 
     public ElevatorIOSim() {
         leftMotor = new DCMotorSim(ElevatorConstants.ELEVATOR_LINEAR_SYSTEM, DCMotor.getNEO(1), 0.1111);
