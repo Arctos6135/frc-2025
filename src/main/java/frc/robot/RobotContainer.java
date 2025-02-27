@@ -20,6 +20,7 @@ import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
+import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIO;
 import java.io.File;
@@ -48,7 +49,7 @@ public class RobotContainer {
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIO());
     } else {
-      this.intake = new Intake(new IntakeIO());
+      this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIO());
     }
