@@ -21,8 +21,7 @@ public class IntakeMove extends Command {
   public void execute() {
     if (operatorController.getAButton()) {
       intake.setRPS(IntakeConstants.INTAKE_RPS);
-    } 
-    else {
+    } else {
       intake.setRPS(0);
     }
   }

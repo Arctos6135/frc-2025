@@ -7,11 +7,10 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.IntakeConstants;
-
 import org.littletonrobotics.junction.Logger;
 
 public class IntakeIOReal extends IntakeIO {
-  //private final SparkMax motor = new SparkMax(CANConstants.INTAKE_MOTOR, MotorType.kBrushless);
+  // private final SparkMax motor = new SparkMax(CANConstants.INTAKE_MOTOR, MotorType.kBrushless);
   private final SparkMax rightMotor = new SparkMax(CANConstants.INTAKE_RIGHT, MotorType.kBrushless);
   private final SparkMax leftMotor = new SparkMax(CANConstants.INTAKE_LEFT, MotorType.kBrushless);
 
@@ -44,7 +43,7 @@ public class IntakeIOReal extends IntakeIO {
 
     leftMotor.configure(leftConfig, null, null);
     this.leftEncoder = leftMotor.getEncoder();
-    
+
     rightMotor.configure(rightConfig, null, null);
     this.rightEncoder = leftMotor.getEncoder();
   }
