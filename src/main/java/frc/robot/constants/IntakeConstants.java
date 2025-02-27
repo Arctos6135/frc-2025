@@ -7,7 +7,8 @@ import edu.wpi.first.math.system.LinearSystem;
 public class IntakeConstants {
   public static final int CURRENT_LIMIT = 30;
 
-  public static final double GEARBOX_RATIO = 0.0; // TODO
+  public static final double GEARBOX_RATIO = 1.0; // TODO
+
   // Rotations.
   public static final double POSITION_CONVERSION_FACTOR = 1 / GEARBOX_RATIO;
   // Rotations per second.
@@ -18,4 +19,6 @@ public class IntakeConstants {
   public static final int MEDIAN_FILTER_SIZE = 12;
 
   public static final double INTAKE_RPS = 60.0;
+
+  public static final LinearSystem<N2, N1, N2> INTAKE_LINEAR_SYSTEM = null;
 }

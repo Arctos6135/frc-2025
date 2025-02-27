@@ -19,5 +19,6 @@ public class OuttakeSpin extends Command {
   @Override
   public void end(boolean i) {
     outtake.setRPS(0);
+    outtake.setVoltage(0);
   }
 }
