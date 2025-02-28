@@ -13,7 +13,7 @@ public class OuttakeConstants {
   public static final double VELOCITY_CONVERSION_FACTOR = 1.0 / 60.0;
   public static final double POSITION_CONVERSION_FACTOR = 1.0;
 
-  public static final double OUTTAKE_RPS = 20;
+  public static final double OUTTAKE_RPS = 60;
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
 
   public static final double[] PID_CONSTANTS = {0.19227, 0.0, 0.0};

@@ -27,7 +27,7 @@ public class ElevatorConstants {
   public static final double ka = 1.2;
 
   // Hopefully m/s
-  public static final double ELEVATOR_MAX_SPEED = 0.5;
+  public static final double ELEVATOR_MAX_SPEED = 0.25;
 
   // The linear model representing the elevator motor.
   public static final LinearSystem<N2, N1, N2> ELEVATOR_LINEAR_SYSTEM =

@@ -19,18 +19,16 @@ public class ElevatorIOReal extends ElevatorIO {
   public ElevatorIOReal() {
     // Left Motor Configuration
     SparkMaxConfig leftConfig = new SparkMaxConfig();
-    leftConfig
-        .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake)
-        .inverted(true)
+    leftConfig.smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT).idleMode(IdleMode.kBrake);
+    // .inverted(true)
 
-        // setting up soft limits, soft stops are not set up on elevator rightMotor because it
-        // follows leftMotor
-        .softLimit
-        .forwardSoftLimitEnabled(true)
-        .reverseSoftLimitEnabled(true)
-        .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
-        .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
+    // setting up soft limits, soft stops are not set up on elevator rightMotor because it
+    // follows leftMotor
+    // .softLimit
+    // .forwardSoftLimitEnabled(true)
+    // .reverseSoftLimitEnabled(true)
+    // .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
+    // .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
 
     leftConfig
         .encoder
@@ -42,10 +40,10 @@ public class ElevatorIOReal extends ElevatorIO {
     rightConfig
         .follow(leftMotor, true) // follows the other motor but inverted
         .smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake)
-        .softLimit
-        .forwardSoftLimitEnabled(false)
-        .reverseSoftLimitEnabled(false);
+        .idleMode(IdleMode.kBrake);
+    // .softLimit
+    // .forwardSoftLimitEnabled(false)
+    // .reverseSoftLimitEnabled(false);
 
     rightConfig
         .encoder

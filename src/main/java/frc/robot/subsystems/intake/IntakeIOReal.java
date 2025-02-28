@@ -50,7 +50,6 @@ public class IntakeIOReal extends IntakeIO {
 
   @Override
   public void setVoltage(double voltage) {
-    Logger.recordOutput("Intake/Voltage", voltage);
     leftMotor.setVoltage(voltage);
     rightMotor.setVoltage(voltage);
   }
