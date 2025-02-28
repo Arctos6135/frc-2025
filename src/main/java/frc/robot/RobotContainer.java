@@ -15,7 +15,6 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
-import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.intake.Intake;
@@ -24,7 +23,6 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIO;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
-
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 

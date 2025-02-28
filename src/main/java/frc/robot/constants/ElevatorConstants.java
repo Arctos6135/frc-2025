@@ -3,7 +3,6 @@ package frc.robot.constants;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
-import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
@@ -36,18 +35,19 @@ public class ElevatorConstants {
           new Matrix<>( // State matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0, 0.0}, {0.0, 0.0} //TODO
+                    {0.0, 0.0}, {0.0, 0.0} // TODO
                   })),
           new Matrix<>( // Input matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0}, {0.0} //TODO
+                    {0.0}, {0.0} // TODO
                   })),
           new Matrix<>( // Output matrix.
               new SimpleMatrix(
                   new double[][] {{1.0, 0.0}, {0.0, 1.0}})), // Assuming canonical form.
           new Matrix<>( // Feedthrough matrix.
-            new SimpleMatrix(new double[][] {{0.0}, {0.0}}))); // There shouldn't be a feedthrough component.
+              new SimpleMatrix(
+                  new double[][] {{0.0}, {0.0}}))); // There shouldn't be a feedthrough component.
 
   // The elevator height to score at each level.
   public static final double INTAKE_POSITION = 0.0; // this one should be right
