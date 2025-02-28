@@ -18,9 +18,7 @@ public class OuttakeSpin extends Command {
     outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
   }
 
-  /**
-   * Must be interrupted to turn off
-   */
+  /** Must be interrupted to turn off */
   @Override
   public boolean isFinished() {
     return false;
