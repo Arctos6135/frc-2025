@@ -2,21 +2,16 @@ package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import frc.robot.constants.OuttakeConstants;
 
 public class OuttakeIOSim extends OuttakeIO {
-  private final DCMotorSim leftMotor;
-  private final DCMotorSim rightMotor;
+  private final FlywheelSim leftMotor;
+  private final FlywheelSim rightMotor;
 
   public OuttakeIOSim() {
-    leftMotor =
-        new DCMotorSim(
-            OuttakeConstants.OUTTAKE_LINEAR_SYSTEM,
-            DCMotor.getNeo550(1),
-            new double[] {0.0, 0.0}); // TODO std and type of motor
-    rightMotor =
-        new DCMotorSim(
-            OuttakeConstants.OUTTAKE_LINEAR_SYSTEM, DCMotor.getNeo550(1), new double[] {0.0, 0.0});
+    leftMotor = new FlywheelSim(OuttakeConstants.OUTTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), 0);
+    rightMotor = new FlywheelSim(OuttakeConstants.OUTTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), 0);
   }
 
   @Override
@@ -29,11 +24,6 @@ public class OuttakeIOSim extends OuttakeIO {
   public void updateInputs(OuttakeInputs inputs) {
     leftMotor.update(0.02); // Assumes uniform timestep.
     rightMotor.update(0.02);
-
-    inputs.leftPosition =
-        leftMotor.getAngularPositionRotations() * OuttakeConstants.POSITION_CONVERSION_FACTOR;
-    inputs.rightPosition =
-        rightMotor.getAngularPositionRotations() * OuttakeConstants.POSITION_CONVERSION_FACTOR;
 
     inputs.leftVelocity =
         leftMotor.getAngularVelocityRPM() * OuttakeConstants.VELOCITY_CONVERSION_FACTOR;

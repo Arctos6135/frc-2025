@@ -1,6 +1,7 @@
 package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OuttakeConstants;
@@ -10,7 +11,10 @@ public class Outtake extends SubsystemBase {
   private final OuttakeIO io;
   private final OuttakeInputsAutoLogged inputs = new OuttakeInputsAutoLogged();
 
-  private final PIDController pidController;
+  private final SimpleMotorFeedforward feedforward;
+
+  private double targetVelocity;
+  private double lastTargetVelocity;
 
   private final MedianFilter filterLeft = new MedianFilter(OuttakeConstants.MEDIAN_FILTER_SIZE);
   private final MedianFilter filterRight = new MedianFilter(OuttakeConstants.MEDIAN_FILTER_SIZE);
@@ -19,11 +23,7 @@ public class Outtake extends SubsystemBase {
 
   public Outtake(OuttakeIO io) {
     this.io = io;
-    pidController =
-        new PIDController(
-            OuttakeConstants.PID_CONSTANTS[0],
-            OuttakeConstants.PID_CONSTANTS[1],
-            OuttakeConstants.PID_CONSTANTS[2]);
+    this.feedforward = new SimpleMotorFeedforward(OuttakeConstants.kS, OuttakeConstants.kV, OuttakeConstants.kA);
   }
 
   @Override
@@ -32,7 +32,7 @@ public class Outtake extends SubsystemBase {
     leftMedianCurrent = filterLeft.calculate(inputs.leftCurrent);
     rightMedianCurrent = filterRight.calculate(inputs.rightCurrent);
 
-    io.setVoltage(pidController.calculate(getVelocity()));
+    io.setVoltage(feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
 
     Logger.processInputs("Outtake", inputs);
     Logger.recordOutput("Outtake/Filtered Current Left", leftMedianCurrent);
@@ -54,7 +54,8 @@ public class Outtake extends SubsystemBase {
    * @param rps rotations per second.
    */
   public void setRPS(double rps) {
-    pidController.setSetpoint(rps);
+    lastTargetVelocity = targetVelocity;
+    targetVelocity = rps;
   }
 
   /**

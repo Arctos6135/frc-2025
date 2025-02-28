@@ -17,11 +17,14 @@ public class OuttakeConstants {
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
 
   public static final double[] PID_CONSTANTS = {0.19227, 0.0, 0.0};
-  public static final LinearSystem<N2, N1, N2> OUTTAKE_LINEAR_SYSTEM =
+  public static final LinearSystem<N1, N1, N1> OUTTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
-          new Matrix<>(new SimpleMatrix(new double[][] {{0.0, 0.0}, {1.0, 0.0}})),
-          new Matrix<>(new SimpleMatrix(new double[][] {{15}, {0.0}})),
-          new Matrix<>(new SimpleMatrix(new double[][] {{1.0, 0.0}, {0.0, 1.0}})),
+          new Matrix<>(new SimpleMatrix(new double[] {0.988})),
+          new Matrix<>(new SimpleMatrix(new double[] {0.15})),
+          new Matrix<>(new SimpleMatrix(new double[] {1})),
           new Matrix<>(
-              new SimpleMatrix(new double[][] {{0.0}, {0.0}}))); // TODO Use actual numbers.
+              new SimpleMatrix(new double[] {0.0}))); // TODO Use actual numbers.
+
+  public static final double kV = - OUTTAKE_LINEAR_SYSTEM.getA(0, 0) / OUTTAKE_LINEAR_SYSTEM.getB(0, 0);
+  public static final double kA = 1 / OUTTAKE_LINEAR_SYSTEM.getB(0, 0);
 }
