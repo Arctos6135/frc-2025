@@ -1,7 +1,6 @@
 package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import frc.robot.constants.OuttakeConstants;
 

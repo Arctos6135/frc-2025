@@ -2,7 +2,6 @@ package frc.robot.constants;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
@@ -19,12 +18,13 @@ public class OuttakeConstants {
   public static final double[] PID_CONSTANTS = {0.19227, 0.0, 0.0};
   public static final LinearSystem<N1, N1, N1> OUTTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
-          new Matrix<>(new SimpleMatrix(new double[] {0.988})),
+          new Matrix<>(new SimpleMatrix(new double[] {-0.01})),
           new Matrix<>(new SimpleMatrix(new double[] {0.15})),
           new Matrix<>(new SimpleMatrix(new double[] {1})),
-          new Matrix<>(
-              new SimpleMatrix(new double[] {0.0}))); // TODO Use actual numbers.
+          new Matrix<>(new SimpleMatrix(new double[] {0.0}))); // TODO Use actual numbers.
 
-  public static final double kV = - OUTTAKE_LINEAR_SYSTEM.getA(0, 0) / OUTTAKE_LINEAR_SYSTEM.getB(0, 0);
+  public static final double kV =
+      -OUTTAKE_LINEAR_SYSTEM.getA(0, 0) / OUTTAKE_LINEAR_SYSTEM.getB(0, 0);
   public static final double kA = 1 / OUTTAKE_LINEAR_SYSTEM.getB(0, 0);
+  public static final double kS = 0; // TODO
 }

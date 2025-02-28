@@ -1,6 +1,5 @@
 package frc.robot.subsystems.outtake;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,7 +22,8 @@ public class Outtake extends SubsystemBase {
 
   public Outtake(OuttakeIO io) {
     this.io = io;
-    this.feedforward = new SimpleMotorFeedforward(OuttakeConstants.kS, OuttakeConstants.kV, OuttakeConstants.kA);
+    this.feedforward =
+        new SimpleMotorFeedforward(OuttakeConstants.kS, OuttakeConstants.kV, OuttakeConstants.kA);
   }
 
   @Override
@@ -32,11 +32,13 @@ public class Outtake extends SubsystemBase {
     leftMedianCurrent = filterLeft.calculate(inputs.leftCurrent);
     rightMedianCurrent = filterRight.calculate(inputs.rightCurrent);
 
-    io.setVoltage(feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
+    io.setVoltage(
+        feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
 
     Logger.processInputs("Outtake", inputs);
     Logger.recordOutput("Outtake/Filtered Current Left", leftMedianCurrent);
     Logger.recordOutput("Outtake/Filtered Current Right", rightMedianCurrent);
+    lastTargetVelocity = targetVelocity;
   }
 
   /**
