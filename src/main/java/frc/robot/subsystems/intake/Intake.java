@@ -1,6 +1,6 @@
 package frc.robot.subsystems.intake;
 
-import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
@@ -8,7 +8,8 @@ import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
-  private final PIDController pidController;
+  private final SimpleMotorFeedforward feedforward;
+  private double rps;
 
   private final IntakeInputsAutoLogged inputs = new IntakeInputsAutoLogged();
 
@@ -18,11 +19,7 @@ public class Intake extends SubsystemBase {
 
   public Intake(IntakeIO io) {
     this.io = io;
-    pidController =
-        new PIDController(
-            IntakeConstants.PID_CONSTANTS[0],
-            IntakeConstants.PID_CONSTANTS[1],
-            IntakeConstants.PID_CONSTANTS[2]);
+    feedforward = new SimpleMotorFeedforward(0.0, 0.11075036075);
   }
 
   @Override
@@ -30,7 +27,7 @@ public class Intake extends SubsystemBase {
     io.updateInputs(inputs);
     medianCurrent = filter.calculate(inputs.leftCurrent);
 
-    io.setVoltage(pidController.calculate(getVelocity()));
+    io.setVoltage(feedforward.calculate(rps));
 
     Logger.processInputs("Intake", inputs);
     Logger.recordOutput("Intake/Filtered Current", medianCurrent);
@@ -49,7 +46,7 @@ public class Intake extends SubsystemBase {
    * @param rps rotations per second.
    */
   public void setRPS(double rps) {
-    pidController.setSetpoint(rps);
+    this.rps = rps;
   }
 
   /**
