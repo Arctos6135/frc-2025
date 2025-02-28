@@ -9,14 +9,16 @@ import frc.robot.constants.CANConstants;
 import frc.robot.constants.OuttakeConstants;
 
 public class OuttakeIOReal extends OuttakeIO {
-  private final SparkMax rightMotor =
-      new SparkMax(CANConstants.OUTTAKE_RIGHT, MotorType.kBrushless);
-  private final SparkMax leftMotor = new SparkMax(CANConstants.OUTTAKE_LEFT, MotorType.kBrushless);
+  private final SparkMax rightMotor;
+  private final SparkMax leftMotor;
 
   private final RelativeEncoder rightEncoder;
   private final RelativeEncoder leftEncoder;
 
   public OuttakeIOReal() {
+    rightMotor = new SparkMax(CANConstants.OUTTAKE_RIGHT, MotorType.kBrushless);
+    leftMotor = new SparkMax(CANConstants.OUTTAKE_LEFT, MotorType.kBrushless);
+
     SparkMaxConfig leftConfig = new SparkMaxConfig();
     leftConfig.follow(rightMotor);
     leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
