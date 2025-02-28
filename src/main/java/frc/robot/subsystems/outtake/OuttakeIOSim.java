@@ -13,8 +13,10 @@ public class OuttakeIOSim extends OuttakeIO {
         new DCMotorSim(
             OuttakeConstants.OUTTAKE_LINEAR_SYSTEM,
             DCMotor.getNeo550(1),
-            null); // TODO std and type of motor
-    rightMotor = new DCMotorSim(OuttakeConstants.OUTTAKE_LINEAR_SYSTEM, DCMotor.getNeo550(1), null);
+            new double[] {0.0, 0.0}); // TODO std and type of motor
+    rightMotor =
+        new DCMotorSim(
+            OuttakeConstants.OUTTAKE_LINEAR_SYSTEM, DCMotor.getNeo550(1), new double[] {0.0, 0.0});
   }
 
   @Override

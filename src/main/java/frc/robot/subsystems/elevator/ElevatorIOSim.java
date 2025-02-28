@@ -9,12 +9,16 @@ public class ElevatorIOSim extends ElevatorIO {
   private final DCMotorSim rightMotor;
 
   public ElevatorIOSim() {
-    leftMotor = new DCMotorSim(ElevatorConstants.ELEVATOR_LINEAR_SYSTEM, DCMotor.getNEO(1), 0.1111);
+    leftMotor =
+        new DCMotorSim(
+            ElevatorConstants.ELEVATOR_LINEAR_SYSTEM,
+            DCMotor.getNEO(1),
+            new double[] {0.1111, 0.1111});
     rightMotor =
         new DCMotorSim(
             ElevatorConstants.ELEVATOR_LINEAR_SYSTEM,
             DCMotor.getNEO(1),
-            0.1111); // Should be no difference between the two.
+            new double[] {0.1111, 0.1111}); // Should be no difference between the two.
   }
 
   @Override

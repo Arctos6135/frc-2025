@@ -13,8 +13,12 @@ public class IntakeIOSim extends IntakeIO {
         new DCMotorSim(
             IntakeConstants.INTAKE_LINEAR_SYSTEM,
             DCMotor.getNEO(1),
-            null); // TODO Check what kind of neo is being used and std deviations.
-    rightMotor = new DCMotorSim(IntakeConstants.INTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), null);
+            new double[] {
+              0.1111, 0.1111
+            }); // TODO Check what kind of neo is being used and std deviations.
+    rightMotor =
+        new DCMotorSim(
+            IntakeConstants.INTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), new double[] {0.1111, 0.1111});
   }
 
   @Override

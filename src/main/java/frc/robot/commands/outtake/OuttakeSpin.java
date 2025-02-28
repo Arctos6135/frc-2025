@@ -9,15 +9,17 @@ public class OuttakeSpin extends Command {
 
   public OuttakeSpin(Outtake outtake) {
     this.outtake = outtake;
+
+    addRequirements(outtake);
   }
 
   @Override
-  public void initialize() {
+  public void execute() {
     outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
   }
 
   @Override
-  public void end(boolean i) {
+  public void end(boolean interrupted) {
     outtake.setRPS(0);
     outtake.setVoltage(0);
   }
