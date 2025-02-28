@@ -1,6 +1,5 @@
 package frc.robot.commands.outtake;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.OuttakeConstants;
 import frc.robot.subsystems.outtake.Outtake;
@@ -29,12 +28,17 @@ public class QuickOuttake extends Command {
   @Override
   public void initialize() {
     outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
-    endTime = Timer.getFPGATimestamp() + duration;
+    endTime = 0;
+  }
+
+  @Override
+  public void execute() {
+    endTime++;
   }
 
   @Override
   public boolean isFinished() {
-    return Timer.getFPGATimestamp() >= endTime;
+    return endTime >= 100;
   }
 
   @Override

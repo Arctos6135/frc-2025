@@ -10,8 +10,13 @@ public class OuttakeConstants {
   public static final int CURRENT_LIMIT = 10;
   public static final int MEDIAN_FILTER_SIZE = 12;
 
+<<<<<<< HEAD
+  public static final int VELOCITY_CONVERSION_FACTOR = 1;
+  public static final int POSITION_CONVERSION_FACTOR = 1;
+=======
   public static final double VELOCITY_CONVERSION_FACTOR = 1.0 / 60.0;
   public static final double POSITION_CONVERSION_FACTOR = 1.0;
+>>>>>>> d9e54a3f62cb50bb4f32b6aa653f154b3a27da33
 
   public static final double OUTTAKE_RPS = 60;
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
