@@ -44,7 +44,6 @@ public class Elevator extends SubsystemBase {
    */
   public void setPosition(double setpoint) {
     pidController.setSetpoint(setpoint);
-    Logger.recordOutput("Elevator/PIDTarget", pidController.getSetpoint());
   }
 
   public boolean atSetpoint() {

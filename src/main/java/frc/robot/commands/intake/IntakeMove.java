@@ -19,14 +19,10 @@ public class IntakeMove extends Command {
     intake.setRPS(IntakeConstants.INTAKE_RPS);
   }
 
-  // @Override
-  // public void execute() {
-  //   if (operatorController.getAButton()) {
-  //     intake.setRPS(IntakeConstants.INTAKE_RPS);
-  //   } else {
-  //     intake.setRPS(0);
-  //   }
-  // }
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 
   @Override
   public void end(boolean i) {
