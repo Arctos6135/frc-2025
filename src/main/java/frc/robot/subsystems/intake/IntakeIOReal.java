@@ -19,9 +19,8 @@ public class IntakeIOReal extends IntakeIO {
   public IntakeIOReal() {
     SparkMaxConfig leftConfig = new SparkMaxConfig();
     leftConfig
-        .follow(rightMotor)
+        .follow(rightMotor, true)
         .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
-        .inverted(false)
         .idleMode(IdleMode.kBrake);
 
     leftConfig
