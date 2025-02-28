@@ -177,8 +177,9 @@ logs/
 
 # Folder that has CTRE Phoenix Sim device config storage
 ctre_sim/
-
 .VSCodeCounter/
 
-
 .gradle/
+
+# Just leave
+src/main/java/frc/robot/BuildConstants.java

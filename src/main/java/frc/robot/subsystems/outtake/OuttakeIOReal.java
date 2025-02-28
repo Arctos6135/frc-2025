@@ -20,10 +20,9 @@ public class OuttakeIOReal extends OuttakeIO {
     leftMotor = new SparkMax(CANConstants.OUTTAKE_LEFT, MotorType.kBrushless);
 
     SparkMaxConfig leftConfig = new SparkMaxConfig();
-    leftConfig.follow(rightMotor);
+    leftConfig.follow(rightMotor, false);
     leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
     leftConfig.idleMode(IdleMode.kBrake);
-    leftConfig.inverted(false);
 
     leftConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
     leftConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);

@@ -23,7 +23,7 @@ public class Outtake extends SubsystemBase {
   public Outtake(OuttakeIO io) {
     this.io = io;
     this.feedforward =
-        new SimpleMotorFeedforward(OuttakeConstants.kS, OuttakeConstants.kV, OuttakeConstants.kA);
+        new SimpleMotorFeedforward(OuttakeConstants.kS, 0.15398061338, 0.03178134435);
   }
 
   @Override
