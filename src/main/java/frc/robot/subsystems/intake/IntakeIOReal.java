@@ -17,17 +17,6 @@ public class IntakeIOReal extends IntakeIO {
   private final RelativeEncoder leftEncoder;
 
   public IntakeIOReal() {
-    SparkMaxConfig leftConfig = new SparkMaxConfig();
-    leftConfig
-        .follow(rightMotor, true)
-        .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
-        .idleMode(IdleMode.kBrake);
-
-    leftConfig
-        .encoder
-        .positionConversionFactor(IntakeConstants.POSITION_CONVERSION_FACTOR)
-        .velocityConversionFactor(IntakeConstants.VELOCITY_CONVERSION_FACTOR);
-
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
         .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
@@ -39,11 +28,22 @@ public class IntakeIOReal extends IntakeIO {
         .positionConversionFactor(IntakeConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(IntakeConstants.VELOCITY_CONVERSION_FACTOR);
 
+    rightMotor.configure(rightConfig, null, null);
+    this.rightEncoder = rightMotor.getEncoder();
+
+    SparkMaxConfig leftConfig = new SparkMaxConfig();
+    leftConfig
+        .follow(rightMotor, true)
+        .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
+        .idleMode(IdleMode.kBrake);
+
+    leftConfig
+        .encoder
+        .positionConversionFactor(IntakeConstants.POSITION_CONVERSION_FACTOR)
+        .velocityConversionFactor(IntakeConstants.VELOCITY_CONVERSION_FACTOR);
+
     leftMotor.configure(leftConfig, null, null);
     this.leftEncoder = leftMotor.getEncoder();
-
-    rightMotor.configure(rightConfig, null, null);
-    this.rightEncoder = leftMotor.getEncoder();
   }
 
   @Override

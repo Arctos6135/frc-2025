@@ -22,7 +22,7 @@ public class OuttakeConstants {
           new Matrix<>(new SimpleMatrix(new double[] {1})),
           new Matrix<>(new SimpleMatrix(new double[] {0.0})));
 
-  public static final double kV = 0.15398061338;
-  public static final double kA = 0.03178134435;
+  public static final double kV = 0.1377791281;
+  public static final double kA = 0.0304;
   public static final double kS = 0; // TODO
 }

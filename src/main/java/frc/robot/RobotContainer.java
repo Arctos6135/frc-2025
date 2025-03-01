@@ -81,11 +81,14 @@ public class RobotContainer {
     Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
     Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
-    Trigger operatorLeftBumper = new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
-    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorLeftBumper =
+        new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
+    Trigger operatorRightBumper =
+        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-
-    operatorLeftBumper.onTrue(IntakePiece.badIntakePiece(intake, outtake)); //TODO: when we have beambreak on switch to the better command
+    operatorLeftBumper.onTrue(
+        IntakePiece.badIntakePiece(
+            intake, outtake)); // TODO: when we have beambreak on switch to the better command
     operatorRightBumper.whileTrue(new QuickOuttake(outtake));
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
@@ -94,14 +97,13 @@ public class RobotContainer {
     operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
-    operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
     operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftTrigger.whileTrue(new IntakeMove(intake));
-    operatorRightTrigger.whileTrue(new OuttakeSpin(outtake)); //TODO: make these changed based on how much its pressed?
-
-
+    operatorRightTrigger.whileTrue(
+        new OuttakeSpin(outtake)); // TODO: make these changed based on how much its pressed?
   }
 
   private void configureAuto() {
