@@ -19,7 +19,7 @@ public class Intake extends SubsystemBase {
 
   public Intake(IntakeIO io) {
     this.io = io;
-    feedforward = new SimpleMotorFeedforward(0.0, 0.11075036075);
+    feedforward = new SimpleMotorFeedforward(IntakeConstants.kS, IntakeConstants.kV, IntakeConstants.kA);
   }
 
   @Override
