@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -11,7 +12,9 @@ import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
 import frc.robot.commands.intake.IntakeMove;
+import frc.robot.commands.intake.IntakePiece;
 import frc.robot.commands.outtake.OuttakeSpin;
+import frc.robot.commands.outtake.QuickOuttake;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -41,6 +44,7 @@ public class RobotContainer {
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
+  public final DigitalInput beambreak = new DigitalInput(0);
 
   public final TeleopDrive teleopDrive;
 
@@ -64,8 +68,6 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    Trigger operatorRightBumper =
-        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
     Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
@@ -79,7 +81,12 @@ public class RobotContainer {
     Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
     Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
-    operatorRightBumper.whileTrue(new OuttakeSpin(outtake));
+    Trigger operatorLeftBumper = new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
+    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+
+
+    operatorLeftBumper.onTrue(IntakePiece.badIntakePiece(intake, outtake)); //TODO: when we have beambreak on switch to the better command
+    operatorRightBumper.whileTrue(new QuickOuttake(outtake));
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -92,7 +99,9 @@ public class RobotContainer {
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftTrigger.whileTrue(new IntakeMove(intake));
-    operatorRightTrigger.whileTrue(new OuttakeSpin(outtake));
+    operatorRightTrigger.whileTrue(new OuttakeSpin(outtake)); //TODO: make these changed based on how much its pressed?
+
+
   }
 
   private void configureAuto() {
