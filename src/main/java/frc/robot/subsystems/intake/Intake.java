@@ -9,6 +9,7 @@ import org.littletonrobotics.junction.Logger;
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
   private final SimpleMotorFeedforward feedforward;
+  // private final TrapezoidProfile trapezoidProfile;
   private double rps;
 
   private final IntakeInputsAutoLogged inputs = new IntakeInputsAutoLogged();
@@ -19,7 +20,10 @@ public class Intake extends SubsystemBase {
 
   public Intake(IntakeIO io) {
     this.io = io;
-    feedforward = new SimpleMotorFeedforward(0.0, 0.11075036075);
+    feedforward =
+        new SimpleMotorFeedforward(IntakeConstants.kS, IntakeConstants.kV, IntakeConstants.kA);
+    // trapezoidProfile = new TrapezoidProfile(new Constraints(IntakeConstants.MAX_RPS,
+    // IntakeConsta));
   }
 
   @Override

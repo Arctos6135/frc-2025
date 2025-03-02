@@ -20,15 +20,23 @@ public class IntakeConstants {
 
   public static final int MEDIAN_FILTER_SIZE = 12;
 
-  public static final double INTAKE_RPS = 6.0;
+  public static final double INTAKE_RPS = 30;
 
   public static final double INTAKE_PIECE_TIME = 2; // Seconds
 
   public static final LinearSystem<N2, N1, N2> INTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
-          new Matrix<>(new SimpleMatrix(new double[][] {{0.0, 0.0}, {1.0, 0.0}})),
-          new Matrix<>(new SimpleMatrix(new double[][] {{0.015}, {0.0}})),
-          new Matrix<>(new SimpleMatrix(new double[][] {{1.0, 0.0}, {0.0, 1.0}})),
-          new Matrix<>(
-              new SimpleMatrix(new double[][] {{0.0}, {0.0}}))); // TODO Use actual numbers.
+          new Matrix<>(new SimpleMatrix(new double[][] {{0.9046}})),
+          new Matrix<>(new SimpleMatrix(new double[][] {{0.8556}})),
+          new Matrix<>(new SimpleMatrix(new double[][] {{1.0}})),
+          new Matrix<>(new SimpleMatrix(new double[][] {{0.0}})));
+
+  public static final double kS = 0.0; // TODO
+  public static final double kV =
+      (1 - INTAKE_LINEAR_SYSTEM.getA(0, 0)) / INTAKE_LINEAR_SYSTEM.getB(0, 0);
+  public static final double kA = 1 / INTAKE_LINEAR_SYSTEM.getB(0, 0);
+
+  public static final String MAX_RPS = null;
+
+  public static final String MAX_ACC = null;
 }
