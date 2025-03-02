@@ -6,6 +6,6 @@ public class VisionConstants {
   public static final double SIDE_OFFSET = 0;
   public static final double UP_OFFSET = 0;
   public static final double ROLL_OFFSET = 0;
-  public static final double PITCH_OFFSET = 30;
+  public static final double PITCH_OFFSET = 25;
   public static final double YAW_OFFSET = 0;
 }
