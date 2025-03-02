@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.drivetrain.AutoAlign;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
@@ -68,6 +69,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
+    Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
+
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
     Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
@@ -86,12 +89,14 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
+    driverA.whileTrue(new AutoAlign(drivetrain));
+
     operatorLeftBumper.onTrue(
         IntakePiece.badIntakePiece(
             intake, outtake)); // TODO: when we have beambreak on switch to the better command
     operatorRightBumper.whileTrue(new QuickOuttake(outtake));
     // operatorA.whileTrue(new QuickOuttake(outtake));
-    operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+    operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));

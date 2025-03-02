@@ -2,6 +2,8 @@ package frc.robot.subsystems.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
+import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.vision.LimelightHelpers;
 import java.io.File;
 import org.littletonrobotics.junction.AutoLog;
 import org.littletonrobotics.junction.Logger;
@@ -59,6 +61,15 @@ public class Drivetrain extends SubsystemBase {
     }
     swerveDrive.setHeadingCorrection(false);
     swerveDrive.setCosineCompensator(false);
+
+    LimelightHelpers.setCameraPose_RobotSpace(
+        VisionConstants.LIMELIGHT_NAME,
+        VisionConstants.FORWARD_OFFSET,
+        VisionConstants.SIDE_OFFSET,
+        VisionConstants.UP_OFFSET,
+        VisionConstants.ROLL_OFFSET,
+        VisionConstants.PITCH_OFFSET,
+        VisionConstants.YAW_OFFSET);
   }
 
   @Override
