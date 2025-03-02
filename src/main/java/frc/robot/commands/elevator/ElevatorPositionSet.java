@@ -26,9 +26,7 @@ public class ElevatorPositionSet extends Command {
   public void execute() {
     elevator.setVoltage(elevator.calculatePID());
 
-    if (elevator.atSetpoint()) {
-      endTime = Timer.getFPGATimestamp() + 0.5; // TODO: test this, i think it shouldnt change
-    } else {
+    if (!elevator.atSetpoint()) {
       endTime = Timer.getFPGATimestamp() + 1000000;
     }
   }

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.704501591435184,
-        "y": 2.5911519820601847
+        "x": 7.6,
+        "y": 4.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.3869621672453696,
-        "y": 2.2097902199074064
+        "x": 7.190907734033844,
+        "y": 3.9466660412117904
       },
       "isLocked": false,
-      "linkedName": "A"
+      "linkedName": "StarPositionB"
     },
     {
       "anchor": {
-        "x": 1.5127050781249989,
-        "y": 0.6518496817129619
+        "x": 6.117283450463974,
+        "y": 3.8592513305131
       },
       "prevControl": {
-        "x": 2.572994429976851,
-        "y": 1.7103920717592587
+        "x": 6.679142501364629,
+        "y": 3.8611972059224886
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Reef-A2"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -129.54635595451788
+    "rotation": 179.48671924508858
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.59284431126673
+    "rotation": 179.94451750713975
   },
   "useDefaultConstraints": true
 }

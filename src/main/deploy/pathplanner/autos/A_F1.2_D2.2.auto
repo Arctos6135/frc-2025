@@ -1,0 +1,67 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StartA-F1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorL2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "outtakePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorIntakeHeight"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "F1-IntakeA"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intakePiece"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "IntakeA-D2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorL2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "outtakePiece"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

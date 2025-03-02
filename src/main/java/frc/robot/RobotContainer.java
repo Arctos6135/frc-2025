@@ -1,10 +1,18 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.FollowPathCommand;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -37,7 +45,8 @@ public class RobotContainer {
   public final XboxController operatorController =
       new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
-  public LoggedDashboardChooser<Command> autoChooser;
+  public SendableChooser<Command> autoChooser;
+  //public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
   public final Drivetrain drivetrain =
@@ -113,13 +122,33 @@ public class RobotContainer {
   }
 
   private void configureAuto() {
-    autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
+    //autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+
+    NamedCommands.registerCommand(
+        "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorL3", new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorL4", new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorIntakeHeight",
+        new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+    NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
+    NamedCommands.registerCommand(
+        "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
+    NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
+
+    autoChooser = AutoBuilder.buildAutoChooser();
+    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   public void startMatch() {}
 
   public Command getAutonomousCommand() {
-    return autoChooser.get();
+    //return autoChooser.get();
+    return autoChooser.getSelected();
   }
 }
