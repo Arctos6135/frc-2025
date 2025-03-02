@@ -17,10 +17,12 @@ public class AutoAlign extends Command {
   public void initialize() {}
 
   public void execute() {
-    while (Math.abs(LimelightHelpers.getTA(VisionConstants.LIMELIGHT_NAME)) - 90 > 1) {
+    while (Math.abs(LimelightHelpers.getTX(VisionConstants.LIMELIGHT_NAME)) > 1) {
       drivetrain.swerveDrive.drive(
           ChassisSpeeds.discretize(
-              0, 0, LimelightHelpers.getTA(VisionConstants.LIMELIGHT_NAME) * 0.1, 0.02));
+              0, 0, LimelightHelpers.getTX(VisionConstants.LIMELIGHT_NAME) * 0.1, 0.02));
     }
+    
+
   }
 }
