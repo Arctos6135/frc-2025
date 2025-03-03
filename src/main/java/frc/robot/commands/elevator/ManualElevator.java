@@ -22,7 +22,6 @@ public class ManualElevator extends Command {
     elevator.setVoltage(
         elevator.feedForward.calculate(
             operatorController.getLeftY() * ElevatorConstants.ELEVATOR_MAX_SPEED, 0));
-    // elevator.setVoltage(Math.pow(operatorController.getLeftY(), 3) * 4 - 0.26);
 
     Logger.recordOutput(
         "Elevator/TargetVelocity",

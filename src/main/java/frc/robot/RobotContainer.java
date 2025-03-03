@@ -1,18 +1,12 @@
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.FollowPathCommand;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.PathPlannerPath;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -46,7 +40,7 @@ public class RobotContainer {
       new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
   public SendableChooser<Command> autoChooser;
-  //public LoggedDashboardChooser<Command> autoChooser;
+  // public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
   public final Drivetrain drivetrain =
@@ -122,7 +116,7 @@ public class RobotContainer {
   }
 
   private void configureAuto() {
-    //autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
+    // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
 
     NamedCommands.registerCommand(
@@ -139,16 +133,16 @@ public class RobotContainer {
         "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
-    autoChooser = AutoBuilder.buildAutoChooser();
+    // autoChooser = AutoBuilder.buildAutoChooser();
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+    // SmartDashboard.putData("Auto Chooser", autoChooser); TODO make work
   }
 
   public void startMatch() {}
 
   public Command getAutonomousCommand() {
-    //return autoChooser.get();
+    // return autoChooser.get();
     return autoChooser.getSelected();
   }
 }
