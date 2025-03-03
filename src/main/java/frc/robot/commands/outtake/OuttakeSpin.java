@@ -5,17 +5,24 @@ import frc.robot.constants.OuttakeConstants;
 import frc.robot.subsystems.outtake.Outtake;
 
 public class OuttakeSpin extends Command {
-  private Outtake outtake;
+  private final Outtake outtake;
+  private final boolean reversed;
 
-  public OuttakeSpin(Outtake outtake) {
+  public OuttakeSpin(Outtake outtake, boolean reversed) {
     this.outtake = outtake;
+    this.reversed = reversed;
 
     addRequirements(outtake);
   }
 
   @Override
-  public void execute() {
-    outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
+  public void initialize() {
+    if (reversed) {
+      outtake.setRPS(-OuttakeConstants.OUTTAKE_RPS);
+    }
+    else {
+      outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
+    }
   }
 
   /** Must be interrupted to turn off */

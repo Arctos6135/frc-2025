@@ -95,10 +95,6 @@ public class RobotContainer {
 
     driverA.whileTrue(new AutoAlign(drivetrain));
 
-    operatorLeftBumper.onTrue(
-        IntakePiece.badIntakePiece(
-            intake, outtake)); // TODO: when we have beambreak on switch to the better command
-    operatorRightBumper.whileTrue(new QuickOuttake(outtake));
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -107,12 +103,16 @@ public class RobotContainer {
 
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    operatorB.onTrue(       IntakePiece.badIntakePiece(
+      intake, outtake)); // TODO: when we have beambreak on switch to the better command);
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-    operatorLeftTrigger.whileTrue(new IntakeMove(intake));
+    operatorLeftBumper.whileTrue(new IntakeMove(intake, true));
+    operatorRightBumper.whileTrue(new OuttakeSpin(outtake, true));
+
+    operatorLeftTrigger.whileTrue(new IntakeMove(intake, false));
     operatorRightTrigger.whileTrue(
-        new OuttakeSpin(outtake)); // TODO: make these changed based on how much its pressed?
+        new OuttakeSpin(outtake, false)); // TODO: make these changed based on how much its pressed?
   }
 
   private void configureAuto() {
