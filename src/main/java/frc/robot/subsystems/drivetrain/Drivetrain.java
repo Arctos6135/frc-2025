@@ -1,7 +1,10 @@
 package frc.robot.subsystems.drivetrain;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
+import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.vision.LimelightHelpers;
 import java.io.File;
 import org.littletonrobotics.junction.AutoLog;
 import org.littletonrobotics.junction.Logger;
@@ -32,15 +35,6 @@ public class Drivetrain extends SubsystemBase {
     inputs.angleVoltage =
         swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
 
-    inputs.frontLeftEncoderPosition =
-        swerveDrive.swerveDriveConfiguration.modules[0].getAbsolutePosition();
-    inputs.frontRightEncoderPosition =
-        swerveDrive.swerveDriveConfiguration.modules[1].getAbsolutePosition();
-    inputs.backLeftEncoderPosition =
-        swerveDrive.swerveDriveConfiguration.modules[2].getAbsolutePosition();
-    inputs.backRightEncoderPosition =
-        swerveDrive.swerveDriveConfiguration.modules[3].getAbsolutePosition();
-
     // swerveDrive.addVisionMeasurement(
     // LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
   }
@@ -57,6 +51,7 @@ public class Drivetrain extends SubsystemBase {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+
     swerveDrive.setHeadingCorrection(false);
     swerveDrive.setCosineCompensator(false);
   }
@@ -65,6 +60,12 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     updateInputs(inputs);
 
+    if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
+      swerveDrive.addVisionMeasurement(
+          LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
+    }
+
+    Logger.recordOutput("pose", swerveDrive.swerveDrivePoseEstimator.getEstimatedPosition());
     Logger.processInputs("Drivetrain", inputs);
   }
 }
