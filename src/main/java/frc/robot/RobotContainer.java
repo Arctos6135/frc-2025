@@ -7,7 +7,10 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.AutoAlign;
@@ -34,17 +37,14 @@ import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
-  public final XboxController driverController =
-      new XboxController(ControllerConstants.DRIVER_CONTROLLER);
-  public final XboxController operatorController =
-      new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
+  public final XboxController driverController = new XboxController(ControllerConstants.DRIVER_CONTROLLER);
+  public final XboxController operatorController = new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
   public SendableChooser<Command> autoChooser;
   // public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public final Drivetrain drivetrain =
-      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Drivetrain drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
@@ -74,6 +74,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
+    Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
 
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
@@ -88,10 +89,8 @@ public class RobotContainer {
     Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
     Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
-    Trigger operatorLeftBumper =
-        new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
-    Trigger operatorRightBumper =
-        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorLeftBumper = new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
+    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
     driverA.whileTrue(new AutoAlign(drivetrain));
 
@@ -103,8 +102,8 @@ public class RobotContainer {
 
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    operatorB.onTrue(       IntakePiece.badIntakePiece(
-      intake, outtake)); // TODO: when we have beambreak on switch to the better command);
+    operatorB.onTrue(IntakePiece.badIntakePiece(
+        intake, outtake)); // TODO: when we have beambreak on switch to the better command);
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftBumper.whileTrue(new IntakeMove(intake, true));
@@ -113,6 +112,14 @@ public class RobotContainer {
     operatorLeftTrigger.whileTrue(new IntakeMove(intake, false));
     operatorRightTrigger.whileTrue(
         new OuttakeSpin(outtake, false)); // TODO: make these changed based on how much its pressed?
+
+    /* Reset Gyro QOL */
+    Command delayGyroFix = new WaitCommand(2);
+    delayGyroFix.addRequirements(drivetrain);
+    Command resetGyroCommand = new InstantCommand(() -> drivetrain.swerveDrive.zeroGyro(), drivetrain)
+        .andThen(delayGyroFix);
+    resetGyroCommand.setName("ResetGyro");
+    driverX.onTrue(resetGyroCommand);
   }
 
   private void configureAuto() {
@@ -139,7 +146,8 @@ public class RobotContainer {
     // SmartDashboard.putData("Auto Chooser", autoChooser); TODO make work
   }
 
-  public void startMatch() {}
+  public void startMatch() {
+  }
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();
