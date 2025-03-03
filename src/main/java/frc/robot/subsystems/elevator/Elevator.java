@@ -20,6 +20,7 @@ public class Elevator extends SubsystemBase {
 
     feedForward =
         new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
+    pidController.setTolerance(0.005);
   }
 
   @Override

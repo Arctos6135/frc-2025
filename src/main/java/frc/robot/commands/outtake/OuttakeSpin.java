@@ -19,8 +19,7 @@ public class OuttakeSpin extends Command {
   public void initialize() {
     if (reversed) {
       outtake.setRPS(-OuttakeConstants.OUTTAKE_RPS);
-    }
-    else {
+    } else {
       outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
     }
   }

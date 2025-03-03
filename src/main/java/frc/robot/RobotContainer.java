@@ -103,8 +103,9 @@ public class RobotContainer {
 
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    operatorB.onTrue(       IntakePiece.badIntakePiece(
-      intake, outtake)); // TODO: when we have beambreak on switch to the better command);
+    operatorB.onTrue(
+        IntakePiece.badIntakePiece(
+            intake, outtake)); // TODO: when we have beambreak on switch to the better command);
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftBumper.whileTrue(new IntakeMove(intake, true));

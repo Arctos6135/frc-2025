@@ -1,5 +1,6 @@
 package frc.robot.commands.drivetrain;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,6 +12,9 @@ public class TeleopDrive extends Command {
   private XboxController controller;
   public Drivetrain drivetrain;
   public SwerveDrive swerveDrive;
+  public SlewRateLimiter xLimiter;
+  public SlewRateLimiter yLimiter;
+  public SlewRateLimiter thetaLimiter;
 
   private final double maxSpeed;
   private final double maxRotationalSpeed;
@@ -19,6 +23,9 @@ public class TeleopDrive extends Command {
     this.controller = controller;
     this.drivetrain = drivetrain;
     this.swerveDrive = drivetrain.swerveDrive;
+    this.xLimiter = new SlewRateLimiter(3.0);
+    this.yLimiter = new SlewRateLimiter(3.0);
+    this.thetaLimiter = new SlewRateLimiter(20);
 
     this.maxSpeed = swerveDrive.getMaximumChassisVelocity();
     this.maxRotationalSpeed = swerveDrive.getMaximumChassisAngularVelocity();
@@ -30,8 +37,9 @@ public class TeleopDrive extends Command {
   public void execute() {
     swerveDrive.driveFieldOriented(
         new ChassisSpeeds(
-            MathUtils.nearZero(controller.getLeftY()) * maxSpeed,
-            MathUtils.nearZero(controller.getLeftX()) * maxSpeed,
-            MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed));
+            xLimiter.calculate(MathUtils.nearZero(controller.getLeftY()) * maxSpeed),
+            yLimiter.calculate(MathUtils.nearZero(controller.getLeftX()) * maxSpeed),
+            thetaLimiter.calculate(
+                MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed)));
   }
 }
