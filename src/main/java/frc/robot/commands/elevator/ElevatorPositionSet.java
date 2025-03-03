@@ -19,7 +19,6 @@ public class ElevatorPositionSet extends Command {
 
   @Override
   public void initialize() {
-    endTime = Timer.getFPGATimestamp() + 0.5;
     elevator.setPosition(setpoint);
   }
 
@@ -27,16 +26,12 @@ public class ElevatorPositionSet extends Command {
   public void execute() {
     elevator.setVoltage(elevator.calculatePID());
 
-    if (!elevator.atSetpoint()) {
-      endTime = Timer.getFPGATimestamp() + 0.5;
-    }
-
     Logger.recordOutput("Elevator/endTime", endTime);
     Logger.recordOutput("Elevator/currentTime", Timer.getFPGATimestamp());
   }
 
   @Override
   public boolean isFinished() {
-    return Timer.getFPGATimestamp() >= endTime;
+    return elevator.atSetpoint();
   }
 }
