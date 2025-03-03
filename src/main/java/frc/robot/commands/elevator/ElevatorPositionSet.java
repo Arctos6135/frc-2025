@@ -25,9 +25,6 @@ public class ElevatorPositionSet extends Command {
   @Override
   public void execute() {
     elevator.setVoltage(elevator.calculatePID());
-
-    Logger.recordOutput("Elevator/endTime", endTime);
-    Logger.recordOutput("Elevator/currentTime", Timer.getFPGATimestamp());
   }
 
   @Override
