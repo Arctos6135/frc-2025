@@ -12,7 +12,7 @@ public class OuttakeConstants {
   public static final double VELOCITY_CONVERSION_FACTOR = 1.0 / 60.0;
   public static final double POSITION_CONVERSION_FACTOR = 1;
 
-  public static final double OUTTAKE_RPS = 6.0;
+  public static final double OUTTAKE_RPS = 20.0;
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
 
   public static final LinearSystem<N1, N1, N1> OUTTAKE_LINEAR_SYSTEM =
