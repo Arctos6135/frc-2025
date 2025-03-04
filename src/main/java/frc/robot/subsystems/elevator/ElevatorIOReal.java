@@ -10,8 +10,7 @@ import frc.robot.constants.ElevatorConstants;
 
 public class ElevatorIOReal extends ElevatorIO {
   private final SparkMax leftMotor = new SparkMax(CANConstants.ELEVATOR_LEFT, MotorType.kBrushless);
-  private final SparkMax rightMotor =
-      new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
+  private final SparkMax rightMotor = new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
@@ -22,7 +21,8 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig.smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT).idleMode(IdleMode.kBrake);
     // .inverted(true)
 
-    // setting up soft limits, soft stops are not set up on elevator rightMotor because it
+    // setting up soft limits, soft stops are not set up on elevator rightMotor
+    // because it
     // follows leftMotor
     // .softLimit
     // .forwardSoftLimitEnabled(true)
@@ -30,8 +30,7 @@ public class ElevatorIOReal extends ElevatorIO {
     // .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
     // .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
 
-    leftConfig
-        .encoder
+    leftConfig.encoder
         .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
@@ -45,8 +44,7 @@ public class ElevatorIOReal extends ElevatorIO {
     // .forwardSoftLimitEnabled(false)
     // .reverseSoftLimitEnabled(false);
 
-    rightConfig
-        .encoder
+    rightConfig.encoder
         .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
@@ -60,6 +58,12 @@ public class ElevatorIOReal extends ElevatorIO {
   @Override
   public void setVoltage(double voltage) {
     leftMotor.setVoltage(voltage);
+  }
+
+  @Override
+  public void zeroEncoderPosition() {
+    leftEncoder.setPosition(0);
+    rightEncoder.setPosition(0);
   }
 
   @Override
