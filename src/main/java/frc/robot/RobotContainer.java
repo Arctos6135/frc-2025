@@ -23,6 +23,8 @@ import frc.robot.commands.outtake.OuttakeSpin;
 import frc.robot.commands.outtake.QuickOuttake;
 import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
+import frc.robot.constants.IntakeConstants;
+import frc.robot.constants.OuttakeConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -106,12 +108,13 @@ public class RobotContainer {
             intake, outtake)); // TODO: when we have beambreak on switch to the better command);
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-    operatorLeftBumper.whileTrue(new IntakeMove(intake, true));
-    operatorRightBumper.whileTrue(new OuttakeSpin(outtake, true));
+    operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
+    operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
 
-    operatorLeftTrigger.whileTrue(new IntakeMove(intake, false));
+    operatorLeftTrigger
+        .whileTrue(new IntakeMove(intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
     operatorRightTrigger.whileTrue(
-        new OuttakeSpin(outtake, false)); // TODO: make these changed based on how much its pressed?
+        new OuttakeSpin(outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS));
 
     /* Smart Dashboard */
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));

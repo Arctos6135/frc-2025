@@ -1,28 +1,25 @@
 package frc.robot.commands.intake;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.IntakeConstants;
 import frc.robot.subsystems.intake.Intake;
 
 public class IntakeMove extends Command {
 
   private final Intake intake;
-  private final boolean reversed;
+  private final DoubleSupplier getSpeed;
 
-  public IntakeMove(Intake intake, boolean reversed) {
-    this.reversed = reversed;
+  public IntakeMove(Intake intake, DoubleSupplier getSpeed) {
     this.intake = intake;
+    this.getSpeed = getSpeed;
 
     addRequirements(intake);
   }
 
   @Override
-  public void initialize() {
-    if (reversed) {
-      intake.setRPS(-IntakeConstants.INTAKE_RPS);
-    } else {
-      intake.setRPS(IntakeConstants.INTAKE_RPS);
-    }
+  public void execute() {
+    intake.setRPS(getSpeed.getAsDouble());
   }
 
   @Override
