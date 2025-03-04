@@ -25,12 +25,9 @@ public class ElevatorIO {
     public double leftVoltage;
   }
 
-  public void updateInputs(ElevatorInputs inputs) {
-  }
+  public void updateInputs(ElevatorInputs inputs) {}
 
-  public void setVoltage(double voltage) {
-  }
+  public void setVoltage(double voltage) {}
 
-  public void zeroEncoderPosition() {
-  }
+  public void zeroEncoderPosition() {}
 }

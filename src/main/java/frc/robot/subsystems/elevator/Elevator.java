@@ -14,10 +14,12 @@ public class Elevator extends SubsystemBase {
 
   public Elevator(ElevatorIO io) {
     this.io = io;
-    pidController = new PIDController(
-        ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
+    pidController =
+        new PIDController(
+            ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
 
-    feedForward = new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
+    feedForward =
+        new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
   }
 
   @Override
@@ -50,13 +52,11 @@ public class Elevator extends SubsystemBase {
 
   /**
    * Resets the internal encoder position of the elevator.
-   * 
-   * @note this does NOT move the elevator to the default position. To do that,
-   *       you must call setPosition.
+   *
+   * @note this does NOT move the elevator to the default position. To do that, you must call
+   *     setPosition.
    */
-  public void zeroEncoderPosition() {
-
-  }
+  public void zeroEncoderPosition() {}
 
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);

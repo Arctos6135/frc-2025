@@ -39,14 +39,17 @@ import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
-  public final XboxController driverController = new XboxController(ControllerConstants.DRIVER_CONTROLLER);
-  public final XboxController operatorController = new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
+  public final XboxController driverController =
+      new XboxController(ControllerConstants.DRIVER_CONTROLLER);
+  public final XboxController operatorController =
+      new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
   public SendableChooser<Command> autoChooser;
   // public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public final Drivetrain drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Drivetrain drivetrain =
+      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
@@ -90,8 +93,10 @@ public class RobotContainer {
     Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
     Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
-    Trigger operatorLeftBumper = new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
-    Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorLeftBumper =
+        new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
+    Trigger operatorRightBumper =
+        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
     driverA.whileTrue(new AutoAlign(drivetrain));
 
@@ -111,14 +116,18 @@ public class RobotContainer {
     operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
 
-    operatorLeftTrigger
-        .whileTrue(new IntakeMove(intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
+    operatorLeftTrigger.whileTrue(
+        new IntakeMove(
+            intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
     operatorRightTrigger.whileTrue(
-        new OuttakeSpin(outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS));
+        new OuttakeSpin(
+            outtake,
+            () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS));
 
     /* Smart Dashboard */
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
-    SmartDashboard.putData("Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
+    SmartDashboard.putData(
+        "Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
   }
 
   private void configureAuto() {
@@ -145,8 +154,7 @@ public class RobotContainer {
     // SmartDashboard.putData("Auto Chooser", autoChooser); TODO make work
   }
 
-  public void startMatch() {
-  }
+  public void startMatch() {}
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();

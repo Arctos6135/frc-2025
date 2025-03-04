@@ -10,7 +10,8 @@ import frc.robot.constants.ElevatorConstants;
 
 public class ElevatorIOReal extends ElevatorIO {
   private final SparkMax leftMotor = new SparkMax(CANConstants.ELEVATOR_LEFT, MotorType.kBrushless);
-  private final SparkMax rightMotor = new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
+  private final SparkMax rightMotor =
+      new SparkMax(CANConstants.ELEVATOR_RIGHT, MotorType.kBrushless);
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
@@ -30,7 +31,8 @@ public class ElevatorIOReal extends ElevatorIO {
     // .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
     // .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
 
-    leftConfig.encoder
+    leftConfig
+        .encoder
         .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
@@ -44,7 +46,8 @@ public class ElevatorIOReal extends ElevatorIO {
     // .forwardSoftLimitEnabled(false)
     // .reverseSoftLimitEnabled(false);
 
-    rightConfig.encoder
+    rightConfig
+        .encoder
         .positionConversionFactor(ElevatorConstants.POSITION_CONVERSION_FACTOR)
         .velocityConversionFactor(ElevatorConstants.VELOCITY_CONVERSION_FACTOR);
 
