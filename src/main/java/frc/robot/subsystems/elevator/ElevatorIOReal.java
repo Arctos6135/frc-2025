@@ -22,7 +22,8 @@ public class ElevatorIOReal extends ElevatorIO {
     leftConfig.smartCurrentLimit(ElevatorConstants.CURRENT_LIMIT).idleMode(IdleMode.kBrake);
     // .inverted(true)
 
-    // setting up soft limits, soft stops are not set up on elevator rightMotor because it
+    // setting up soft limits, soft stops are not set up on elevator rightMotor
+    // because it
     // follows leftMotor
     // .softLimit
     // .forwardSoftLimitEnabled(true)
@@ -60,6 +61,12 @@ public class ElevatorIOReal extends ElevatorIO {
   @Override
   public void setVoltage(double voltage) {
     leftMotor.setVoltage(voltage);
+  }
+
+  @Override
+  public void zeroEncoderPosition() {
+    leftEncoder.setPosition(0);
+    rightEncoder.setPosition(0);
   }
 
   @Override

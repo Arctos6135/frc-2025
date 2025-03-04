@@ -28,4 +28,6 @@ public class ElevatorIO {
   public void updateInputs(ElevatorInputs inputs) {}
 
   public void setVoltage(double voltage) {}
+
+  public void zeroEncoderPosition() {}
 }

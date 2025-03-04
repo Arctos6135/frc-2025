@@ -5,7 +5,6 @@ import frc.robot.subsystems.elevator.Elevator;
 
 public class ElevatorPositionSet extends Command {
   public double setpoint;
-  public double endTime = 0; // in seconds
   public Elevator elevator;
 
   public ElevatorPositionSet(Elevator elevator, Double setpoint) {

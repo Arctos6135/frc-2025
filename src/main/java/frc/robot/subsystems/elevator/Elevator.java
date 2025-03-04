@@ -51,6 +51,14 @@ public class Elevator extends SubsystemBase {
     return pidController.atSetpoint();
   }
 
+  /**
+   * Resets the internal encoder position of the elevator.
+   *
+   * @note this does NOT move the elevator to the default position. To do that, you must call
+   *     setPosition.
+   */
+  public void zeroEncoderPosition() {}
+
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
   }
