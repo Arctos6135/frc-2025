@@ -52,7 +52,7 @@ public class ElevatorConstants {
   // The elevator height to score at each level.
   public static final double INTAKE_POSITION = 0.0; // this one should be right
   public static final double L1_HEIGHT = 0.0; // TODO
-  public static final double HANDOFF_HEIGHT = -0.064;
+  public static final double HANDOFF_HEIGHT = -0.060;
   public static final double L2_HEIGHT = -0.105;
   public static final double L3_HEIGHT = -0.260;
   public static final double L4_HEIGHT = -0.45; // Its really 0.47 but didnt want to hit hardstop

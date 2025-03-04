@@ -19,7 +19,7 @@ public class IntakeMove extends Command {
   @Override
   public void initialize() {
     if (reversed) {
-      intake.setRPS(-IntakeConstants.INTAKE_RPS);
+      intake.setRPS(-IntakeConstants.INTAKE_RPS + 10);
     } else {
       intake.setRPS(IntakeConstants.INTAKE_RPS);
     }
