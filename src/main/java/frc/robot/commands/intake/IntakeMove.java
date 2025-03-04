@@ -16,13 +16,6 @@ public class IntakeMove extends Command {
     addRequirements(intake);
   }
 
-  @Override
-  public void initialize() {
-    if (reversed) {
-      intake.setRPS(-IntakeConstants.INTAKE_RPS + 10);
-    } else {
-      intake.setRPS(IntakeConstants.INTAKE_RPS);
-    }
   public void execute() {
     intake.setRPS(getSpeed.getAsDouble());
   }

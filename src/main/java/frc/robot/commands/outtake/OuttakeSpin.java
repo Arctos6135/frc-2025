@@ -15,13 +15,6 @@ public class OuttakeSpin extends Command {
     addRequirements(outtake);
   }
 
-  @Override
-  public void initialize() {
-    if (reversed) {
-      outtake.setRPS(-OuttakeConstants.OUTTAKE_RPS);
-    } else {
-      outtake.setRPS(OuttakeConstants.OUTTAKE_RPS);
-    }
   public void execute() {
     outtake.setRPS(getSpeed.getAsDouble());
   }

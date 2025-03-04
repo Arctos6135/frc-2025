@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.AutoAlign;
@@ -79,6 +81,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
+    Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
 
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
@@ -132,9 +135,8 @@ public class RobotContainer {
             .andThen(delayGyroFix);
     resetGyroCommand.setName("ResetGyro");
     driverX.onTrue(resetGyroCommand);
-        new OuttakeSpin(
-            outtake,
-            () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS));
+    new OuttakeSpin(
+        outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS);
 
     /* Smart Dashboard */
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
