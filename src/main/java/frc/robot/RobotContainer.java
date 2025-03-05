@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -162,10 +163,10 @@ public class RobotContainer {
         "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
-    // autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = AutoBuilder.buildAutoChooser();
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
-    // SmartDashboard.putData("Auto Chooser", autoChooser); TODO make work
+    SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
   }
 
   public void startMatch() {}
