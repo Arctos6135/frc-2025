@@ -1,24 +1,22 @@
 package frc.robot.subsystems.intake;
 
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import frc.robot.constants.IntakeConstants;
 
 public class IntakeIOSim extends IntakeIO {
-  private final DCMotorSim leftMotor;
-  private final DCMotorSim rightMotor;
+  private final FlywheelSim leftMotor;
+  private final FlywheelSim rightMotor;
 
   public IntakeIOSim() {
     leftMotor =
-        new DCMotorSim(
+        new FlywheelSim(
             IntakeConstants.INTAKE_LINEAR_SYSTEM,
             DCMotor.getNEO(1),
-            new double[] {
-              0.1111, 0.1111
-            }); // TODO Check what kind of neo is being used and std deviations.
+            new double[] {0.000}); // TODO Check what kind of neo is being used and std deviations.
     rightMotor =
-        new DCMotorSim(
-            IntakeConstants.INTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), new double[] {0.1111, 0.1111});
+        new FlywheelSim(
+            IntakeConstants.INTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), new double[] {0.000});
   }
 
   @Override

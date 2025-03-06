@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -28,6 +29,7 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
+import frc.robot.constants.PositionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -148,6 +150,13 @@ public class RobotContainer {
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
+    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
+
+    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
+    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -164,7 +173,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+    autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
   }
@@ -173,6 +182,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();
+    drivetrain.swerveDrive.resetOdometry(positionChooser.get());
     return autoChooser.getSelected();
   }
 }

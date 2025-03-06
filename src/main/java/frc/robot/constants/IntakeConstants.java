@@ -2,7 +2,6 @@ package frc.robot.constants;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
@@ -24,7 +23,7 @@ public class IntakeConstants {
 
   public static final double INTAKE_PIECE_TIME = 2; // Seconds
 
-  public static final LinearSystem<N2, N1, N2> INTAKE_LINEAR_SYSTEM =
+  public static final LinearSystem<N1, N1, N1> INTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
           new Matrix<>(new SimpleMatrix(new double[][] {{0.9046}})),
           new Matrix<>(new SimpleMatrix(new double[][] {{0.8556}})),
