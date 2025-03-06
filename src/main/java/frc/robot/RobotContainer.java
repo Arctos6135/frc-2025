@@ -42,7 +42,6 @@ import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
 import frc.robot.subsystems.vision.Vision;
-
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
