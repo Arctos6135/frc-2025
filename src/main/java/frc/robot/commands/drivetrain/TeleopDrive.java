@@ -25,7 +25,6 @@ public class TeleopDrive extends Command {
     this.swerveDrive = drivetrain.swerveDrive;
     this.xLimiter = new SlewRateLimiter(3.0);
     this.yLimiter = new SlewRateLimiter(3.0);
-    this.thetaLimiter = new SlewRateLimiter(20);
 
     this.maxSpeed = swerveDrive.getMaximumChassisVelocity();
     this.maxRotationalSpeed = swerveDrive.getMaximumChassisAngularVelocity();
@@ -39,7 +38,6 @@ public class TeleopDrive extends Command {
         new ChassisSpeeds(
             xLimiter.calculate(MathUtils.nearZero(controller.getLeftY()) * maxSpeed),
             yLimiter.calculate(MathUtils.nearZero(controller.getLeftX()) * maxSpeed),
-            thetaLimiter.calculate(
-                MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed)));
+            MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed));
   }
 }

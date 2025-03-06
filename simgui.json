@@ -1,18 +1,25 @@
 {
   "NTProvider": {
     "types": {
+      "/AdvantageKit/RealOutputs/Alerts": "Alerts",
       "/AdvantageKit/RealOutputs/Encoders": "Alerts",
       "/AdvantageKit/RealOutputs/IMU": "Alerts",
       "/AdvantageKit/RealOutputs/JSON": "Alerts",
       "/AdvantageKit/RealOutputs/Motors": "Alerts",
+      "/AdvantageKit/RealOutputs/PathPlanner": "Alerts",
       "/AdvantageKit/RealOutputs/Swerve Drive": "Alerts",
       "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Alerts": "Alerts",
+      "/SmartDashboard/Auto Chooser": "String Chooser",
       "/SmartDashboard/Encoders": "Alerts",
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/IMU": "Alerts",
       "/SmartDashboard/JSON": "Alerts",
       "/SmartDashboard/Motors": "Alerts",
+      "/SmartDashboard/PathPlanner": "Alerts",
       "/SmartDashboard/Swerve Drive": "Alerts",
+      "/SmartDashboard/Zero Encoder": "Command",
+      "/SmartDashboard/Zero Gyro": "Command",
       "/SmartDashboard/auto chooser": "String Chooser",
       "/SmartDashboard/position chooser": "String Chooser"
     }

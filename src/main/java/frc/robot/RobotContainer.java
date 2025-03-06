@@ -30,6 +30,7 @@ import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
 import frc.robot.constants.PositionConstants;
+import frc.robot.constants.VisionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -40,6 +41,8 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
+import frc.robot.subsystems.vision.Vision;
+
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -58,7 +61,8 @@ public class RobotContainer {
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
-  public final DigitalInput beambreak = new DigitalInput(0);
+  public final Vision vision;
+  public final DigitalInput beambreak = new DigitalInput(9);
 
   public final TeleopDrive teleopDrive;
 
@@ -67,11 +71,13 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
@@ -104,7 +110,7 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-    driverA.whileTrue(new AutoAlign(drivetrain));
+    driverA.whileTrue(new AutoAlign(drivetrain, vision));
 
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
