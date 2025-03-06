@@ -12,6 +12,7 @@ public class ResetGyro extends Command {
 
   public ResetGyro(Drivetrain drivetrain) {
     this.drivetrain = drivetrain;
+
     addRequirements(drivetrain);
   }
 

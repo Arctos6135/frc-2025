@@ -48,144 +48,152 @@ import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
-    public final XboxController driverController = new XboxController(ControllerConstants.DRIVER_CONTROLLER);
-    public final XboxController operatorController = new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
+  public final XboxController driverController =
+      new XboxController(ControllerConstants.DRIVER_CONTROLLER);
+  public final XboxController operatorController =
+      new XboxController(ControllerConstants.OPERATOR_CONTROLLER);
 
-    public SendableChooser<Command> autoChooser;
-    // public LoggedDashboardChooser<Command> autoChooser;
-    public LoggedDashboardChooser<Pose2d> positionChooser;
+  public SendableChooser<Command> autoChooser;
+  // public LoggedDashboardChooser<Command> autoChooser;
+  public LoggedDashboardChooser<Pose2d> positionChooser;
 
-    public final Drivetrain drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
-    public final Intake intake;
-    public final Outtake outtake;
-    public final Elevator elevator;
-    public final Vision vision;
-    public final DigitalInput beambreak = new DigitalInput(9);
+  public final Drivetrain drivetrain =
+      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Intake intake;
+  public final Outtake outtake;
+  public final Elevator elevator;
+  public final Vision vision;
+  public final DigitalInput beambreak = new DigitalInput(9);
 
-    public final TeleopDrive teleopDrive;
+  public final TeleopDrive teleopDrive;
 
-    public RobotContainer() {
-        if (RobotBase.isReal()) {
-            this.intake = new Intake(new IntakeIOReal());
-            this.elevator = new Elevator(new ElevatorIOReal());
-            this.outtake = new Outtake(new OuttakeIOReal());
-            this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+  public RobotContainer() {
+    if (RobotBase.isReal()) {
+      this.intake = new Intake(new IntakeIOReal());
+      this.elevator = new Elevator(new ElevatorIOReal());
+      this.outtake = new Outtake(new OuttakeIOReal());
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
 
-        } else {
-            this.intake = new Intake(new IntakeIOSim());
-            this.elevator = new Elevator(new ElevatorIOSim());
-            this.outtake = new Outtake(new OuttakeIOSim());
-            this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
-        }
-
-        teleopDrive = new TeleopDrive(drivetrain, driverController);
-        drivetrain.setDefaultCommand(teleopDrive);
-        elevator.setDefaultCommand(new ManualElevator(elevator, operatorController));
-
-        configureAuto();
-        configureBindings();
+    } else {
+      this.intake = new Intake(new IntakeIOSim());
+      this.elevator = new Elevator(new ElevatorIOSim());
+      this.outtake = new Outtake(new OuttakeIOSim());
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
 
-    private void configureBindings() {
-        Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
-        Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
+    teleopDrive = new TeleopDrive(drivetrain, driverController);
+    drivetrain.setDefaultCommand(teleopDrive);
+    elevator.setDefaultCommand(new ManualElevator(elevator, operatorController));
 
-        Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
-        Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
-        Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
-        Trigger operatorY = new JoystickButton(operatorController, XboxController.Button.kY.value);
+    configureAuto();
+    configureBindings();
+  }
 
-        Trigger operatorDpadDown = new Trigger(() -> operatorController.getPOV() == 180);
-        Trigger operatorDpadUp = new Trigger(() -> operatorController.getPOV() == 0);
-        Trigger operatorDpadRight = new Trigger(() -> operatorController.getPOV() == 90);
-        Trigger operatorDpadLeft = new Trigger(() -> operatorController.getPOV() == 270);
+  private void configureBindings() {
+    Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
+    Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
 
-        Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
-        Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
+    Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
+    Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
+    Trigger operatorX = new JoystickButton(operatorController, XboxController.Button.kX.value);
+    Trigger operatorY = new JoystickButton(operatorController, XboxController.Button.kY.value);
 
-        Trigger operatorLeftBumper = new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
-        Trigger operatorRightBumper = new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+    Trigger operatorDpadDown = new Trigger(() -> operatorController.getPOV() == 180);
+    Trigger operatorDpadUp = new Trigger(() -> operatorController.getPOV() == 0);
+    Trigger operatorDpadRight = new Trigger(() -> operatorController.getPOV() == 90);
+    Trigger operatorDpadLeft = new Trigger(() -> operatorController.getPOV() == 270);
 
-        driverA.whileTrue(new MakeNormal(drivetrain, vision)
-                .andThen(new CenterDrivetrain(drivetrain, vision).andThen(new SmashTag(drivetrain, vision))));
+    Trigger operatorLeftTrigger = new Trigger(() -> operatorController.getLeftTriggerAxis() > 0);
+    Trigger operatorRightTrigger = new Trigger(() -> operatorController.getRightTriggerAxis() > 0);
 
-        // operatorA.whileTrue(new QuickOuttake(outtake));
-        operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
-        operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
-        operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-        operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    Trigger operatorLeftBumper =
+        new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
+    Trigger operatorRightBumper =
+        new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-        operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
-        operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-        operatorB.onTrue(
-                IntakePiece.badIntakePiece(
-                        intake, outtake)); // TODO: when we have beambreak on switch to the better command);
-        operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    driverA.whileTrue(
+        new MakeNormal(drivetrain, vision)
+            .andThen(
+                new CenterDrivetrain(drivetrain, vision)
+                    .andThen(new SmashTag(drivetrain, vision))));
 
-        operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
-        operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
+    // operatorA.whileTrue(new QuickOuttake(outtake));
+    operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
+    operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-        operatorLeftTrigger.whileTrue(
-                new IntakeMove(
-                        intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
-        operatorRightTrigger.whileTrue(
-                new ManualOuttake(
-                        outtake,
-                        operatorController)); // TODO: make these changed based on how much its pressed?
+    operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+    operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
+    operatorB.onTrue(
+        IntakePiece.badIntakePiece(
+            intake, outtake)); // TODO: when we have beambreak on switch to the better command);
+    operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-        /* Reset Gyro QOL */
-        Command delayGyroFix = new WaitCommand(2);
-        delayGyroFix.addRequirements(drivetrain);
-        Command resetGyroCommand = new InstantCommand(() -> drivetrain.swerveDrive.zeroGyro(), drivetrain)
-                .andThen(delayGyroFix);
-        resetGyroCommand.setName("ResetGyro");
-        driverX.onTrue(resetGyroCommand);
-        new OuttakeSpin(
-                outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS);
+    operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
+    operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
 
-        /* Smart Dashboard */
-        SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
-        SmartDashboard.putData(
-                "Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
-    }
+    operatorLeftTrigger.whileTrue(
+        new IntakeMove(
+            intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
+    operatorRightTrigger.whileTrue(
+        new ManualOuttake(
+            outtake,
+            operatorController)); // TODO: make these changed based on how much its pressed?
 
-    private void configureAuto() {
-        // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-        positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-        positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
-        positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-        positionChooser.addOption("red reef", PositionConstants.RED_REEF);
+    /* Reset Gyro QOL */
+    Command delayGyroFix = new WaitCommand(2);
+    delayGyroFix.addRequirements(drivetrain);
+    Command resetGyroCommand =
+        new InstantCommand(() -> drivetrain.swerveDrive.zeroGyro(), drivetrain)
+            .andThen(delayGyroFix);
+    resetGyroCommand.setName("ResetGyro");
+    driverX.onTrue(resetGyroCommand);
+    new OuttakeSpin(
+        outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS);
 
-        positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
-        positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-        positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
+    /* Smart Dashboard */
+    SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
+    SmartDashboard.putData(
+        "Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
+  }
 
-        NamedCommands.registerCommand(
-                "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
-        NamedCommands.registerCommand(
-                "elevatorL3", new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-        NamedCommands.registerCommand(
-                "elevatorL4", new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
-        NamedCommands.registerCommand(
-                "elevatorIntakeHeight",
-                new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
-        NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
-        NamedCommands.registerCommand(
-                "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
-        NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
+  private void configureAuto() {
+    // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
+    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
+    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
 
-        autoChooser = AutoBuilder.buildAutoChooser();
-        autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
+    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
 
-        SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
-    }
+    NamedCommands.registerCommand(
+        "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorL3", new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorL4", new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    NamedCommands.registerCommand(
+        "elevatorIntakeHeight",
+        new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+    NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
+    NamedCommands.registerCommand(
+        "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
+    NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
-    public void startMatch() {
-    }
+    autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
-    public Command getAutonomousCommand() {
-        // return autoChooser.get();
-        drivetrain.swerveDrive.resetOdometry(positionChooser.get());
-        return autoChooser.getSelected();
-    }
+    SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
+  }
+
+  public void startMatch() {}
+
+  public Command getAutonomousCommand() {
+    // return autoChooser.get();
+    drivetrain.swerveDrive.resetOdometry(positionChooser.get());
+    return autoChooser.getSelected();
+  }
 }

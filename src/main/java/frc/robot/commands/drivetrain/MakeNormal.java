@@ -26,7 +26,8 @@ public class MakeNormal extends Command {
 
   @Override
   public boolean isFinished() {
-    return !(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) > 1.0 || vision.getSkew() == 0.0); // TODO maybe flips angles
+    return !(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) > 1.0
+        || vision.getSkew() == 0.0); // TODO maybe flips angles
   }
   // currentSkew *= -1;
   // System.out.println("longSide " + t2darray[12]);
