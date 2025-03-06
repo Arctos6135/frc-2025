@@ -10,22 +10,27 @@ import frc.robot.subsystems.vision.LimelightHelpers;
 import frc.robot.subsystems.vision.Vision;
 import swervelib.SwerveDrive;
 
-public class AutoAlign extends Command {
+public class MakeNormal extends Command {
   private final Drivetrain drivetrain;
   private final Vision vision;
   private Pose3d aprilTagPose;
   private double kP = 0.01;
 
-  public AutoAlign(Drivetrain drivetrain, Vision vision) {
+  public MakeNormal(Drivetrain drivetrain, Vision vision) {
     this.drivetrain = drivetrain;
     this.vision = vision;
+
+    addRequirements(drivetrain);
   }
 
+  @Override
   public void execute() {
-      vision.updateInputs();
-      aprilTagPose = vision.getAprilTagPose();
+    drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, 0, vision.getSkew() * 0.01, 0.02));
+  }
 
-      drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(aprilTagPose.getX() * kP, aprilTagPose.getY() * kP, aprilTagPose.getRotation().getZ() * kP, 0.02));
+  @Override
+  public boolean isFinished() {
+    return !(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) > 1.0 || vision.getSkew() == 0.0); // TODO maybe flips angles
   }
       // currentSkew *= -1;
       // System.out.println("longSide " + t2darray[12]);
@@ -48,10 +53,6 @@ public class AutoAlign extends Command {
       //   aligned = true;
       // }
 
-  @Override
-  public boolean isFinished() {
-    return (Math.abs(aprilTagPose.getX()) < 0.1 && Math.abs(aprilTagPose.getY()) < 0.5 && Math.abs(aprilTagPose.getRotation().getZ()) < 0.5);
-  }
 
   @Override
   public void end(boolean interrupted) {
