@@ -1,14 +1,10 @@
 package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.VisionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.subsystems.vision.LimelightHelpers;
 import frc.robot.subsystems.vision.Vision;
-import swervelib.SwerveDrive;
 
 public class MakeNormal extends Command {
   private final Drivetrain drivetrain;
@@ -32,27 +28,26 @@ public class MakeNormal extends Command {
   public boolean isFinished() {
     return !(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) > 1.0 || vision.getSkew() == 0.0); // TODO maybe flips angles
   }
-      // currentSkew *= -1;
-      // System.out.println("longSide " + t2darray[12]);
-      // System.out.println("shortSide " + t2darray[13]);
-      // System.out.println("horizontal " + t2darray[14]);
-      // System.out.println("vertical " + t2darray[15]);
-      // System.out.println("skew " + t2darray[16]);
-      // System.out.println("");
+  // currentSkew *= -1;
+  // System.out.println("longSide " + t2darray[12]);
+  // System.out.println("shortSide " + t2darray[13]);
+  // System.out.println("horizontal " + t2darray[14]);
+  // System.out.println("vertical " + t2darray[15]);
+  // System.out.println("skew " + t2darray[16]);
+  // System.out.println("");
 
-      // if (Math.abs(t2darray[16] - 90) > 5) {
-      //   if (t2darray[16] > 45) {
-      //     t2darray[16] = t2darray[16] - 90;
+  // if (Math.abs(t2darray[16] - 90) > 5) {
+  //   if (t2darray[16] > 45) {
+  //     t2darray[16] = t2darray[16] - 90;
 
-      // if (!aligned) {
-      // if (Math.abs(Math.abs(currentSkew) - 45) > 1.0 || currentSkew == 0.0) {
-      //   drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, 0, currentSkew * 0.01, 0.02));
-      // } else if (Math.abs(t2darray[4]) > 0.5) {
-      //   drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, t2darray[4] * 0.1, 0, 0.02));
-      // } else {
-      //   aligned = true;
-      // }
-
+  // if (!aligned) {
+  // if (Math.abs(Math.abs(currentSkew) - 45) > 1.0 || currentSkew == 0.0) {
+  //   drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, 0, currentSkew * 0.01, 0.02));
+  // } else if (Math.abs(t2darray[4]) > 0.5) {
+  //   drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, t2darray[4] * 0.1, 0, 0.02));
+  // } else {
+  //   aligned = true;
+  // }
 
   @Override
   public void end(boolean interrupted) {
