@@ -1,53 +1,47 @@
 package frc.robot.subsystems.elevator;
 
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.numbers.N4;
+import edu.wpi.first.math.system.LinearSystem;
 import frc.robot.constants.ElevatorConstants;
+import frc.robot.utils.MathUtils;
+import org.ejml.simple.SimpleMatrix;
 
 public class ElevatorIOSim extends ElevatorIO {
-  private final DCMotorSim leftMotor;
-  private final DCMotorSim rightMotor;
+  private double voltage;
+  private Matrix<N2, N1> state;
+  private Matrix<N2, N1> output;
+
+  private final LinearSystem<N2, N1, N2> motor;
 
   public ElevatorIOSim() {
-    leftMotor =
-        new DCMotorSim(
-            ElevatorConstants.ELEVATOR_LINEAR_SYSTEM,
-            DCMotor.getNEO(1),
-            new double[] {0.1111, 0.1111});
-    rightMotor =
-        new DCMotorSim(
-            ElevatorConstants.ELEVATOR_LINEAR_SYSTEM,
-            DCMotor.getNEO(1),
-            new double[] {0.1111, 0.1111}); // Should be no difference between the two.
+    motor = ElevatorConstants.ELEVATOR_LINEAR_SYSTEM;
+    // Should be no difference between the two.
+
+    state = new Matrix<>(new SimpleMatrix(new double[][] {{0}, {0}}));
+    output = motor.calculateY(state, VecBuilder.fill(0));
   }
 
   @Override
   public void setVoltage(double voltage) {
-    leftMotor.setInputVoltage(voltage);
-    rightMotor.setInputVoltage(voltage);
+    this.voltage = voltage;
   }
 
   @Override
   public void updateInputs(ElevatorInputs inputs) {
-    leftMotor.update(0.02); // Assumes uniform timestep.
-    rightMotor.update(0.02);
+    state = motor.calculateX(state, VecBuilder.fill(MathUtils.clampVoltage(voltage)), 0.02);
+    output = motor.calculateY(state, VecBuilder.fill(MathUtils.clampVoltage(voltage)));
 
-    // Meters.
-    inputs.leftPosition =
-        leftMotor.getAngularPositionRotations() * ElevatorConstants.POSITION_CONVERSION_FACTOR;
-    inputs.rightPosition =
-        rightMotor.getAngularPositionRotations() * ElevatorConstants.POSITION_CONVERSION_FACTOR;
+    inputs.leftPosition = output.get(1, 0);
+    inputs.rightPosition = output.get(1, 0);
 
-    // Meters per second.
-    inputs.leftVelocity =
-        leftMotor.getAngularVelocityRPM() * ElevatorConstants.VELOCITY_CONVERSION_FACTOR;
-    inputs.rightVelocity =
-        rightMotor.getAngularVelocityRPM() * ElevatorConstants.VELOCITY_CONVERSION_FACTOR;
+    inputs.leftVelocity = output.get(0, 0);
+    inputs.rightVelocity = output.get(0, 0);
 
-    inputs.leftCurrent = leftMotor.getCurrentDrawAmps();
-    inputs.rightCurrent = rightMotor.getCurrentDrawAmps();
-
-    inputs.leftVoltage = leftMotor.getInputVoltage();
-    inputs.rightVoltage = rightMotor.getInputVoltage();
+    inputs.leftVoltage = voltage;
+    inputs.rightVoltage = voltage;
   }
 }

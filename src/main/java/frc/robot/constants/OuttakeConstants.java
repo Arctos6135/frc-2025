@@ -17,12 +17,12 @@ public class OuttakeConstants {
 
   public static final LinearSystem<N1, N1, N1> OUTTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
-          new Matrix<>(new SimpleMatrix(new double[] {-5.096})),
-          new Matrix<>(new SimpleMatrix(new double[] {33.09})),
+          new Matrix<>(new SimpleMatrix(new double[] {-5.17})),
+          new Matrix<>(new SimpleMatrix(new double[] {35.62})),
           new Matrix<>(new SimpleMatrix(new double[] {1})),
           new Matrix<>(new SimpleMatrix(new double[] {0.0})));
 
-  public static final double kV = 0.1377791281;
-  public static final double kA = 0.0304;
+  public static final double kV = 0.145135786465285;
+  public static final double kA = 0.029551708522453;
   public static final double kS = 0; // TODO: Controls again
 }

@@ -69,13 +69,13 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, true);
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, false);
     }
     // beambreak = outtake.beambreak;
 

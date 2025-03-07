@@ -4,7 +4,6 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
-import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
@@ -32,8 +31,6 @@ public class Intake extends SubsystemBase {
     medianCurrent = filter.calculate(inputs.leftCurrent);
 
     io.setVoltage(feedforward.calculate(rps));
-
-    Logger.processInputs("Intake", inputs);
   }
 
   /**

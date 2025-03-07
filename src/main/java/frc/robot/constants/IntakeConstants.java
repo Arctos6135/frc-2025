@@ -26,15 +26,14 @@ public class IntakeConstants {
 
   public static final LinearSystem<N1, N1, N1> INTAKE_LINEAR_SYSTEM =
       new LinearSystem<>(
-          new Matrix<>(new SimpleMatrix(new double[][] {{0.9046}})),
-          new Matrix<>(new SimpleMatrix(new double[][] {{0.8556}})),
+          new Matrix<>(new SimpleMatrix(new double[][] {{-6.423}})),
+          new Matrix<>(new SimpleMatrix(new double[][] {{52.8}})),
           new Matrix<>(new SimpleMatrix(new double[][] {{1.0}})),
           new Matrix<>(new SimpleMatrix(new double[][] {{0.0}})));
 
   public static final double kS = 0.0; // TODO: Controls
-  public static final double kV =
-      (1 - INTAKE_LINEAR_SYSTEM.getA(0, 0)) / INTAKE_LINEAR_SYSTEM.getB(0, 0);
-  public static final double kA = 1 / INTAKE_LINEAR_SYSTEM.getB(0, 0);
+  public static final double kV = 0.121646340539224;
+  public static final double kA = 0.020180871963097;
 
   public static final String MAX_RPS = null;
 

@@ -8,6 +8,7 @@ public class Vision {
   String limelightName;
   VisionInputs inputs;
   double[] t2darray;
+  boolean isReal;
 
   @AutoLog
   public static class VisionInputs {
@@ -29,18 +30,21 @@ public class Vision {
     // inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
   }
 
-  public Vision(String limelightName) {
+  public Vision(String limelightName, boolean isReal) {
+    this.isReal = isReal;
     this.limelightName = limelightName;
     inputs = new VisionInputs();
 
-    LimelightHelpers.setCameraPose_RobotSpace(
-        limelightName,
-        VisionConstants.FORWARD_OFFSET,
-        VisionConstants.SIDE_OFFSET,
-        VisionConstants.UP_OFFSET,
-        VisionConstants.ROLL_OFFSET,
-        VisionConstants.PITCH_OFFSET,
-        VisionConstants.YAW_OFFSET);
+    if (isReal) {
+      LimelightHelpers.setCameraPose_RobotSpace(
+          limelightName,
+          VisionConstants.FORWARD_OFFSET,
+          VisionConstants.SIDE_OFFSET,
+          VisionConstants.UP_OFFSET,
+          VisionConstants.ROLL_OFFSET,
+          VisionConstants.PITCH_OFFSET,
+          VisionConstants.YAW_OFFSET);
+    }
   }
 
   public double getTX() {
