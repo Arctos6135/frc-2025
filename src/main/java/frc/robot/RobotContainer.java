@@ -130,7 +130,7 @@ public class RobotContainer {
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-    //operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    // operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
@@ -138,10 +138,7 @@ public class RobotContainer {
     operatorLeftTrigger.whileTrue(
         new IntakeMove(
             intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
-    operatorRightTrigger.whileTrue(
-        new ManualOuttake(
-            outtake,
-            operatorController));
+    operatorRightTrigger.whileTrue(new ManualOuttake(outtake, operatorController));
 
     /* Reset Gyro QOL */
     Command delayGyroFix = new WaitCommand(2);
@@ -180,7 +177,8 @@ public class RobotContainer {
     NamedCommands.registerCommand(
         "elevatorHandoffHeight",
         new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    NamedCommands.registerCommand("elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
+    NamedCommands.registerCommand(
+        "elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
     NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
