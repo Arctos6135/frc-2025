@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartBlue_F2"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "outtakePiece"
+            "pathName": "StartPro-Leave"
           }
         }
       ]

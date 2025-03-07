@@ -29,7 +29,6 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
-import frc.robot.constants.PositionConstants;
 import frc.robot.constants.VisionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
@@ -158,14 +157,14 @@ public class RobotContainer {
 
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red red", PositionConstants.RED_RED);
-    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
+    // positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    // positionChooser.addOption("red red", PositionConstants.RED_RED);
+    // positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
+    // positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
 
-    positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
-    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
+    // positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
+    // positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
+    // positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -194,7 +193,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();
-    drivetrain.swerveDrive.resetOdometry(positionChooser.get());
+    // drivetrain.swerveDrive.resetOdometry(positionChooser.get());
     return autoChooser.getSelected();
   }
 }

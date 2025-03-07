@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.571750940393518,
-        "y": 0.8070963541666663
+        "x": 7.573,
+        "y": 7.301
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.453141391531635,
-        "y": 0.8070963541666663
+        "x": 6.454390451138117,
+        "y": 7.301
       },
       "isLocked": false,
-      "linkedName": "StartRed"
+      "linkedName": "StartReef"
     },
     {
       "anchor": {
         "x": 5.67810257523148,
-        "y": 0.807
+        "y": 7.301
       },
       "prevControl": {
         "x": 6.642020588375258,
-        "y": 0.8070000000000004
+        "y": 7.301
       },
       "nextControl": null,
       "isLocked": false,
