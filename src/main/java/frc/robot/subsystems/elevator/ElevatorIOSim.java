@@ -4,7 +4,6 @@ import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
-import edu.wpi.first.math.numbers.N4;
 import edu.wpi.first.math.system.LinearSystem;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.utils.MathUtils;

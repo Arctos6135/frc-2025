@@ -2,7 +2,6 @@ package frc.robot.subsystems.outtake;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.OuttakeConstants;
 import org.littletonrobotics.junction.Logger;
@@ -11,7 +10,7 @@ public class Outtake extends SubsystemBase {
   private final OuttakeIO io;
   private final OuttakeInputsAutoLogged inputs = new OuttakeInputsAutoLogged();
 
-  public final DigitalInput beambreak = new DigitalInput(9);
+  // public final DigitalInput beambreak = new DigitalInput(9);
 
   private final SimpleMotorFeedforward feedforward;
 

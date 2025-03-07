@@ -3,7 +3,6 @@ package frc.robot.constants;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
-import edu.wpi.first.math.numbers.N4;
 import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
@@ -45,10 +44,7 @@ public class ElevatorConstants {
                     {0.1122}, {-0.4236} // TODO: More controls
                   })),
           new Matrix<>( // Output matrix.
-              new SimpleMatrix(
-                  new double[][] {
-                    {1, 0}, {0, 1}
-                  })), // Assuming canonical form.
+              new SimpleMatrix(new double[][] {{1, 0}, {0, 1}})), // Assuming canonical form.
           new Matrix<>( // Feedthrough matrix.
               new SimpleMatrix(
                   new double[][] {{0.0}, {0.0}}))); // There shouldn't be a feedthrough component.

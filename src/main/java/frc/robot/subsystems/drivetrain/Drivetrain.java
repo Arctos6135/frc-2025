@@ -22,17 +22,17 @@ public class Drivetrain extends SubsystemBase {
 
   @AutoLog
   public static class DrivetrainInputs {
-    /** The voltage of the front left drive motor. */
-    public double driveVoltage;
-    // /** The voltage fo the front left angle motor. */
-    public double angleVoltage;
+    // /** The voltage of the front left drive motor. */
+    // public double driveVoltage;
+    // // /** The voltage fo the front left angle motor. */
+    // public double angleVoltage;
   }
 
   public void updateInputs(DrivetrainInputs inputs) {
-    inputs.driveVoltage =
-        swerveDrive.swerveDriveConfiguration.modules[0].getDriveMotor().getVoltage();
-    inputs.angleVoltage =
-        swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
+    // inputs.driveVoltage =
+    //     swerveDrive.swerveDriveConfiguration.modules[0].getDriveMotor().getVoltage();
+    // inputs.angleVoltage =
+    //     swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
 
     // swerveDrive.addVisionMeasurement(
     // LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
