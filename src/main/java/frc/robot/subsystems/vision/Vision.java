@@ -1,7 +1,6 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import frc.robot.constants.VisionConstants;
 import org.littletonrobotics.junction.AutoLog;
 
@@ -21,11 +20,11 @@ public class Vision {
   }
 
   public void updateInputs() {
-    t2darray = LimelightHelpers.getT2DArray(limelightName);
-    inputs.tv = t2darray[0];
-    inputs.ty = t2darray[4];
-    inputs.tx = t2darray[5];
-    inputs.skew = t2darray[16];
+    // t2darray = LimelightHelpers.getT2DArray(limelightName);
+    // inputs.tv = t2darray[0];
+    // inputs.ty = t2darray[4];
+    // inputs.tx = t2darray[5];
+    // inputs.skew = t2darray[16]; TODO: this gives an error still
     // inputs.pose = LimelightHelpers.getBotPose2d(limelightName);
     // inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
   }
