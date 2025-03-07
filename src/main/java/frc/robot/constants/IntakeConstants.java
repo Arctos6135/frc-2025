@@ -8,7 +8,7 @@ import org.ejml.simple.SimpleMatrix;
 public class IntakeConstants {
   public static final int CURRENT_LIMIT = 30;
 
-  public static final double GEARBOX_RATIO = 1.0; // TODO
+  public static final double GEARBOX_RATIO = 1.0; // TODO: Uhhhh this should have been done by now...
 
   // Rotations.
   public static final double POSITION_CONVERSION_FACTOR = 1 / GEARBOX_RATIO;
@@ -30,7 +30,7 @@ public class IntakeConstants {
           new Matrix<>(new SimpleMatrix(new double[][] {{1.0}})),
           new Matrix<>(new SimpleMatrix(new double[][] {{0.0}})));
 
-  public static final double kS = 0.0; // TODO
+  public static final double kS = 0.0; // TODO: Controls
   public static final double kV =
       (1 - INTAKE_LINEAR_SYSTEM.getA(0, 0)) / INTAKE_LINEAR_SYSTEM.getB(0, 0);
   public static final double kA = 1 / INTAKE_LINEAR_SYSTEM.getB(0, 0);
