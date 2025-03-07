@@ -11,7 +11,7 @@ public class Outtake extends SubsystemBase {
   private final OuttakeIO io;
   private final OuttakeInputsAutoLogged inputs = new OuttakeInputsAutoLogged();
 
-  private final DigitalInput beambreak = new DigitalInput(9);
+  public final DigitalInput beambreak = new DigitalInput(9);
 
   private final SimpleMotorFeedforward feedforward;
 
