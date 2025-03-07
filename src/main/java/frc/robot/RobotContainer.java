@@ -2,9 +2,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -63,7 +61,7 @@ public class RobotContainer {
   public final Outtake outtake;
   public final Elevator elevator;
   public final Vision vision;
-  public final DigitalInput beambreak = new DigitalInput(9);
+  // public final DigitalInput beambreak = new DigitalInput(9);
 
   public final TeleopDrive teleopDrive;
 
@@ -161,13 +159,13 @@ public class RobotContainer {
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("red red", PositionConstants.RED_RED);
     positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
+    positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
 
-    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
     positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
+    positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -179,12 +177,12 @@ public class RobotContainer {
         "elevatorIntakeHeight",
         new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
-    NamedCommands.registerCommand(
-        "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
+    NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
+    // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
   }

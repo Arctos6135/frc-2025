@@ -17,9 +17,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "outtakePiece"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "outtakePiece"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 2.0
+                }
+              }
+            ]
           }
         },
         {
@@ -53,9 +66,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "outtakePiece"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "outtakePiece"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 2.0
+                }
+              }
+            ]
           }
         }
       ]

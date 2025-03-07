@@ -39,9 +39,6 @@ public class Outtake extends SubsystemBase {
         feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
 
     Logger.processInputs("Outtake", inputs);
-    Logger.recordOutput("Outtake/Filtered Current Left", leftMedianCurrent);
-    Logger.recordOutput("Outtake/Filtered Current Right", rightMedianCurrent);
-    Logger.recordOutput("Outtake/Beambreak", beambreak.get());
     lastTargetVelocity = targetVelocity;
   }
 

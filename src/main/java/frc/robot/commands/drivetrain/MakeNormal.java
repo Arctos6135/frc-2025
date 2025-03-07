@@ -21,13 +21,15 @@ public class MakeNormal extends Command {
 
   @Override
   public void execute() {
-    drivetrain.swerveDrive.drive(ChassisSpeeds.discretize(0, 0, vision.getSkew() * 0.01, 0.02));
+    drivetrain.swerveDrive.drive(
+        ChassisSpeeds.discretize(0, 0, (Math.abs(vision.getSkew() % 90 - 45) - 45) * 0.1, 0.02));
   }
 
   @Override
   public boolean isFinished() {
-    return !(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) > 1.0
-        || vision.getSkew() == 0.0); // TODO maybe flips angles
+    System.out.println(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45));
+    return ((Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) < 1.0)
+        && Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) != 0.0); // TODO maybe flips angles
   }
   // currentSkew *= -1;
   // System.out.println("longSide " + t2darray[12]);

@@ -28,7 +28,7 @@ public class Vision {
     inputs.tx = t2darray[5];
     inputs.skew = t2darray[16];
     inputs.pose = LimelightHelpers.getBotPose2d(limelightName);
-    inputs.targetPose = LimelightHelpers.getTargetPose3d_CameraSpace(limelightName);
+    inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
   }
 
   public Vision(String limelightName) {

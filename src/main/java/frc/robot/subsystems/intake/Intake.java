@@ -34,7 +34,6 @@ public class Intake extends SubsystemBase {
     io.setVoltage(feedforward.calculate(rps));
 
     Logger.processInputs("Intake", inputs);
-    Logger.recordOutput("Intake/Filtered Current", medianCurrent);
   }
 
   /**
@@ -68,7 +67,6 @@ public class Intake extends SubsystemBase {
    * @param voltage voltage
    */
   public void setVoltage(double voltage) {
-    Logger.recordOutput("Intake/Voltage", voltage);
     io.setVoltage(voltage);
   }
 
