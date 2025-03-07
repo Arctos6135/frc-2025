@@ -12,16 +12,16 @@ import org.ejml.simple.SimpleMatrix;
 
 public class ElevatorIOSim extends ElevatorIO {
   private double voltage;
-  private Matrix<N4, N1> state;
+  private Matrix<N2, N1> state;
   private Matrix<N2, N1> output;
 
-  private final LinearSystem<N4, N1, N2> motor;
+  private final LinearSystem<N2, N1, N2> motor;
 
   public ElevatorIOSim() {
     motor = ElevatorConstants.ELEVATOR_LINEAR_SYSTEM;
     // Should be no difference between the two.
 
-    state = new Matrix<>(new SimpleMatrix(new double[][] {{0}, {0}, {0}, {0}}));
+    state = new Matrix<>(new SimpleMatrix(new double[][] {{0}, {0}}));
     output = motor.calculateY(state, VecBuilder.fill(0));
   }
 
