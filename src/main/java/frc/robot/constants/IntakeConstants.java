@@ -8,7 +8,8 @@ import org.ejml.simple.SimpleMatrix;
 public class IntakeConstants {
   public static final int CURRENT_LIMIT = 30;
 
-  public static final double GEARBOX_RATIO = 1.0; // TODO: Uhhhh this should have been done by now...
+  public static final double GEARBOX_RATIO =
+      1.0; // TODO: Uhhhh this should have been done by now...
 
   // Rotations.
   public static final double POSITION_CONVERSION_FACTOR = 1 / GEARBOX_RATIO;
