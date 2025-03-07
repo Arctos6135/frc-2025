@@ -18,7 +18,6 @@ public class Vision {
     double skew;
     Pose2d pose;
     double timestamp;
-    Pose3d targetPose;
   }
 
   public void updateInputs() {
@@ -27,8 +26,8 @@ public class Vision {
     inputs.ty = t2darray[4];
     inputs.tx = t2darray[5];
     inputs.skew = t2darray[16];
-    inputs.pose = LimelightHelpers.getBotPose2d(limelightName);
-    inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
+    // inputs.pose = LimelightHelpers.getBotPose2d(limelightName);
+    // inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
   }
 
   public Vision(String limelightName) {
@@ -55,17 +54,5 @@ public class Vision {
 
   public double getSkew() {
     return inputs.skew;
-  }
-
-  public Pose2d visionPose() {
-    return inputs.pose;
-  }
-
-  public boolean validTarget() {
-    return inputs.tv == 1.0 ? true : false;
-  }
-
-  public Pose3d getAprilTagPose() {
-    return inputs.targetPose;
   }
 }
