@@ -2,7 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,8 +12,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.drivetrain.AutoAlign;
+import frc.robot.commands.drivetrain.CenterDrivetrain;
+import frc.robot.commands.drivetrain.MakeNormal;
 import frc.robot.commands.drivetrain.ResetGyro;
+import frc.robot.commands.drivetrain.SmashTag;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
@@ -109,7 +110,11 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-    driverA.whileTrue(new AutoAlign(drivetrain, vision));
+    driverA.whileTrue(
+        new MakeNormal(drivetrain, vision)
+            .andThen(
+                new CenterDrivetrain(drivetrain, vision)
+                    .andThen(new SmashTag(drivetrain, vision))));
 
     // driverB.whileTrue(new BeambreakTest(outtake));
 
@@ -157,13 +162,13 @@ public class RobotContainer {
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("red red", PositionConstants.RED_RED);
     positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
+    positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
 
-    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
     positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
+    positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -175,8 +180,8 @@ public class RobotContainer {
         "elevatorIntakeHeight",
         new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
-    NamedCommands.registerCommand(
-        "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
+    NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
+    // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
     // autoChooser = AutoBuilder.buildAutoChooser();
