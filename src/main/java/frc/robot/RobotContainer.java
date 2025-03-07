@@ -1,7 +1,9 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -119,17 +121,16 @@ public class RobotContainer {
     // driverB.whileTrue(new BeambreakTest(outtake));
 
     // operatorA.whileTrue(new QuickOuttake(outtake));
-    operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L1_HEIGHT));
+    operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-    operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    operatorB.onTrue(
-        IntakePiece.badIntakePiece(
-            intake, outtake)); // TODO: when we have beambreak on switch to the better command);
-    operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
+    operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
+    operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
+    //operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
@@ -140,7 +141,7 @@ public class RobotContainer {
     operatorRightTrigger.whileTrue(
         new ManualOuttake(
             outtake,
-            operatorController)); // TODO: make these changed based on how much its pressed?
+            operatorController));
 
     /* Reset Gyro QOL */
     Command delayGyroFix = new WaitCommand(2);
@@ -177,17 +178,18 @@ public class RobotContainer {
     NamedCommands.registerCommand(
         "elevatorL4", new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
     NamedCommands.registerCommand(
-        "elevatorIntakeHeight",
-        new ElevatorPositionSet(elevator, ElevatorConstants.INTAKE_POSITION));
+        "elevatorHandoffHeight",
+        new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
+    NamedCommands.registerCommand("elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
     NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
-    // autoChooser = AutoBuilder.buildAutoChooser();
-    // //autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+    autoChooser = AutoBuilder.buildAutoChooser();
+    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
-    // SmartDashboard.putData("Auto Chooser", autoChooser);
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   public void startMatch() {}

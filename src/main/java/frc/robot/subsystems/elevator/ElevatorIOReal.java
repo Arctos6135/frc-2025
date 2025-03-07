@@ -25,11 +25,12 @@ public class ElevatorIOReal extends ElevatorIO {
     // setting up soft limits, soft stops are not set up on elevator rightMotor
     // because it
     // follows leftMotor
-    // .softLimit
-    // .forwardSoftLimitEnabled(true)
-    // .reverseSoftLimitEnabled(true)
-    // .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
-    // .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
+    leftConfig
+        .softLimit
+        .forwardSoftLimitEnabled(true)
+        .reverseSoftLimitEnabled(true)
+        .forwardSoftLimit(ElevatorConstants.ELEVATOR_MAX)
+        .reverseSoftLimit(ElevatorConstants.ELEVATOR_MIN);
 
     leftConfig
         .encoder
