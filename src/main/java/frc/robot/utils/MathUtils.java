@@ -10,4 +10,14 @@ public class MathUtils {
   public static double nearZero(double num) {
     return Math.abs(num) > 0.05 ? num : 0;
   }
+
+  public static double clampVoltage(double voltage) {
+    if (voltage > 12) {
+      return 12;
+    } else if (voltage < -12) {
+      return -12;
+    } else {
+      return voltage;
+    }
+  }
 }

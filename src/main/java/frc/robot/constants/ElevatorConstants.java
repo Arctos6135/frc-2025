@@ -3,6 +3,7 @@ package frc.robot.constants;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.numbers.N4;
 import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
@@ -30,21 +31,26 @@ public class ElevatorConstants {
   public static final double ELEVATOR_MAX_SPEED = 0.25;
 
   // The linear model representing the elevator motor.
-  public static final LinearSystem<N2, N1, N2> ELEVATOR_LINEAR_SYSTEM =
+  public static final LinearSystem<N4, N1, N2> ELEVATOR_LINEAR_SYSTEM =
       new LinearSystem<>(
           new Matrix<>( // State matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0, 0.0}, {0.0, 0.0} // TODO: Controls
+                    {-3.463, 4.785, -0.7736, 1.459},
+                    {-14.78, -8.75, 6.889, -4.398},
+                    {-10.32, -22.78, -18.78, 1.737},
+                    {-5.363, -5.956, -16.09, 4.617} // TODO: Controls
                   })),
           new Matrix<>( // Input matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0}, {0.0} // TODO: More controls
+                    {0.1122}, {-0.4236}, {-1.373}, {-0.5652} // TODO: More controls
                   })),
           new Matrix<>( // Output matrix.
               new SimpleMatrix(
-                  new double[][] {{1.0, 0.0}, {0.0, 1.0}})), // Assuming canonical form.
+                  new double[][] {
+                    {1.966, 0.2269, 0.07705, 0.01125}, {1.068, -0.3434, 0.5577, -0.8102}
+                  })), // Assuming canonical form.
           new Matrix<>( // Feedthrough matrix.
               new SimpleMatrix(
                   new double[][] {{0.0}, {0.0}}))); // There shouldn't be a feedthrough component.

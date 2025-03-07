@@ -51,8 +51,8 @@ public class Drivetrain extends SubsystemBase {
       throw new RuntimeException(e);
     }
 
-    swerveDrive.setHeadingCorrection(false);
-    swerveDrive.setCosineCompensator(false);
+    swerveDrive.setHeadingCorrection(true);
+    swerveDrive.setCosineCompensator(true);
 
     setupPathPlanner();
   }

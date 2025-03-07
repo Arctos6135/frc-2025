@@ -2,8 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -72,13 +70,13 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, true);
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, false);
     }
     // beambreak = outtake.beambreak;
 
@@ -189,7 +187,7 @@ public class RobotContainer {
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    //TODO: I think autos are rotated, not just flipped, we might have to rename again
+    // TODO: I think autos are rotated, not just flipped, we might have to rename again
   }
 
   public void startMatch() {}
