@@ -3,7 +3,6 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -62,7 +61,7 @@ public class RobotContainer {
   public final Outtake outtake;
   public final Elevator elevator;
   public final Vision vision;
-  public final DigitalInput beambreak;
+  // public final DigitalInput beambreak;
 
   public final TeleopDrive teleopDrive;
 
@@ -79,7 +78,7 @@ public class RobotContainer {
       this.outtake = new Outtake(new OuttakeIOSim());
       this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
-    beambreak = outtake.beambreak;
+    // beambreak = outtake.beambreak;
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
     drivetrain.setDefaultCommand(teleopDrive);
@@ -130,7 +129,7 @@ public class RobotContainer {
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorB.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-    //operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    // operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
@@ -138,10 +137,7 @@ public class RobotContainer {
     operatorLeftTrigger.whileTrue(
         new IntakeMove(
             intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
-    operatorRightTrigger.whileTrue(
-        new ManualOuttake(
-            outtake,
-            operatorController));
+    operatorRightTrigger.whileTrue(new ManualOuttake(outtake, operatorController));
 
     /* Reset Gyro QOL */
     Command delayGyroFix = new WaitCommand(2);
@@ -180,7 +176,8 @@ public class RobotContainer {
     NamedCommands.registerCommand(
         "elevatorHandoffHeight",
         new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
-    NamedCommands.registerCommand("elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
+    NamedCommands.registerCommand(
+        "elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
     NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
@@ -190,6 +187,7 @@ public class RobotContainer {
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
+    //TODO: I think autos are rotated, not just flipped, we might have to rename again
   }
 
   public void startMatch() {}

@@ -29,6 +29,7 @@ public class Vision {
     // inputs.skew = t2darray[16];
     // inputs.pose = LimelightHelpers.getBotPose2d(limelightName);
     // inputs.targetPose = LimelightHelpers.getTargetPose3d_RobotSpace(limelightName);
+    // TODO: This was throwing an error so I commented it out
   }
 
   public Vision(String limelightName) {
