@@ -182,7 +182,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
+    autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser); // TODO make work
   }
