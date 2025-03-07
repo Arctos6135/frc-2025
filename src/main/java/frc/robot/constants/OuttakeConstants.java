@@ -24,5 +24,5 @@ public class OuttakeConstants {
 
   public static final double kV = 0.1377791281;
   public static final double kA = 0.0304;
-  public static final double kS = 0; // TODO
+  public static final double kS = 0; // TODO: Controls again
 }

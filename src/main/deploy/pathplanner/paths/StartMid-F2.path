@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.187445769342567,
-        "y": 4.0
+        "x": 7.205626535207424,
+        "y": 5.122523625136462
       },
       "isLocked": false,
-      "linkedName": "StarPositionB"
+      "linkedName": "StartMid"
     },
     {
       "anchor": {
-        "x": 6.117283450463974,
-        "y": 3.8592513305131
+        "x": 5.444559395469432,
+        "y": 5.35892254025655
       },
       "prevControl": {
-        "x": 6.679142501364629,
-        "y": 3.8611972059224886
+        "x": 6.639326896834061,
+        "y": 5.952065280431222
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Reef-A2"
+      "linkedName": "Reef-F2"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 179.48671924508858
+    "rotation": -120.54117533135798
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 179.94451750713975
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

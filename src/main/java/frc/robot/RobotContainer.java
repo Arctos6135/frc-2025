@@ -2,8 +2,9 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -30,7 +31,6 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
-import frc.robot.constants.PositionConstants;
 import frc.robot.constants.VisionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
@@ -62,7 +62,7 @@ public class RobotContainer {
   public final Outtake outtake;
   public final Elevator elevator;
   public final Vision vision;
-  public final DigitalInput beambreak;
+  // public final DigitalInput beambreak;
 
   public final TeleopDrive teleopDrive;
 
@@ -79,7 +79,7 @@ public class RobotContainer {
       this.outtake = new Outtake(new OuttakeIOSim());
       this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
-    beambreak = outtake.beambreak;
+    // beambreak = outtake.beambreak;
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
     drivetrain.setDefaultCommand(teleopDrive);
@@ -159,14 +159,14 @@ public class RobotContainer {
 
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red red", PositionConstants.RED_RED);
-    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
+    // positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    // positionChooser.addOption("red red", PositionConstants.RED_RED);
+    // positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
+    // positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
 
-    positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
-    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
+    // positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
+    // positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
+    // positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -188,13 +188,14 @@ public class RobotContainer {
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
+    // TODO: I think autos are rotated, not just flipped, we might have to rename again
   }
 
   public void startMatch() {}
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();
-    drivetrain.swerveDrive.resetOdometry(positionChooser.get());
+    // drivetrain.swerveDrive.resetOdometry(positionChooser.get());
     return autoChooser.getSelected();
   }
 }

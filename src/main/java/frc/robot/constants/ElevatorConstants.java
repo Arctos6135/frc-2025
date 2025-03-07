@@ -35,12 +35,12 @@ public class ElevatorConstants {
           new Matrix<>( // State matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0, 0.0}, {0.0, 0.0} // TODO
+                    {0.0, 0.0}, {0.0, 0.0} // TODO: Controls
                   })),
           new Matrix<>( // Input matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.0}, {0.0} // TODO
+                    {0.0}, {0.0} // TODO: More controls
                   })),
           new Matrix<>( // Output matrix.
               new SimpleMatrix(
@@ -50,7 +50,7 @@ public class ElevatorConstants {
                   new double[][] {{0.0}, {0.0}}))); // There shouldn't be a feedthrough component.
 
   // The elevator height to score at each level.
-  public static final double ZERO = 0.0; // TODO
+  public static final double ZERO = 0.0; // TODO: Make sure zero being zero works (it really should)
   public static final double HANDOFF_HEIGHT = -0.060;
   public static final double L2_HEIGHT = -0.105;
   public static final double L3_HEIGHT = -0.260;
@@ -58,5 +58,5 @@ public class ElevatorConstants {
 
   // min and max for soft stop
   public static final double ELEVATOR_MAX = 0.01; // hopefully this is right
-  public static final double ELEVATOR_MIN = -0.45; // TODO
+  public static final double ELEVATOR_MIN = -0.45; // TODO: MAke sure softstops work properly
 }

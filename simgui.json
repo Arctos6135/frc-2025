@@ -24,6 +24,19 @@
       "/SmartDashboard/position chooser": "String Chooser"
     }
   },
+  "NetworkTables": {
+    "transitory": {
+      "SmartDashboard": {
+        "open": true,
+        "position chooser": {
+          "open": true,
+          "string[]##v_/SmartDashboard/position chooser/options": {
+            "open": true
+          }
+        }
+      }
+    }
+  },
   "NetworkTables Info": {
     "visible": true
   }
