@@ -2,8 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -61,7 +59,7 @@ public class RobotContainer {
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
-  public final Vision vision;
+  //public final Vision vision;
   // public final DigitalInput beambreak;
 
   public final TeleopDrive teleopDrive;
@@ -71,13 +69,13 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      //this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      //this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
     // beambreak = outtake.beambreak;
 
@@ -112,11 +110,11 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-    driverA.whileTrue(
-        new MakeNormal(drivetrain, vision)
-            .andThen(
-                new CenterDrivetrain(drivetrain, vision)
-                    .andThen(new SmashTag(drivetrain, vision))));
+    // driverA.whileTrue(
+    //     new MakeNormal(drivetrain, vision)
+    //         .andThen(
+    //             new CenterDrivetrain(drivetrain, vision)
+    //                 .andThen(new SmashTag(drivetrain, vision))));
 
     // driverB.whileTrue(new BeambreakTest(outtake));
 
