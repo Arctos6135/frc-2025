@@ -12,7 +12,8 @@ public class BeambreakTest extends Command {
 
   @Override
   public void execute() {
-    if (outtake.beambreak.get()) {
+    if (
+    /*outtake.beambreak.get()*/ false) {
       outtake.setVoltage(2);
     } else {
       outtake.setVoltage(0);

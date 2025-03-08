@@ -13,10 +13,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.drivetrain.CenterDrivetrain;
-import frc.robot.commands.drivetrain.MakeNormal;
 import frc.robot.commands.drivetrain.ResetGyro;
-import frc.robot.commands.drivetrain.SmashTag;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
@@ -29,7 +26,7 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
-import frc.robot.constants.VisionConstants;
+import frc.robot.constants.PositionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -40,7 +37,6 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
-import frc.robot.subsystems.vision.Vision;
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -59,7 +55,7 @@ public class RobotContainer {
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
-  //public final Vision vision;
+  // public final Vision vision;
   // public final DigitalInput beambreak;
 
   public final TeleopDrive teleopDrive;
@@ -69,13 +65,13 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      //this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      // this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      //this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      // this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
     }
     // beambreak = outtake.beambreak;
 
@@ -146,8 +142,6 @@ public class RobotContainer {
             .andThen(delayGyroFix);
     resetGyroCommand.setName("ResetGyro");
     driverX.onTrue(resetGyroCommand);
-    new OuttakeSpin(
-        outtake, () -> operatorController.getRightTriggerAxis() * OuttakeConstants.OUTTAKE_RPS);
 
     /* Smart Dashboard */
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
@@ -157,14 +151,14 @@ public class RobotContainer {
 
   private void configureAuto() {
     // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-    // positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    // positionChooser.addOption("red red", PositionConstants.RED_RED);
-    // positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    // positionChooser.addOption("red blue", PositionConstants.RED_BLUE);
+    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
+    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
+    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
 
-    // positionChooser.addOption("blue red", PositionConstants.BLUE_RED);
-    // positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    // positionChooser.addOption("blue blue", PositionConstants.BLUE_BLUE);
+    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
+    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
+    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
 
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
@@ -178,7 +172,8 @@ public class RobotContainer {
     NamedCommands.registerCommand(
         "elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
-    NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
+    // NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake,
+    // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 
@@ -186,7 +181,6 @@ public class RobotContainer {
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    // TODO: I think autos are rotated, not just flipped, we might have to rename again
   }
 
   public void startMatch() {}
