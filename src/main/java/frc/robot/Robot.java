@@ -38,8 +38,8 @@ public class Robot extends LoggedRobot {
     // Set up data receivers & replay source
     if (isReal()) {
       // Running on a real robot, log to a USB stick ("/U/logs")
-      // Logger.addDataReceiver(new WPILOGWriter());
-      // Logger.addDataReceiver(new NT4Publisher());
+      Logger.addDataReceiver(new WPILOGWriter());
+      Logger.addDataReceiver(new NT4Publisher());
     } else if (isSimulation()) {
       // Running a physics simulator, log to NT
       Logger.addDataReceiver(new NT4Publisher());

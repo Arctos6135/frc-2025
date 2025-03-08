@@ -75,7 +75,6 @@ public class Outtake extends SubsystemBase {
    * @param voltage voltage
    */
   public void setVoltage(double voltage) {
-    Logger.recordOutput("Outtake/Voltage", voltage);
     io.setVoltage(voltage);
   }
 

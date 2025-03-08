@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake;
 
+import org.littletonrobotics.junction.Logger;
+
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,8 +23,6 @@ public class Intake extends SubsystemBase {
     this.io = io;
     feedforward =
         new SimpleMotorFeedforward(IntakeConstants.kS, IntakeConstants.kV, IntakeConstants.kA);
-    // trapezoidProfile = new TrapezoidProfile(new Constraints(IntakeConstants.MAX_RPS,
-    // IntakeConsta));
   }
 
   @Override
@@ -31,6 +31,7 @@ public class Intake extends SubsystemBase {
     medianCurrent = filter.calculate(inputs.leftCurrent);
 
     io.setVoltage(feedforward.calculate(rps));
+    Logger.processInputs("Intake", inputs);
   }
 
   /**

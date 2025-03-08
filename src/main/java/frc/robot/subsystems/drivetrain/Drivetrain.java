@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
 import java.io.File;
 import org.littletonrobotics.junction.AutoLog;
+import org.littletonrobotics.junction.Logger;
+
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -21,20 +23,17 @@ public class Drivetrain extends SubsystemBase {
 
   @AutoLog
   public static class DrivetrainInputs {
-    // /** The voltage of the front left drive motor. */
-    // public double driveVoltage;
-    // // /** The voltage fo the front left angle motor. */
-    // public double angleVoltage;
+    double frontLeftAbsolutePosition;
+    double frontRightAbsolutePosition;
+    double backLeftAbsolutePosition;
+    double backRightAbsolutePosition;
   }
 
   public void updateInputs(DrivetrainInputs inputs) {
-    // inputs.driveVoltage =
-    //     swerveDrive.swerveDriveConfiguration.modules[0].getDriveMotor().getVoltage();
-    // inputs.angleVoltage =
-    //     swerveDrive.swerveDriveConfiguration.modules[0].getAngleMotor().getVoltage();
-
-    // swerveDrive.addVisionMeasurement(
-    // LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME), Timer.getFPGATimestamp());
+    inputs.frontLeftAbsolutePosition = swerveDrive.getModules()[0].getAbsolutePosition();
+    inputs.frontRightAbsolutePosition = swerveDrive.getModules()[1].getAbsolutePosition();
+    inputs.backLeftAbsolutePosition = swerveDrive.getModules()[2].getAbsolutePosition();
+    inputs.backRightAbsolutePosition = swerveDrive.getModules()[3].getAbsolutePosition();
   }
 
   private final DrivetrainInputsAutoLogged inputs = new DrivetrainInputsAutoLogged();
@@ -66,7 +65,7 @@ public class Drivetrain extends SubsystemBase {
     // Timer.getFPGATimestamp());
     // }
 
-    // Logger.processInputs("Drivetrain", inputs);
+    Logger.processInputs("Drivetrain", inputs);
   }
 
   // You can tell I stole this code because its commented
