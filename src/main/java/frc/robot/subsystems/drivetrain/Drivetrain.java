@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
 import java.io.File;
 import org.littletonrobotics.junction.AutoLog;
-import org.littletonrobotics.junction.Logger;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -41,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
   private final DrivetrainInputsAutoLogged inputs = new DrivetrainInputsAutoLogged();
 
   public Drivetrain(File directory) {
-    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.NONE;
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
       this.swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.MAX_SPEED);
       // Alternative method if you don't want to supply the conversion factor via JSON files.
@@ -51,8 +50,8 @@ public class Drivetrain extends SubsystemBase {
       throw new RuntimeException(e);
     }
 
-    swerveDrive.setHeadingCorrection(true);
-    swerveDrive.setCosineCompensator(true);
+    swerveDrive.setHeadingCorrection(false);
+    swerveDrive.setCosineCompensator(false);
 
     setupPathPlanner();
   }
@@ -67,7 +66,7 @@ public class Drivetrain extends SubsystemBase {
     // Timer.getFPGATimestamp());
     // }
 
-    Logger.processInputs("Drivetrain", inputs);
+    // Logger.processInputs("Drivetrain", inputs);
   }
 
   // You can tell I stole this code because its commented

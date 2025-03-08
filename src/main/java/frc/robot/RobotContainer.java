@@ -172,7 +172,8 @@ public class RobotContainer {
     NamedCommands.registerCommand(
         "elevatorDown", new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     NamedCommands.registerCommand("intakePiece", IntakePiece.badIntakePiece(intake, outtake));
-    NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake, outtake));
+    // NamedCommands.registerCommand("beambreakIntake", IntakePiece.badIntakePiece(intake,
+    // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
 

@@ -27,7 +27,6 @@ public class MakeNormal extends Command {
 
   @Override
   public boolean isFinished() {
-    System.out.println(Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45));
     return ((Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) < 1.0)
         && Math.abs(Math.abs(vision.getSkew() % 90 - 45) - 45) != 0.0); // TODO maybe flips angles
   }
