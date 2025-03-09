@@ -13,6 +13,7 @@ public class MathUtils {
 
   /**
    * Clamp a number to be in between min and max.
+   *
    * @param number The number to be clamped.
    * @param min The minimum value.
    * @param max The maximum value.

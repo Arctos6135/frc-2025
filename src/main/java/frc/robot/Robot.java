@@ -13,6 +13,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.net.WebServer;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -52,6 +54,8 @@ public class Robot extends LoggedRobot {
       Logger.setReplaySource(new WPILOGReader(logPath));
       Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
     }
+
+    WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
 
     // Start AdvantageKit logger
     Logger.start();

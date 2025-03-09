@@ -5,7 +5,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.utils.MathUtils;
-
 import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
@@ -23,8 +22,8 @@ public class Elevator extends SubsystemBase {
 
     feedForward =
         new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
-    
-        pidController.setTolerance(0.05);
+
+    pidController.setTolerance(0.05);
   }
 
   @Override
@@ -48,7 +47,8 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    pidController.setSetpoint(MathUtils.clamp(setpoint, ElevatorConstants.ELEVATOR_MIN, ElevatorConstants.ELEVATOR_MAX));
+    pidController.setSetpoint(
+        MathUtils.clamp(setpoint, ElevatorConstants.ELEVATOR_MIN, ElevatorConstants.ELEVATOR_MAX));
   }
 
   public boolean atSetpoint() {
