@@ -8,6 +8,7 @@ import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
   public final ElevatorIO io;
+  private final double kG = ElevatorConstants.kg;
   public final PIDController pidController;
   public final ElevatorFeedforward feedForward;
   public final ElevatorInputsAutoLogged inputs = new ElevatorInputsAutoLogged();
@@ -20,13 +21,13 @@ public class Elevator extends SubsystemBase {
 
     feedForward =
         new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
-    pidController.setTolerance(0.005);
+    pidController.setTolerance(0.05);
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    // io.setVoltage(pidController.calculate(inputs.leftPosition));
+    io.setVoltage(-pidController.calculate(inputs.leftPosition) - kG);
 
     Logger.processInputs("Elevator", inputs);
   }
@@ -61,9 +62,5 @@ public class Elevator extends SubsystemBase {
 
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
-  }
-
-  public double calculatePID() {
-    return pidController.calculate(inputs.leftPosition);
   }
 }

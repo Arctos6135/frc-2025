@@ -52,12 +52,13 @@ public class ElevatorIOSim extends ElevatorIO {
     inputs.rightVoltage = voltage;
   }
 
+  // Accounts for the hard stops.
   private void normalize() {
-    if (state.get(1, 0) >= maxPos) {
-      state.set(1, 0, maxPos);
-      state.set(0, 0, 0);
-    } else if (state.get(1, 0) <= minPos) {
+    if (state.get(1, 0) <= minPos) {
       state.set(1, 0, minPos);
+      state.set(0, 0, 0);
+    } else if (state.get(1, 0) >= maxPos) {
+      state.set(1, 0, maxPos);
       state.set(0, 0, 0);
     }
   }

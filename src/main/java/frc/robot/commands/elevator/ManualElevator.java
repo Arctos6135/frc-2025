@@ -2,8 +2,8 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.ElevatorConstants;
 import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.utils.MathUtils;
 
 public class ManualElevator extends Command {
   private final Elevator elevator;
@@ -18,9 +18,9 @@ public class ManualElevator extends Command {
 
   @Override
   public void execute() {
-    elevator.setVoltage(
-        elevator.feedForward.calculate(
-            operatorController.getLeftY() * ElevatorConstants.ELEVATOR_MAX_SPEED, 0));
+    elevator.setPosition(
+        elevator.pidController.getSetpoint()
+            - MathUtils.nearZero(operatorController.getLeftY()) / 100.0);
   }
 
   @Override

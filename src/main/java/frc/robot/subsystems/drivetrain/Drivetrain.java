@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
 import java.io.File;
-import org.littletonrobotics.junction.AutoLog;
-import org.littletonrobotics.junction.Logger;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -19,23 +17,6 @@ import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 public class Drivetrain extends SubsystemBase {
   public final SwerveDrive swerveDrive;
-
-  @AutoLog
-  public static class DrivetrainInputs {
-    double frontLeftAbsolutePosition;
-    double frontRightAbsolutePosition;
-    double backLeftAbsolutePosition;
-    double backRightAbsolutePosition;
-  }
-
-  public void updateInputs(DrivetrainInputs inputs) {
-    inputs.frontLeftAbsolutePosition = swerveDrive.getModules()[0].getAbsolutePosition();
-    inputs.frontRightAbsolutePosition = swerveDrive.getModules()[1].getAbsolutePosition();
-    inputs.backLeftAbsolutePosition = swerveDrive.getModules()[2].getAbsolutePosition();
-    inputs.backRightAbsolutePosition = swerveDrive.getModules()[3].getAbsolutePosition();
-  }
-
-  private final DrivetrainInputsAutoLogged inputs = new DrivetrainInputsAutoLogged();
 
   public Drivetrain(File directory) {
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
@@ -56,15 +37,12 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    updateInputs(inputs);
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
     //   swerveDrive.addVisionMeasurement(
     //       LimelightHelpers.getBotPose2d(VisionConstants.LIMELIGHT_NAME),
     // Timer.getFPGATimestamp());
     // }
-
-    Logger.processInputs("Drivetrain", inputs);
   }
 
   // You can tell I stole this code because its commented
