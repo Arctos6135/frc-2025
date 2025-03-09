@@ -150,16 +150,6 @@ public class RobotContainer {
   }
 
   private void configureAuto() {
-    // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
-    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
-
-    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
-    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
-
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     NamedCommands.registerCommand(

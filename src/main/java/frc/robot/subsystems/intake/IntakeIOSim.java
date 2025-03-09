@@ -5,40 +5,28 @@ import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import frc.robot.constants.IntakeConstants;
 
 public class IntakeIOSim extends IntakeIO {
-  private final FlywheelSim leftMotor;
-  private final FlywheelSim rightMotor;
+  private final FlywheelSim motor;
 
   public IntakeIOSim() {
-    leftMotor =
+    motor =
         new FlywheelSim(
             IntakeConstants.INTAKE_LINEAR_SYSTEM,
             DCMotor.getNEO(1),
             new double[] {0.000}); // TODO Check what kind of neo is being used and std deviations.
-    rightMotor =
-        new FlywheelSim(
-            IntakeConstants.INTAKE_LINEAR_SYSTEM, DCMotor.getNEO(1), new double[] {0.000});
   }
 
   @Override
   public void setVoltage(double voltage) {
-    leftMotor.setInputVoltage(voltage);
-    rightMotor.setInputVoltage(voltage);
+    motor.setInputVoltage(voltage);
   }
 
   @Override
   public void updateInputs(IntakeInputs inputs) {
-    leftMotor.update(0.02); // Assumes uniform timestep.
-    rightMotor.update(0.02);
+    motor.update(0.02); // Assumes uniform timestep.
 
-    inputs.leftSpeed =
-        leftMotor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR;
-    inputs.rightSpeed =
-        rightMotor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR;
-
-    inputs.leftCurrent = leftMotor.getCurrentDrawAmps();
-    inputs.rightCurrent = rightMotor.getCurrentDrawAmps();
-
-    inputs.leftVoltage = leftMotor.getInputVoltage();
-    inputs.rightVoltage = rightMotor.getInputVoltage();
+    inputs.speed =
+        motor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR; // Converts from RPM to RPS
+    inputs.current = motor.getCurrentDrawAmps();
+    inputs.voltage = motor.getInputVoltage();
   }
 }

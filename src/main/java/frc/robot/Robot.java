@@ -13,6 +13,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
@@ -60,6 +62,7 @@ public class Robot extends LoggedRobot {
   public void robotPeriodic() {
     // m_robotContainer.vision.updateInputs();
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
   }
 
   /** This function is called once when the robot is disabled. */

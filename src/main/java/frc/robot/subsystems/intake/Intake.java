@@ -27,7 +27,7 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    medianCurrent = filter.calculate(inputs.leftCurrent);
+    medianCurrent = filter.calculate(inputs.current);
 
     io.setVoltage(feedforward.calculate(rps));
     Logger.processInputs("Intake", inputs);
@@ -37,7 +37,7 @@ public class Intake extends SubsystemBase {
    * @return in meters of tread per second
    */
   public double getVelocity() {
-    return inputs.leftSpeed;
+    return inputs.speed;
   }
 
   /**

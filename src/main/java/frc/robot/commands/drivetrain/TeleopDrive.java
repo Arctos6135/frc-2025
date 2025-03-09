@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.SwerveConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.utils.MathUtils;
 import frc.robot.utils.SlewRateLimiter;
 import swervelib.SwerveDrive;
 
@@ -40,10 +39,10 @@ public class TeleopDrive extends Command {
   public void execute() {
     rates =
         rateLimiter.limit(
-            MathUtils.nearZero(controller.getLeftY()) * maxSpeed,
-            MathUtils.nearZero(controller.getLeftX()) * maxSpeed);
+            Math.pow(controller.getLeftY(), 3) * maxSpeed,
+            Math.pow(controller.getLeftX(), 3) * maxSpeed);
     drivetrain.swerveDrive.driveFieldOriented(
         new ChassisSpeeds(
-            rates[0], rates[1], MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed));
+            rates[0], rates[1], Math.pow(controller.getRightX(), 3) * maxRotationalSpeed));
   }
 }
