@@ -36,6 +36,5 @@ public class IntakeConstants {
   public static final double kA = 0.020180871963097;
 
   public static final String MAX_RPS = null;
-
   public static final String MAX_ACC = null;
 }

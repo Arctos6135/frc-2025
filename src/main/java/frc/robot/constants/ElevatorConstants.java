@@ -35,13 +35,13 @@ public class ElevatorConstants {
           new Matrix<>( // State matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {-5.611, -0.2123},
-                    {-0.1158, -0.01634} // TODO: Controls
+                    {-7.853, 0.0},
+                    {1.057, -0.01674} // TODO: Controls
                   })),
           new Matrix<>( // Input matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {0.1122}, {-0.4236} // TODO: More controls
+                    {-0.3055}, {0.003065} // TODO: More controls
                   })),
           new Matrix<>( // Output matrix.
               new SimpleMatrix(new double[][] {{1, 0}, {0, 1}})), // Assuming canonical form.
@@ -59,4 +59,6 @@ public class ElevatorConstants {
   // min and max for soft stop
   public static final double ELEVATOR_MAX = 0.01; // hopefully this is right
   public static final double ELEVATOR_MIN = -0.45; // TODO: MAke sure softstops work properly
+
+  public static final double NOISE_STD = 0;
 }
