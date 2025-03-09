@@ -37,6 +37,7 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
+    swerveDrive.updateOdometry();
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
     //   swerveDrive.addVisionMeasurement(

@@ -50,8 +50,7 @@ public class RobotContainer {
   // public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public final Drivetrain drivetrain =
-      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Drivetrain drivetrain;
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
@@ -61,6 +60,7 @@ public class RobotContainer {
   public final TeleopDrive teleopDrive;
 
   public RobotContainer() {
+    this.drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
     if (RobotBase.isReal()) {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
