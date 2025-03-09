@@ -48,20 +48,14 @@ public class IntakeIOReal extends IntakeIO {
 
   @Override
   public void setVoltage(double voltage) {
-    leftMotor.setVoltage(voltage);
     rightMotor.setVoltage(voltage);
   }
 
   @Override
   public void updateInputs(IntakeInputs inputs) {
-    inputs.leftCurrent = leftMotor.getOutputCurrent();
-    inputs.leftTemperature = leftMotor.getMotorTemperature();
-    inputs.leftVoltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput();
-    inputs.leftSpeed = leftEncoder.getVelocity();
-
-    inputs.rightCurrent = rightMotor.getOutputCurrent();
-    inputs.rightTemperature = rightMotor.getMotorTemperature();
-    inputs.rightVoltage = rightMotor.getBusVoltage() * leftMotor.getAppliedOutput();
-    inputs.rightSpeed = rightEncoder.getVelocity();
+    inputs.current = leftMotor.getOutputCurrent();
+    inputs.temperature = leftMotor.getMotorTemperature();
+    inputs.voltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput();
+    inputs.speed = leftEncoder.getVelocity();
   }
 }

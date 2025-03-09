@@ -41,15 +41,9 @@ public class ElevatorIOSim extends ElevatorIO {
     state = motor.calculateX(state, VecBuilder.fill(MathUtils.clampVoltage(voltage)), 0.02);
     normalize();
     output = motor.calculateY(state, VecBuilder.fill(MathUtils.clampVoltage(voltage)));
-
-    inputs.leftPosition = output.get(1, 0);
-    inputs.rightPosition = output.get(1, 0);
-
-    inputs.leftVelocity = output.get(0, 0);
-    inputs.rightVelocity = output.get(0, 0);
-
-    inputs.leftVoltage = voltage;
-    inputs.rightVoltage = voltage;
+    inputs.position = output.get(1, 0);
+    inputs.velocity = output.get(0, 0);
+    inputs.voltage = voltage;
   }
 
   // Accounts for the hard stops.

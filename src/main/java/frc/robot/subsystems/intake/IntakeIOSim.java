@@ -25,7 +25,8 @@ public class IntakeIOSim extends IntakeIO {
     motor.update(0.02); // Assumes uniform timestep.
 
     inputs.speed =
-        motor.getAngularVelocityRPM() * IntakeConstants.VELOCITY_CONVERSION_FACTOR; // Converts from RPM to RPS
+        motor.getAngularVelocityRPM()
+            * IntakeConstants.VELOCITY_CONVERSION_FACTOR; // Converts from RPM to RPS
     inputs.current = motor.getCurrentDrawAmps();
     inputs.voltage = motor.getInputVoltage();
   }

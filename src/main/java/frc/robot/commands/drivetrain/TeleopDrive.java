@@ -15,6 +15,7 @@ public class TeleopDrive extends Command {
   public SwerveDrive swerveDrive;
   public SlewRateLimiter rateLimiter;
   public double[] rates;
+  private ChassisSpeeds targetSpeeds;
 
   private final double maxSpeed;
   private final double maxRotationalSpeed;
@@ -41,8 +42,9 @@ public class TeleopDrive extends Command {
         rateLimiter.limit(
             Math.pow(controller.getLeftY(), 3) * maxSpeed,
             Math.pow(controller.getLeftX(), 3) * maxSpeed);
-    drivetrain.swerveDrive.driveFieldOriented(
-        new ChassisSpeeds(
-            rates[0], rates[1], Math.pow(controller.getRightX(), 3) * maxRotationalSpeed));
+    targetSpeeds.vxMetersPerSecond = rates[0];
+    targetSpeeds.vyMetersPerSecond = rates[1];
+    targetSpeeds.omegaRadiansPerSecond = Math.pow(controller.getRightX(), 3) * maxRotationalSpeed;
+    drivetrain.swerveDrive.driveFieldOriented(targetSpeeds);
   }
 }

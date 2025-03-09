@@ -5,24 +5,19 @@ import org.littletonrobotics.junction.AutoLog;
 public class ElevatorIO {
   @AutoLog
   public static class ElevatorInputs {
-    public double leftPosition;
-    public double rightPosition;
+    public double position;
 
     // Radians per second
-    public double leftVelocity;
-    public double rightVelocity;
+    public double velocity;
 
     // Amps
-    public double rightCurrent;
-    public double leftCurrent;
+    public double current;
 
     // Celsius
-    public double rightTemperature;
-    public double leftTemperature;
+    public double temperature;
 
     // % Max Volts
-    public double rightVoltage;
-    public double leftVoltage;
+    public double voltage;
   }
 
   public void updateInputs(ElevatorInputs inputs) {}

@@ -4,6 +4,8 @@ import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
+import frc.robot.utils.MathUtils;
+
 import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
@@ -21,13 +23,14 @@ public class Elevator extends SubsystemBase {
 
     feedForward =
         new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
-    pidController.setTolerance(0.05);
+    
+        pidController.setTolerance(0.05);
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    io.setVoltage(-pidController.calculate(inputs.leftPosition) - kG);
+    io.setVoltage(-pidController.calculate(inputs.position) - kG);
 
     Logger.processInputs("Elevator", inputs);
   }
@@ -35,8 +38,8 @@ public class Elevator extends SubsystemBase {
   /**
    * @return returns the position of the left motor in radians
    */
-  public double getLeftPosition() {
-    return inputs.leftPosition;
+  public double getPosition() {
+    return inputs.position;
   }
 
   /**
@@ -45,7 +48,7 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    pidController.setSetpoint(setpoint);
+    pidController.setSetpoint(MathUtils.clamp(setpoint, ElevatorConstants.ELEVATOR_MIN, ElevatorConstants.ELEVATOR_MAX));
   }
 
   public boolean atSetpoint() {
