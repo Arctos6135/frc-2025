@@ -18,7 +18,7 @@ public class ElevatorConstants {
   // Meters per second
   public static final double VELOCITY_CONVERSION_FACTOR = POSITION_CONVERSION_FACTOR / 60.0;
   // PID constants for position control.
-  public static final double[] PID = {112.0884, 0.0, 0.0};
+  public static final double[] PID = {61.6385, 0.0, 0.0};
 
   // Feedforward values
   public static final double ks = -0.1;
