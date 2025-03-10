@@ -17,10 +17,8 @@ public class Outtake extends SubsystemBase {
   private double targetVelocity;
   private double lastTargetVelocity;
 
-  private final MedianFilter filterLeft = new MedianFilter(OuttakeConstants.MEDIAN_FILTER_SIZE);
-  private final MedianFilter filterRight = new MedianFilter(OuttakeConstants.MEDIAN_FILTER_SIZE);
-  private double leftMedianCurrent;
-  private double rightMedianCurrent;
+  private final MedianFilter filter = new MedianFilter(OuttakeConstants.MEDIAN_FILTER_SIZE);
+  private double medianCurrent;
 
   public Outtake(OuttakeIO io) {
     this.io = io;
@@ -31,8 +29,7 @@ public class Outtake extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    leftMedianCurrent = filterLeft.calculate(inputs.leftCurrent);
-    rightMedianCurrent = filterRight.calculate(inputs.rightCurrent);
+    medianCurrent = filter.calculate(inputs.current);
 
     io.setVoltage(
         feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
@@ -47,7 +44,7 @@ public class Outtake extends SubsystemBase {
    * @return in meters of tread per second
    */
   public double getVelocity() {
-    return Math.max(inputs.leftVelocity, inputs.rightVelocity);
+    return inputs.velocity;
   }
 
   /**
@@ -78,8 +75,8 @@ public class Outtake extends SubsystemBase {
     io.setVoltage(voltage);
   }
 
-  /** Get the average of the most most up-to-date filtered for both motors. */
+  /** Get the filtered current. */
   public double getFilteredCurrent() {
-    return (leftMedianCurrent + rightMedianCurrent) / 2;
+    return medianCurrent;
   }
 }

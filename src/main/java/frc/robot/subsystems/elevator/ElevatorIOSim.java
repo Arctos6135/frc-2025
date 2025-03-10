@@ -14,7 +14,6 @@ public class ElevatorIOSim extends ElevatorIO {
   private double voltage;
   private Matrix<N2, N1> state;
   private Matrix<N2, N1> output;
-
   private GaussianNoiseGenerator noiseGenerator;
 
   private double maxPos = ElevatorConstants.ELEVATOR_MAX;
