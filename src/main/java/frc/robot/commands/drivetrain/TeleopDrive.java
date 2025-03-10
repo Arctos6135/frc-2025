@@ -1,10 +1,8 @@
 package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.SwerveConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.utils.SlewRateLimiter;
 import swervelib.SwerveDrive;
@@ -16,7 +14,7 @@ public class TeleopDrive extends Command {
   public SlewRateLimiter rateLimiter;
   public double[] rates;
 
-  private final double maxSpeed;
+  public double maxSpeed;
   private final double maxRotationalSpeed;
 
   public TeleopDrive(Drivetrain drivetrain, XboxController controller) {
@@ -24,12 +22,7 @@ public class TeleopDrive extends Command {
     this.drivetrain = drivetrain;
     this.swerveDrive = drivetrain.swerveDrive;
     this.rateLimiter = new SlewRateLimiter(3.0);
-
-    if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
-      this.maxSpeed = SwerveConstants.MAX_SPEED * -1;
-    } else {
-      this.maxSpeed = SwerveConstants.MAX_SPEED;
-    }
+    this.maxSpeed = 4.0;
     this.maxRotationalSpeed = swerveDrive.getMaximumChassisAngularVelocity();
 
     addRequirements(drivetrain);
@@ -44,5 +37,10 @@ public class TeleopDrive extends Command {
     drivetrain.swerveDrive.driveFieldOriented(
         new ChassisSpeeds(
             rates[0], rates[1], Math.pow(controller.getRightX(), 3) * maxRotationalSpeed));
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    drivetrain.swerveDrive.drive(new ChassisSpeeds(0, 0, 0));
   }
 }

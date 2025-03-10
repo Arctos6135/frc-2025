@@ -16,7 +16,7 @@
             "type": "Field",
             "properties": {
               "topic": "/SmartDashboard/Field",
-              "period": 0.06,
+              "period": 0.02,
               "field_game": "Reefscape",
               "robot_width": 0.85,
               "robot_length": 0.85,
@@ -36,7 +36,7 @@
             "type": "Match Time",
             "properties": {
               "topic": "/SmartDashboard/Match Time",
-              "period": 0.06,
+              "period": 0.02,
               "data_type": "double",
               "time_display_mode": "Minutes and Seconds",
               "red_start_time": 15,
@@ -150,10 +150,10 @@
             "type": "Number Bar",
             "properties": {
               "topic": "/AdvantageKit/Elevator/Position",
-              "period": 0.06,
+              "period": 0.02,
               "data_type": "double",
-              "min_value": -0.47,
-              "max_value": 0.1,
+              "min_value": -0.01,
+              "max_value": 0.47,
               "divisions": 5,
               "inverted": false,
               "orientation": "horizontal"
@@ -168,7 +168,7 @@
             "type": "Radial Gauge",
             "properties": {
               "topic": "/AdvantageKit/Intake/Speed",
-              "period": 0.06,
+              "period": 0.02,
               "data_type": "double",
               "start_angle": -140.0,
               "end_angle": 140.0,
@@ -188,8 +188,8 @@
             "height": 256.0,
             "type": "Radial Gauge",
             "properties": {
-              "topic": "/AdvantageKit/Outtake/LeftVelocity",
-              "period": 0.06,
+              "topic": "/AdvantageKit/Outtake/Velocity",
+              "period": 0.02,
               "data_type": "double",
               "start_angle": -140.0,
               "end_angle": 140.0,

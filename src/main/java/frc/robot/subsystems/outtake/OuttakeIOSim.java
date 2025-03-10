@@ -19,8 +19,8 @@ public class OuttakeIOSim extends OuttakeIO {
   @Override
   public void updateInputs(OuttakeInputs inputs) {
     motor.update(0.02); // Assumes uniform timestep.
-    inputs.velocity = motor.getAngularVelocityRPM() * OuttakeConstants.VELOCITY_CONVERSION_FACTOR;
 
+    inputs.velocity = motor.getAngularVelocityRPM() * OuttakeConstants.VELOCITY_CONVERSION_FACTOR;
     inputs.current = motor.getCurrentDrawAmps();
     inputs.voltage = motor.getInputVoltage();
   }

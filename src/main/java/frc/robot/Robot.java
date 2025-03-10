@@ -14,6 +14,8 @@
 package frc.robot;
 
 import edu.wpi.first.net.WebServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -98,6 +100,12 @@ public class Robot extends LoggedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+
+    if (DriverStation.getAlliance().get() == Alliance.Red) {
+      m_robotContainer.teleopDrive.maxSpeed = 4.0;
+    } else {
+      m_robotContainer.teleopDrive.maxSpeed = -4.0;
     }
   }
 

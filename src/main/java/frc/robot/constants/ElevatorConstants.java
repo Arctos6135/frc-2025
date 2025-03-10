@@ -22,7 +22,7 @@ public class ElevatorConstants {
 
   // Feedforward values
   public static final double ks = -0.1;
-  public static final double kg = -0.15;
+  public static final double kg = 0.15;
   public static final double kv = 25.0;
   public static final double ka = 1.2;
 
@@ -41,7 +41,7 @@ public class ElevatorConstants {
           new Matrix<>( // Input matrix.
               new SimpleMatrix(
                   new double[][] {
-                    {-0.3055}, {0.003065} // TODO: More controls
+                    {0.3055}, {-0.003065} // TODO: More controls
                   })),
           new Matrix<>( // Output matrix.
               new SimpleMatrix(new double[][] {{1, 0}, {0, 1}})), // Assuming canonical form.
@@ -51,14 +51,14 @@ public class ElevatorConstants {
 
   // The elevator height to score at each level.
   public static final double ZERO = 0.0; // TODO: Make sure zero being zero works (it really should)
-  public static final double HANDOFF_HEIGHT = -0.060;
-  public static final double L2_HEIGHT = -0.105;
-  public static final double L3_HEIGHT = -0.260;
-  public static final double L4_HEIGHT = -0.45; // Its really 0.47 but didnt want to hit hardstop
+  public static final double HANDOFF_HEIGHT = 0.060;
+  public static final double L2_HEIGHT = 0.105;
+  public static final double L3_HEIGHT = 0.260;
+  public static final double L4_HEIGHT = 0.45; // Its really 0.47 but didnt want to hit hardstop
 
   // min and max for soft stop
-  public static final double ELEVATOR_MAX = 0.01; // hopefully this is right
-  public static final double ELEVATOR_MIN = -0.45; // TODO: MAke sure softstops work properly
+  public static final double ELEVATOR_MAX = 0.47; // hopefully this is right
+  public static final double ELEVATOR_MIN = -0.01; // TODO: MAke sure softstops work properly
 
   public static final double NOISE_STD = 0;
 }
