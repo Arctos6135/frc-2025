@@ -21,6 +21,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.vision.LimelightHelpers;
+import frc.robot.subsystems.vision.LimelightHelpers.LimelightResults;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -37,10 +40,20 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 public class Robot extends LoggedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  private LimelightResults limelightResults;
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    LimelightHelpers.setCameraPose_RobotSpace(
+        "",
+        VisionConstants.FORWARD_OFFSET,
+        VisionConstants.SIDE_OFFSET,
+        VisionConstants.UP_OFFSET,
+        VisionConstants.ROLL_OFFSET,
+        VisionConstants.PITCH_OFFSET,
+        VisionConstants.YAW_OFFSET);
+    LimelightHelpers.setLEDMode_ForceOff("");
     // Set up data receivers & replay source
     if (isReal()) {
       // Running on a real robot, log to a USB stick ("/U/logs")
@@ -57,8 +70,7 @@ public class Robot extends LoggedRobot {
       Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
     }
 
-    WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
-
+    WebServer.start(5801, Filesystem.getDeployDirectory().getPath());
     // Start AdvantageKit logger
     Logger.start();
   }
@@ -69,6 +81,9 @@ public class Robot extends LoggedRobot {
     // m_robotContainer.vision.updateInputs();
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
+    limelightResults = LimelightHelpers.getLatestResults("");
+    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
+        limelightResults.getBotPose2d(), limelightResults.timestamp_LIMELIGHT_publish);
   }
 
   /** This function is called once when the robot is disabled. */

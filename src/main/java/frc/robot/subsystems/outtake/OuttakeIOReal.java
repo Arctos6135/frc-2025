@@ -19,14 +19,6 @@ public class OuttakeIOReal extends OuttakeIO {
     rightMotor = new SparkMax(CANConstants.OUTTAKE_RIGHT, MotorType.kBrushless);
     leftMotor = new SparkMax(CANConstants.OUTTAKE_LEFT, MotorType.kBrushless);
 
-    SparkMaxConfig leftConfig = new SparkMaxConfig();
-    leftConfig.follow(rightMotor, true);
-    leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
-    leftConfig.idleMode(IdleMode.kBrake);
-
-    leftConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
-    leftConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
-
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
     rightConfig.idleMode(IdleMode.kBrake);
@@ -36,6 +28,15 @@ public class OuttakeIOReal extends OuttakeIO {
     rightConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
 
     rightMotor.configure(rightConfig, null, null);
+
+    SparkMaxConfig leftConfig = new SparkMaxConfig();
+    leftConfig.follow(rightMotor, true);
+    leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
+    leftConfig.idleMode(IdleMode.kBrake);
+
+    leftConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
+    leftConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
+
     leftMotor.configure(leftConfig, null, null);
 
     this.rightEncoder = rightMotor.getEncoder();

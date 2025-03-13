@@ -20,7 +20,7 @@ public class ManualElevator extends Command {
   public void execute() {
     elevator.setPosition(
         elevator.pidController.getSetpoint()
-            - MathUtils.nearZero(operatorController.getLeftY()) / 100.0);
+            - MathUtils.nearZero(operatorController.getLeftY() / 10) / 100.0);
   }
 
   @Override

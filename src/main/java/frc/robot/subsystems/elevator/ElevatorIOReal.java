@@ -26,7 +26,7 @@ public class ElevatorIOReal extends ElevatorIO {
     // because it
     // follows leftMotor
     leftConfig
-        .inverted(true)
+        .inverted(false)
         .softLimit
         .forwardSoftLimitEnabled(true)
         .reverseSoftLimitEnabled(true)

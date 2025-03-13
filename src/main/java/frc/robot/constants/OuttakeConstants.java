@@ -6,7 +6,7 @@ import edu.wpi.first.math.system.LinearSystem;
 import org.ejml.simple.SimpleMatrix;
 
 public class OuttakeConstants {
-  public static final int CURRENT_LIMIT = 10;
+  public static final int CURRENT_LIMIT = 40;
   public static final int MEDIAN_FILTER_SIZE = 12;
 
   public static final double VELOCITY_CONVERSION_FACTOR = 1.0 / 60.0;

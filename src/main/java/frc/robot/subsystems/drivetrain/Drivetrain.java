@@ -3,11 +3,15 @@ package frc.robot.subsystems.drivetrain;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.RobotConfig;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.SwerveConstants;
 import java.io.File;
+import org.ejml.simple.SimpleMatrix;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -28,7 +32,11 @@ public class Drivetrain extends SubsystemBase {
     }
 
     swerveDrive.setHeadingCorrection(false);
-    swerveDrive.setCosineCompensator(false);
+    swerveDrive.setCosineCompensator(true);
+    swerveDrive.setVisionMeasurementStdDevs(
+        new Matrix<N3, N1>(new SimpleMatrix(new double[][] {{0.00001}, {0.000001}, {0.0000001}})));
+
+    swerveDrive.stopOdometryThread();
 
     setupPathPlanner();
   }
@@ -36,6 +44,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     swerveDrive.updateOdometry();
+
     // swerveDrive.addVisionMeasurement(null, 0);
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
@@ -74,7 +83,7 @@ public class Drivetrain extends SubsystemBase {
           },
           // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally
           // outputs individual module feedforwards
-          SwerveConstants.SWERVE_DRIVE_CONTROLLER,
+          SwerveConstants.AUTO_SWERVE_DRIVE_CONTROLLER,
           config,
           // The robot configuration
           () -> {
