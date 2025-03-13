@@ -2,9 +2,7 @@ package frc.robot.subsystems.drivetrain;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
-import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -38,6 +36,7 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     swerveDrive.updateOdometry();
+    // swerveDrive.addVisionMeasurement(null, 0);
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
     //   swerveDrive.addVisionMeasurement(
@@ -75,14 +74,7 @@ public class Drivetrain extends SubsystemBase {
           },
           // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally
           // outputs individual module feedforwards
-          new PPHolonomicDriveController(
-              // PPHolonomicController is the built in path following controller for holonomic drive
-              // trains
-              new PIDConstants(5.0, 0.0, 0.0),
-              // Translation PID constants
-              new PIDConstants(5.0, 0.0, 0.0)
-              // Rotation PID constants
-              ),
+          SwerveConstants.SWERVE_DRIVE_CONTROLLER,
           config,
           // The robot configuration
           () -> {

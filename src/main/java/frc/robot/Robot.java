@@ -69,7 +69,6 @@ public class Robot extends LoggedRobot {
     // m_robotContainer.vision.updateInputs();
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
-    SmartDashboard.putNumber("free memory", Runtime.getRuntime().freeMemory());
   }
 
   /** This function is called once when the robot is disabled. */

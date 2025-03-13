@@ -17,6 +17,10 @@ public class Vision {
     inputs.botPose2d = LimelightHelpers.getBotPose2d(limelightName);
   }
 
+  public static Pose2d getPose2d(String limelightName) {
+    return LimelightHelpers.getBotPose2d(limelightName);
+  }
+
   public Vision(String limelightName, boolean isReal) {
     this.limelightName = limelightName;
     inputs = new VisionInputs();

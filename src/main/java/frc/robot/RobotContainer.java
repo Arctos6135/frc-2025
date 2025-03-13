@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.drivetrain.AutoAlign;
 import frc.robot.commands.drivetrain.ResetGyro;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
@@ -104,6 +105,8 @@ public class RobotContainer {
         new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value);
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
+
+    driverA.whileTrue(new AutoAlign(drivetrain, driverController));
 
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
