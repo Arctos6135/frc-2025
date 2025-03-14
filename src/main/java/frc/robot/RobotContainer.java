@@ -37,6 +37,11 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
+import frc.robot.subsystems.vision.LimelightHelpers;
+import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionIOReal;
+import frc.robot.subsystems.vision.VisionIOSim;
+
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -54,6 +59,7 @@ public class RobotContainer {
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
+  public final Vision vision;
   //   public final Vision vision;
   // public final DigitalInput beambreak;
 
@@ -65,15 +71,14 @@ public class RobotContainer {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      //   this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, true);
+      this.vision = new Vision(new VisionIOReal());
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      //   this.vision = new Vision(VisionConstants.LIMELIGHT_NAME, false);
+      this.vision = new Vision(new VisionIOSim());
     }
-    // beambreak = outtake.beambreak;
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
     drivetrain.setDefaultCommand(teleopDrive);
@@ -149,6 +154,11 @@ public class RobotContainer {
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
     SmartDashboard.putData(
         "Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
+
+    SmartDashboard.putData(
+        "reset to vision",
+        new InstantCommand(
+            () -> drivetrain.swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""))));
   }
 
   private void configureAuto() {

@@ -78,12 +78,10 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during all modes. */
   @Override
   public void robotPeriodic() {
-    // m_robotContainer.vision.updateInputs();
+    m_robotContainer.vision.update();
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
-    limelightResults = LimelightHelpers.getLatestResults("");
-    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
-        limelightResults.getBotPose2d(), limelightResults.timestamp_LIMELIGHT_publish);
+    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(m_robotContainer.vision.getVisionPose(), m_robotContainer.vision.getTimestamp());
   }
 
   /** This function is called once when the robot is disabled. */

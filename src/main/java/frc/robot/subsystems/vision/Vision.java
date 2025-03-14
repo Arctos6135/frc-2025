@@ -1,36 +1,27 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import frc.robot.constants.VisionConstants;
-import org.littletonrobotics.junction.AutoLog;
+import org.littletonrobotics.junction.Logger;
 
 public class Vision {
-  String limelightName;
-  VisionInputs inputs;
+  private VisionIO io;
+  private final VisionInputsAutoLogged inputs = new VisionInputsAutoLogged();
 
-  @AutoLog
-  public static class VisionInputs {
-    Pose2d botPose2d;
+  public Vision(VisionIO io) {
+    this.io = io;
   }
 
-  public void updateInputs() {
-    inputs.botPose2d = LimelightHelpers.getBotPose2d(limelightName);
+  public void update() {
+    io.updateInputs(inputs);
+
+    Logger.processInputs("vision", inputs);
   }
 
-  public static Pose2d getPose2d(String limelightName) {
-    return LimelightHelpers.getBotPose2d(limelightName);
+  public Pose2d getVisionPose() {
+    return inputs.botPose;
   }
 
-  public Vision(String limelightName, boolean isReal) {
-    this.limelightName = limelightName;
-    inputs = new VisionInputs();
-    LimelightHelpers.setCameraPose_RobotSpace(
-        limelightName,
-        VisionConstants.FORWARD_OFFSET,
-        VisionConstants.SIDE_OFFSET,
-        VisionConstants.UP_OFFSET,
-        VisionConstants.ROLL_OFFSET,
-        VisionConstants.PITCH_OFFSET,
-        VisionConstants.YAW_OFFSET);
+  public double getTimestamp() {
+    return inputs.timestamp;
   }
 }
