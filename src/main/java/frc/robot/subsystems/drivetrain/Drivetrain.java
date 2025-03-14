@@ -36,6 +36,7 @@ public class Drivetrain extends SubsystemBase {
     swerveDrive.setVisionMeasurementStdDevs(
         new Matrix<N3, N1>(new SimpleMatrix(new double[][] {{0.00001}, {0.000001}, {0.0000001}})));
 
+    swerveDrive.setMotorIdleMode(false);
     swerveDrive.stopOdometryThread();
 
     setupPathPlanner();
