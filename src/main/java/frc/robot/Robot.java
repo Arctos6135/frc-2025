@@ -81,7 +81,8 @@ public class Robot extends LoggedRobot {
     m_robotContainer.vision.update();
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
-    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(m_robotContainer.vision.getVisionPose(), m_robotContainer.vision.getTimestamp());
+    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
+        m_robotContainer.vision.getVisionPose(), m_robotContainer.vision.getTimestamp());
   }
 
   /** This function is called once when the robot is disabled. */

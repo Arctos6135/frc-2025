@@ -1,5 +1,3 @@
 package frc.robot.subsystems.vision;
 
-public class VisionIOSim extends VisionIO {
-    
-}
+public class VisionIOSim extends VisionIO {}

@@ -41,7 +41,6 @@ import frc.robot.subsystems.vision.LimelightHelpers;
 import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIOReal;
 import frc.robot.subsystems.vision.VisionIOSim;
-
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
