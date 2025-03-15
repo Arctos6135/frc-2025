@@ -17,7 +17,7 @@ public class ManualOuttake extends Command {
 
   @Override
   public void execute() {
-    outtake.setRPS(20 * (controller.getRightTriggerAxis()));
+    outtake.setRPS(40 * (controller.getRightTriggerAxis()));
   }
 
   @Override

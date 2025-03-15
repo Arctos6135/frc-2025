@@ -37,15 +37,12 @@ public class Drivetrain extends SubsystemBase {
         new Matrix<N3, N1>(new SimpleMatrix(new double[][] {{0.00001}, {0.000001}, {0.0000001}})));
 
     swerveDrive.setMotorIdleMode(false);
-    swerveDrive.stopOdometryThread();
 
     setupPathPlanner();
   }
 
   @Override
   public void periodic() {
-    swerveDrive.updateOdometry();
-
     // swerveDrive.addVisionMeasurement(null, 0);
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {

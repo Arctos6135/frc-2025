@@ -110,7 +110,7 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-    driverA.whileTrue(new AutoAlign(drivetrain, driverController));
+    driverA.whileTrue(new AutoAlign(drivetrain, vision, driverController));
 
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
@@ -177,6 +177,7 @@ public class RobotContainer {
     // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
+    // NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, vision, () -> true));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));

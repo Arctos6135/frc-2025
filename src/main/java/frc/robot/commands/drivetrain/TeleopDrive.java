@@ -15,15 +15,15 @@ public class TeleopDrive extends Command {
   public double[] rates;
 
   public double maxSpeed;
-  private final double maxRotationalSpeed;
+  public double maxRotationalSpeed;
 
   public TeleopDrive(Drivetrain drivetrain, XboxController controller) {
     this.controller = controller;
     this.drivetrain = drivetrain;
     this.swerveDrive = drivetrain.swerveDrive;
-    this.rateLimiter = new SlewRateLimiter(3.0);
+    this.rateLimiter = new SlewRateLimiter(1.0);
     this.maxSpeed = 4.0;
-    this.maxRotationalSpeed = swerveDrive.getMaximumChassisAngularVelocity();
+    this.maxRotationalSpeed = -swerveDrive.getMaximumChassisAngularVelocity();
 
     addRequirements(drivetrain);
   }

@@ -18,7 +18,7 @@ public class SwerveConstants {
       new HolonomicDriveController(
           new PIDController(1, 0, 0),
           new PIDController(1, 0, 0),
-          new ProfiledPIDController(1, 0, 0, new Constraints(SwerveConstants.MAX_SPEED, 1)));
+          new ProfiledPIDController(2, 0, 0, new Constraints(SwerveConstants.MAX_SPEED, 1)));
 
   public static final PPHolonomicDriveController AUTO_SWERVE_DRIVE_CONTROLLER =
       new PPHolonomicDriveController(
