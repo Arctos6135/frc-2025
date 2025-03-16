@@ -92,6 +92,10 @@ public class RobotContainer {
     Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
     Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
     Trigger driverB = new JoystickButton(driverController, XboxController.Button.kB.value);
+    Trigger driverLeftBumper =
+        new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);
+    Trigger driverRightBumper =
+        new JoystickButton(driverController, XboxController.Button.kRightBumper.value);
 
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
@@ -111,7 +115,8 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
-    driverA.whileTrue(new AutoAlign(drivetrain, vision, driverController));
+    driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
+    driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
 
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
@@ -125,7 +130,7 @@ public class RobotContainer {
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-    operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    // operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
@@ -133,12 +138,15 @@ public class RobotContainer {
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     // operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-    operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
+    operatorLeftBumper.whileTrue(
+        new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS, elevator));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
 
     operatorLeftTrigger.whileTrue(
         new IntakeMove(
-            intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
+            intake,
+            () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS,
+            elevator));
     operatorRightTrigger.whileTrue(new ManualOuttake(outtake, operatorController));
 
     /* Reset Gyro QOL */

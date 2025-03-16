@@ -2,6 +2,7 @@ package frc.robot.commands.outtake;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.OuttakeConstants;
 import frc.robot.subsystems.outtake.Outtake;
 
 public class ManualOuttake extends Command {
@@ -17,7 +18,7 @@ public class ManualOuttake extends Command {
 
   @Override
   public void execute() {
-    outtake.setRPS(40 * (controller.getRightTriggerAxis()));
+    outtake.setRPS(OuttakeConstants.OUTTAKE_RPS * (controller.getRightTriggerAxis()));
   }
 
   @Override

@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartPro-B1"
+            "pathName": "StartPro-B1_VISION"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoAlignAuto"
           }
         },
         {
@@ -20,6 +26,12 @@
           "type": "named",
           "data": {
             "name": "outtakePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorDown"
           }
         }
       ]

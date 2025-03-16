@@ -21,7 +21,7 @@ public class TeleopDrive extends Command {
     this.controller = controller;
     this.drivetrain = drivetrain;
     this.swerveDrive = drivetrain.swerveDrive;
-    this.rateLimiter = new SlewRateLimiter(1.0);
+    this.rateLimiter = new SlewRateLimiter(0.75);
     this.maxSpeed = 4.0;
     this.maxRotationalSpeed = -swerveDrive.getMaximumChassisAngularVelocity();
 

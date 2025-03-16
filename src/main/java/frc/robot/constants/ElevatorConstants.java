@@ -27,7 +27,7 @@ public class ElevatorConstants {
   public static final double ka = 1.2;
 
   // Hopefully m/s
-  public static final double ELEVATOR_MAX_SPEED = 0.25;
+  public static final double ELEVATOR_MAX_SPEED = 1;
 
   // The linear model representing the elevator motor.
   public static final LinearSystem<N2, N1, N2> ELEVATOR_LINEAR_SYSTEM =
@@ -51,7 +51,7 @@ public class ElevatorConstants {
 
   // The elevator height to score at each level.
   public static final double ZERO = 0.0; // TODO: Make sure zero being zero works (it really should)
-  public static final double HANDOFF_HEIGHT = 0.06678940951824188;
+  public static final double HANDOFF_HEIGHT = 0.059;
   public static final double L2_HEIGHT = 0.109014332950115204;
   public static final double L3_HEIGHT = 0.258893397212028503;
   public static final double L4_HEIGHT = 0.45; // Its really 0.47 but didnt want to hit hardstop

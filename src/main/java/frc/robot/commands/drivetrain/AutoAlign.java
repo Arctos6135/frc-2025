@@ -15,7 +15,6 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.PositionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -25,7 +24,7 @@ import java.util.List;
 import swervelib.SwerveDrive;
 
 public class AutoAlign extends Command {
-  private XboxController controller;
+  private Boolean left;
   private SwerveDrive swerveDrive;
   private Vision vision;
   private Pose2d targetPose;
@@ -33,8 +32,8 @@ public class AutoAlign extends Command {
   private Trajectory trajectory;
   private double initialTime;
 
-  public AutoAlign(Drivetrain drivetrain, Vision vision, XboxController controller) {
-    this.controller = controller;
+  public AutoAlign(Drivetrain drivetrain, Vision vision, Boolean left) {
+    this.left = left;
     this.swerveDrive = drivetrain.swerveDrive;
     this.vision = vision;
 
@@ -54,11 +53,13 @@ public class AutoAlign extends Command {
       cancel();
     }
 
-    if (LimelightHelpers.getBotPose2d_wpiBlue("") != Pose2d.kZero) {
-      swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""));
-    } else {
-      cancel();
-    }
+    // if (LimelightHelpers.getBotPose2d_wpiBlue("") != Pose2d.kZero) {
+    //   swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""));
+    // } else {
+    //   cancel();
+    // }
+    // I'm commenting this out because resetting odometry means were facing the wrong way after.
+    // There should be a way to do this this that works though.
 
     if (DriverStation.getAlliance().get() == Alliance.Red) {
       targetPose = swerveDrive.getPose().nearest(PositionConstants.RED_SCORING_POSES);
@@ -66,7 +67,7 @@ public class AutoAlign extends Command {
       targetPose = swerveDrive.getPose().nearest(PositionConstants.BLUE_SCORING_POSES);
     }
 
-    if (controller.getLeftBumperButton() == true) {
+    if (left) {
       targetPose = targetPose.plus(new Transform2d(0.0, 0.18, Rotation2d.fromDegrees(0)));
     } else {
       targetPose = targetPose.plus(new Transform2d(0.0, -0.18, Rotation2d.fromDegrees(0)));
