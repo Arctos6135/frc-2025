@@ -26,6 +26,7 @@ public class ElevatorIOReal extends ElevatorIO {
     // because it
     // follows leftMotor
     leftConfig
+        .inverted(false)
         .softLimit
         .forwardSoftLimitEnabled(true)
         .reverseSoftLimitEnabled(true)
@@ -72,19 +73,10 @@ public class ElevatorIOReal extends ElevatorIO {
 
   @Override
   public void updateInputs(ElevatorInputs inputs) {
-    inputs.leftPosition = leftEncoder.getPosition();
-    inputs.rightPosition = -rightEncoder.getPosition();
-
-    inputs.leftVelocity = leftEncoder.getVelocity();
-    inputs.rightVelocity = -rightEncoder.getVelocity();
-
-    inputs.leftCurrent = leftMotor.getOutputCurrent();
-    inputs.rightCurrent = rightMotor.getOutputCurrent();
-
-    inputs.leftTemperature = leftMotor.getMotorTemperature();
-    inputs.rightTemperature = rightMotor.getMotorTemperature();
-
-    inputs.leftVoltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput();
-    inputs.rightVoltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
+    inputs.position = leftEncoder.getPosition(); // Meters
+    inputs.velocity = leftEncoder.getVelocity(); // Meters per second
+    inputs.current = leftMotor.getOutputCurrent(); // Amps
+    inputs.temperature = leftMotor.getMotorTemperature(); // Degrees celcius
+    inputs.voltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput(); // Volts
   }
 }

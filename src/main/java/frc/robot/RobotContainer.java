@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.drivetrain.AutoAlign;
+import frc.robot.commands.drivetrain.AutoAlignAuto;
 import frc.robot.commands.drivetrain.ResetGyro;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
@@ -26,7 +28,6 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
-import frc.robot.constants.PositionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -37,6 +38,10 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.outtake.Outtake;
 import frc.robot.subsystems.outtake.OuttakeIOReal;
 import frc.robot.subsystems.outtake.OuttakeIOSim;
+import frc.robot.subsystems.vision.LimelightHelpers;
+import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionIOReal;
+import frc.robot.subsystems.vision.VisionIOSim;
 import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -50,30 +55,30 @@ public class RobotContainer {
   // public LoggedDashboardChooser<Command> autoChooser;
   public LoggedDashboardChooser<Pose2d> positionChooser;
 
-  public final Drivetrain drivetrain =
-      new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final Drivetrain drivetrain;
   public final Intake intake;
   public final Outtake outtake;
   public final Elevator elevator;
-  // public final Vision vision;
+  public final Vision vision;
+  //   public final Vision vision;
   // public final DigitalInput beambreak;
 
   public final TeleopDrive teleopDrive;
 
   public RobotContainer() {
+    this.drivetrain = new Drivetrain(new File(Filesystem.getDeployDirectory(), "swerve"));
     if (RobotBase.isReal()) {
       this.intake = new Intake(new IntakeIOReal());
       this.elevator = new Elevator(new ElevatorIOReal());
       this.outtake = new Outtake(new OuttakeIOReal());
-      // this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(new VisionIOReal());
 
     } else {
       this.intake = new Intake(new IntakeIOSim());
       this.elevator = new Elevator(new ElevatorIOSim());
       this.outtake = new Outtake(new OuttakeIOSim());
-      // this.vision = new Vision(VisionConstants.LIMELIGHT_NAME);
+      this.vision = new Vision(new VisionIOSim());
     }
-    // beambreak = outtake.beambreak;
 
     teleopDrive = new TeleopDrive(drivetrain, driverController);
     drivetrain.setDefaultCommand(teleopDrive);
@@ -87,6 +92,10 @@ public class RobotContainer {
     Trigger driverA = new JoystickButton(driverController, XboxController.Button.kA.value);
     Trigger driverX = new JoystickButton(driverController, XboxController.Button.kX.value);
     Trigger driverB = new JoystickButton(driverController, XboxController.Button.kB.value);
+    Trigger driverLeftBumper =
+        new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);
+    Trigger driverRightBumper =
+        new JoystickButton(driverController, XboxController.Button.kRightBumper.value);
 
     Trigger operatorA = new JoystickButton(operatorController, XboxController.Button.kA.value);
     Trigger operatorB = new JoystickButton(operatorController, XboxController.Button.kB.value);
@@ -106,6 +115,9 @@ public class RobotContainer {
     Trigger operatorRightBumper =
         new JoystickButton(operatorController, XboxController.Button.kRightBumper.value);
 
+    driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
+    driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
+
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
     //         .andThen(
@@ -118,7 +130,7 @@ public class RobotContainer {
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-    operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    // operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
@@ -126,12 +138,15 @@ public class RobotContainer {
     operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     // operatorY.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
 
-    operatorLeftBumper.whileTrue(new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS));
+    operatorLeftBumper.whileTrue(
+        new IntakeMove(intake, () -> -IntakeConstants.INTAKE_RPS, elevator));
     operatorRightBumper.whileTrue(new OuttakeSpin(outtake, () -> -OuttakeConstants.OUTTAKE_RPS));
 
     operatorLeftTrigger.whileTrue(
         new IntakeMove(
-            intake, () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS));
+            intake,
+            () -> operatorController.getLeftTriggerAxis() * IntakeConstants.INTAKE_RPS,
+            elevator));
     operatorRightTrigger.whileTrue(new ManualOuttake(outtake, operatorController));
 
     /* Reset Gyro QOL */
@@ -147,19 +162,14 @@ public class RobotContainer {
     SmartDashboard.putData("Zero Gyro", new ResetGyro(drivetrain));
     SmartDashboard.putData(
         "Zero Encoder", new InstantCommand(() -> elevator.zeroEncoderPosition(), elevator));
+
+    SmartDashboard.putData(
+        "reset to vision",
+        new InstantCommand(
+            () -> drivetrain.swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""))));
   }
 
   private void configureAuto() {
-    // autoChooser = new LoggedDashboardChooser<Command>("auto chooser");
-    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("red reef", PositionConstants.RED_REEF);
-    positionChooser.addOption("red middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("red processor", PositionConstants.RED_PROCESSOR);
-
-    positionChooser.addOption("blue reef", PositionConstants.BLUE_REEF);
-    positionChooser.addOption("blue middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("blue processor", PositionConstants.BLUE_PROCESSOR);
-
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     NamedCommands.registerCommand(
@@ -176,6 +186,8 @@ public class RobotContainer {
     // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
+    NamedCommands.registerCommand("autoAlignAuto", new AutoAlignAuto(drivetrain, vision));
+    // NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, vision, () -> true));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));

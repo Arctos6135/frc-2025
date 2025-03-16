@@ -182,6 +182,9 @@ ctre_sim/
 .gradle/
 
 # Just leave
+.gradle
+/build/
 src/main/java/frc/robot/BuildConstants.java
-BuildConstants.java
-src/main/java/frc/robot/BuildConstants.java
+simgui-ds.json
+simgui-window.json
+simgui.json

@@ -1,44 +1,46 @@
 package frc.robot.commands.drivetrain;
 
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.utils.MathUtils;
+import frc.robot.utils.SlewRateLimiter;
 import swervelib.SwerveDrive;
 
 public class TeleopDrive extends Command {
   private XboxController controller;
   public Drivetrain drivetrain;
   public SwerveDrive swerveDrive;
-  public SlewRateLimiter xLimiter;
-  public SlewRateLimiter yLimiter;
-  public SlewRateLimiter thetaLimiter;
+  public SlewRateLimiter rateLimiter;
+  public double[] rates;
 
-  private final double maxSpeed;
-  private final double maxRotationalSpeed;
+  public double maxSpeed;
+  public double maxRotationalSpeed;
 
   public TeleopDrive(Drivetrain drivetrain, XboxController controller) {
     this.controller = controller;
     this.drivetrain = drivetrain;
     this.swerveDrive = drivetrain.swerveDrive;
-    this.xLimiter = new SlewRateLimiter(3.0);
-    this.yLimiter = new SlewRateLimiter(3.0);
-
-    // this.maxSpeed = swerveDrive.getMaximumChassisVelocity();
+    this.rateLimiter = new SlewRateLimiter(0.75);
     this.maxSpeed = 4.0;
-    this.maxRotationalSpeed = swerveDrive.getMaximumChassisAngularVelocity();
+    this.maxRotationalSpeed = -swerveDrive.getMaximumChassisAngularVelocity();
 
     addRequirements(drivetrain);
   }
 
   @Override
   public void execute() {
-    swerveDrive.drive(
+    rates =
+        rateLimiter.limit(
+            Math.pow(controller.getLeftY(), 3) * maxSpeed,
+            Math.pow(controller.getLeftX(), 3) * maxSpeed);
+    drivetrain.swerveDrive.driveFieldOriented(
         new ChassisSpeeds(
-            xLimiter.calculate(MathUtils.nearZero(controller.getLeftY()) * maxSpeed),
-            yLimiter.calculate(MathUtils.nearZero(controller.getLeftX()) * maxSpeed),
-            MathUtils.nearZero(controller.getRightX()) * maxRotationalSpeed));
+            rates[0], rates[1], Math.pow(controller.getRightX(), 3) * maxRotationalSpeed));
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    drivetrain.swerveDrive.drive(new ChassisSpeeds(0, 0, 0));
   }
 }

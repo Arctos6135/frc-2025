@@ -11,13 +11,25 @@ public class MathUtils {
     return Math.abs(num) > 0.05 ? num : 0;
   }
 
-  public static double clampVoltage(double voltage) {
-    if (voltage > 12) {
-      return 12;
-    } else if (voltage < -12) {
-      return -12;
+  /**
+   * Clamp a number to be in between min and max.
+   *
+   * @param number The number to be clamped.
+   * @param min The minimum value.
+   * @param max The maximum value.
+   * @return The clamped number.
+   */
+  public static double clamp(double number, double min, double max) {
+    if (number > max) {
+      return max;
+    } else if (number < min) {
+      return min;
     } else {
-      return voltage;
+      return number;
     }
+  }
+
+  public static double clampVoltage(double voltage) {
+    return clamp(voltage, -12, 12);
   }
 }

@@ -19,14 +19,6 @@ public class OuttakeIOReal extends OuttakeIO {
     rightMotor = new SparkMax(CANConstants.OUTTAKE_RIGHT, MotorType.kBrushless);
     leftMotor = new SparkMax(CANConstants.OUTTAKE_LEFT, MotorType.kBrushless);
 
-    SparkMaxConfig leftConfig = new SparkMaxConfig();
-    leftConfig.follow(rightMotor, true);
-    leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
-    leftConfig.idleMode(IdleMode.kBrake);
-
-    leftConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
-    leftConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
-
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
     rightConfig.idleMode(IdleMode.kBrake);
@@ -35,8 +27,17 @@ public class OuttakeIOReal extends OuttakeIO {
     rightConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
     rightConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
 
-    leftMotor.configure(leftConfig, null, null);
     rightMotor.configure(rightConfig, null, null);
+
+    SparkMaxConfig leftConfig = new SparkMaxConfig();
+    leftConfig.follow(rightMotor, true);
+    leftConfig.smartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
+    leftConfig.idleMode(IdleMode.kBrake);
+
+    leftConfig.encoder.positionConversionFactor(OuttakeConstants.POSITION_CONVERSION_FACTOR);
+    leftConfig.encoder.velocityConversionFactor(OuttakeConstants.VELOCITY_CONVERSION_FACTOR);
+
+    leftMotor.configure(leftConfig, null, null);
 
     this.rightEncoder = rightMotor.getEncoder();
     this.leftEncoder = leftMotor.getEncoder();
@@ -45,21 +46,14 @@ public class OuttakeIOReal extends OuttakeIO {
   @Override
   public void setVoltage(double voltage) {
     rightMotor.setVoltage(voltage);
-    leftMotor.setVoltage(voltage);
   }
 
   @Override
   public void updateInputs(OuttakeInputs inputs) {
-    inputs.rightVelocity = rightEncoder.getVelocity();
-    inputs.rightPosition = rightEncoder.getPosition();
-    inputs.rightCurrent = rightMotor.getOutputCurrent();
-    inputs.rightTemperature = rightMotor.getMotorTemperature();
-    inputs.rightVoltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
-
-    inputs.leftVelocity = leftEncoder.getVelocity();
-    inputs.leftPosition = leftEncoder.getPosition();
-    inputs.leftCurrent = leftMotor.getOutputCurrent();
-    inputs.leftTemperature = leftMotor.getMotorTemperature();
-    inputs.leftVoltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput();
+    inputs.velocity = rightEncoder.getVelocity();
+    inputs.position = rightEncoder.getPosition();
+    inputs.current = rightMotor.getOutputCurrent();
+    inputs.temperature = rightMotor.getMotorTemperature();
+    inputs.voltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
   }
 }

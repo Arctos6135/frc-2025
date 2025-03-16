@@ -1,15 +1,15 @@
 package frc.robot.subsystems.elevator;
 
-import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
+import frc.robot.utils.MathUtils;
 import org.littletonrobotics.junction.Logger;
 
 public class Elevator extends SubsystemBase {
   public final ElevatorIO io;
+  private final double kG = ElevatorConstants.kg;
   public final PIDController pidController;
-  public final ElevatorFeedforward feedForward;
   public final ElevatorInputsAutoLogged inputs = new ElevatorInputsAutoLogged();
 
   public Elevator(ElevatorIO io) {
@@ -18,15 +18,13 @@ public class Elevator extends SubsystemBase {
         new PIDController(
             ElevatorConstants.PID[0], ElevatorConstants.PID[1], ElevatorConstants.PID[2]);
 
-    feedForward =
-        new ElevatorFeedforward(ElevatorConstants.ks, ElevatorConstants.kg, ElevatorConstants.kv);
-    pidController.setTolerance(0.005);
+    pidController.setTolerance(0.05);
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    // io.setVoltage(pidController.calculate(inputs.leftPosition));
+    io.setVoltage(pidController.calculate(inputs.position) + kG);
 
     Logger.processInputs("Elevator", inputs);
   }
@@ -34,8 +32,8 @@ public class Elevator extends SubsystemBase {
   /**
    * @return returns the position of the left motor in radians
    */
-  public double getLeftPosition() {
-    return inputs.leftPosition;
+  public double getPosition() {
+    return inputs.position;
   }
 
   /**
@@ -44,7 +42,8 @@ public class Elevator extends SubsystemBase {
    * @param setpoint position setpoint
    */
   public void setPosition(double setpoint) {
-    pidController.setSetpoint(setpoint);
+    pidController.setSetpoint(
+        MathUtils.clamp(setpoint, ElevatorConstants.ELEVATOR_MIN, ElevatorConstants.ELEVATOR_MAX));
   }
 
   public boolean atSetpoint() {
@@ -61,9 +60,5 @@ public class Elevator extends SubsystemBase {
 
   public void setVoltage(double voltage) {
     io.setVoltage(voltage);
-  }
-
-  public double calculatePID() {
-    return pidController.calculate(inputs.leftPosition);
   }
 }

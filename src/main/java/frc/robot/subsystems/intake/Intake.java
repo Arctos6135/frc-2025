@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
+import org.littletonrobotics.junction.Logger;
 
 public class Intake extends SubsystemBase {
   private final IntakeIO io;
@@ -21,23 +22,22 @@ public class Intake extends SubsystemBase {
     this.io = io;
     feedforward =
         new SimpleMotorFeedforward(IntakeConstants.kS, IntakeConstants.kV, IntakeConstants.kA);
-    // trapezoidProfile = new TrapezoidProfile(new Constraints(IntakeConstants.MAX_RPS,
-    // IntakeConsta));
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    medianCurrent = filter.calculate(inputs.leftCurrent);
+    medianCurrent = filter.calculate(inputs.current);
 
     io.setVoltage(feedforward.calculate(rps));
+    Logger.processInputs("Intake", inputs);
   }
 
   /**
    * @return in meters of tread per second
    */
   public double getVelocity() {
-    return inputs.leftSpeed;
+    return inputs.speed;
   }
 
   /**

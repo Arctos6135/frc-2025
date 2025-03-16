@@ -10,8 +10,8 @@ import frc.robot.constants.IntakeConstants;
 
 public class IntakeIOReal extends IntakeIO {
   // private final SparkMax motor = new SparkMax(CANConstants.INTAKE_MOTOR, MotorType.kBrushless);
-  private final SparkMax rightMotor = new SparkMax(CANConstants.INTAKE_RIGHT, MotorType.kBrushless);
-  private final SparkMax leftMotor = new SparkMax(CANConstants.INTAKE_LEFT, MotorType.kBrushless);
+  private final SparkMax leftMotor = new SparkMax(CANConstants.INTAKE_RIGHT, MotorType.kBrushless);
+  private final SparkMax rightMotor = new SparkMax(CANConstants.INTAKE_LEFT, MotorType.kBrushless);
 
   private final RelativeEncoder rightEncoder;
   private final RelativeEncoder leftEncoder;
@@ -20,7 +20,7 @@ public class IntakeIOReal extends IntakeIO {
     SparkMaxConfig rightConfig = new SparkMaxConfig();
     rightConfig
         .smartCurrentLimit(IntakeConstants.CURRENT_LIMIT)
-        .inverted(true)
+        .inverted(false)
         .idleMode(IdleMode.kBrake);
 
     rightConfig
@@ -48,20 +48,14 @@ public class IntakeIOReal extends IntakeIO {
 
   @Override
   public void setVoltage(double voltage) {
-    leftMotor.setVoltage(voltage);
     rightMotor.setVoltage(voltage);
   }
 
   @Override
   public void updateInputs(IntakeInputs inputs) {
-    inputs.leftCurrent = leftMotor.getOutputCurrent();
-    inputs.leftTemperature = leftMotor.getMotorTemperature();
-    inputs.leftVoltage = leftMotor.getBusVoltage() * leftMotor.getAppliedOutput();
-    inputs.leftSpeed = leftEncoder.getVelocity();
-
-    inputs.rightCurrent = rightMotor.getOutputCurrent();
-    inputs.rightTemperature = rightMotor.getMotorTemperature();
-    inputs.rightVoltage = rightMotor.getBusVoltage() * leftMotor.getAppliedOutput();
-    inputs.rightSpeed = rightEncoder.getVelocity();
+    inputs.current = rightMotor.getOutputCurrent();
+    inputs.temperature = rightMotor.getMotorTemperature();
+    inputs.voltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
+    inputs.speed = rightEncoder.getVelocity();
   }
 }

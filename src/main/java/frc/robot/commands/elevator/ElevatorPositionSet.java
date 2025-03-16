@@ -20,11 +20,6 @@ public class ElevatorPositionSet extends Command {
   }
 
   @Override
-  public void execute() {
-    elevator.setVoltage(elevator.calculatePID());
-  }
-
-  @Override
   public boolean isFinished() {
     return elevator.atSetpoint();
   }

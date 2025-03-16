@@ -20,7 +20,7 @@ public class IntakeConstants {
 
   public static final int MEDIAN_FILTER_SIZE = 12;
 
-  public static final double INTAKE_RPS = 30;
+  public static final double INTAKE_RPS = 8;
 
   public static final double INTAKE_PIECE_TIME = 2; // Seconds
 
@@ -36,6 +36,5 @@ public class IntakeConstants {
   public static final double kA = 0.020180871963097;
 
   public static final String MAX_RPS = null;
-
   public static final String MAX_ACC = null;
 }

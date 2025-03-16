@@ -13,8 +13,17 @@
 
 package frc.robot;
 
+import edu.wpi.first.net.WebServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.constants.VisionConstants;
+import frc.robot.subsystems.vision.LimelightHelpers;
+import frc.robot.subsystems.vision.LimelightHelpers.LimelightResults;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -31,15 +40,25 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 public class Robot extends LoggedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  private LimelightResults limelightResults;
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    LimelightHelpers.setCameraPose_RobotSpace(
+        "",
+        VisionConstants.FORWARD_OFFSET,
+        VisionConstants.SIDE_OFFSET,
+        VisionConstants.UP_OFFSET,
+        VisionConstants.ROLL_OFFSET,
+        VisionConstants.PITCH_OFFSET,
+        VisionConstants.YAW_OFFSET);
+    LimelightHelpers.setLEDMode_ForceOff("");
     // Set up data receivers & replay source
     if (isReal()) {
       // Running on a real robot, log to a USB stick ("/U/logs")
-      // Logger.addDataReceiver(new WPILOGWriter());
-      // Logger.addDataReceiver(new NT4Publisher());
+      Logger.addDataReceiver(new WPILOGWriter());
+      Logger.addDataReceiver(new NT4Publisher());
     } else if (isSimulation()) {
       // Running a physics simulator, log to NT
       Logger.addDataReceiver(new NT4Publisher());
@@ -51,6 +70,7 @@ public class Robot extends LoggedRobot {
       Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
     }
 
+    WebServer.start(5801, Filesystem.getDeployDirectory().getPath());
     // Start AdvantageKit logger
     Logger.start();
   }
@@ -58,8 +78,14 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during all modes. */
   @Override
   public void robotPeriodic() {
-    // m_robotContainer.vision.updateInputs();
+    m_robotContainer.vision.update();
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
+    // m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
+    //     m_robotContainer.vision.getVisionPose(), m_robotContainer.vision.getTimestamp());
+    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
+        LimelightHelpers.getBotPose2d_wpiBlue(""),
+        LimelightHelpers.getLatestResults("").timestamp_RIOFPGA_capture);
   }
 
   /** This function is called once when the robot is disabled. */
@@ -90,6 +116,12 @@ public class Robot extends LoggedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+
+    if (DriverStation.getAlliance().get() == Alliance.Red) {
+      m_robotContainer.teleopDrive.maxSpeed = 4.0;
+    } else {
+      m_robotContainer.teleopDrive.maxSpeed = -4.0;
     }
   }
 
