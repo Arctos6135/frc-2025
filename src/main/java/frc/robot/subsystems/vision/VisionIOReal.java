@@ -9,7 +9,7 @@ public class VisionIOReal extends VisionIO {
 
   public VisionIOReal() {
     LimelightHelpers.setCameraPose_RobotSpace(
-        limelightName,
+        "",
         VisionConstants.FORWARD_OFFSET,
         VisionConstants.SIDE_OFFSET,
         VisionConstants.UP_OFFSET,
@@ -20,8 +20,7 @@ public class VisionIOReal extends VisionIO {
 
   @Override
   public void updateInputs(VisionInputs inputs) {
-    limelightResults = LimelightHelpers.getLatestResults(limelightName);
-    inputs.botPose = limelightResults.getBotPose2d_wpiBlue();
-    inputs.timestamp = limelightResults.timestamp_LIMELIGHT_publish;
+    inputs.botPose = LimelightHelpers.getBotPose2d_wpiBlue("");
+    inputs.timestamp = LimelightHelpers.getLatestResults("").timestamp_RIOFPGA_capture;
   }
 }

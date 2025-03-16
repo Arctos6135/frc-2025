@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.AutoAlign;
+import frc.robot.commands.drivetrain.AutoAlignAuto;
 import frc.robot.commands.drivetrain.ResetGyro;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
@@ -177,6 +178,7 @@ public class RobotContainer {
     // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
+    NamedCommands.registerCommand("autoAlignAuto", new AutoAlignAuto(drivetrain, vision));
     // NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, vision, () -> true));
 
     autoChooser = AutoBuilder.buildAutoChooser();

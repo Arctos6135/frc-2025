@@ -7,19 +7,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartMid-Leave"
+            "pathName": "StartMid-A1"
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "autoAlign"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignAuto"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 3.0
+                }
+              }
+            ]
           }
         },
         {
           "type": "named",
           "data": {
             "name": "elevatorL2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
           }
         },
         {
