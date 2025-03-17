@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.686904166884861,
+        "x": 6.438990451138117,
         "y": 0.7850000000000003
       },
       "isLocked": false,
-      "linkedName": "StartProcessor"
+      "linkedName": "StartRight"
     },
     {
       "anchor": {
-        "x": 5.76608606557377,
-        "y": 1.9331454918032784
+        "x": 5.67810257523148,
+        "y": 0.7850000000000001
       },
       "prevControl": {
-        "x": 6.216918675527474,
-        "y": 1.133211681039389
+        "x": 6.642020588375258,
+        "y": 0.7850000000000005
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Reef-B1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": null,

@@ -43,7 +43,7 @@ public class AutoAlign extends Command {
             new PIDController(5, 0, 0),
             new ProfiledPIDController(
                 5, 0, 0, new Constraints(swerveDrive.getMaximumChassisAngularVelocity(), 2.0)));
-    swerveController.setTolerance(new Pose2d(0.01, 0.01, Rotation2d.fromDegrees(0.1)));
+    swerveController.setTolerance(new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(0.1)));
   }
 
   @Override
@@ -55,11 +55,10 @@ public class AutoAlign extends Command {
 
     // if (LimelightHelpers.getBotPose2d_wpiBlue("") != Pose2d.kZero) {
     //   swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""));
-    // } else {
+    // }
+    // else {
     //   cancel();
     // }
-    // I'm commenting this out because resetting odometry means were facing the wrong way after.
-    // There should be a way to do this this that works though.
 
     if (DriverStation.getAlliance().get() == Alliance.Red) {
       targetPose = swerveDrive.getPose().nearest(PositionConstants.RED_SCORING_POSES);
@@ -97,7 +96,13 @@ public class AutoAlign extends Command {
 
   @Override
   public boolean isFinished() {
-    return swerveController.atReference();
+    // return swerveController.atReference();
+    return Math.abs(swerveDrive.getPose().getX() - targetPose.getX()) < 0.1
+        && Math.abs(swerveDrive.getPose().getY() - targetPose.getY()) < 0.1
+        && Math.abs(
+                swerveDrive.getPose().getRotation().getDegrees()
+                    - targetPose.getRotation().getDegrees())
+            < 2;
   }
 
   @Override

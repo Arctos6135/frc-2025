@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartMid-A1"
+            "pathName": "StartLeft_F1_VISION"
           }
         },
         {
@@ -17,7 +17,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "autoAlignLeft"
+                  "name": "autoAlignRight"
                 }
               },
               {
@@ -36,15 +36,15 @@
           }
         },
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 2.0
+            "name": "outtakePiece"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "outtakePiece"
+            "name": "elevatorDown"
           }
         }
       ]

@@ -52,12 +52,12 @@ public class PositionConstants {
   public static List<Pose2d> RED_SCORING_POSES =
       Arrays.asList(
           new Pose2d[] {
-            new Pose2d(RED_SCORING_ZONES[0], Rotation2d.fromDegrees(180)),
-            new Pose2d(RED_SCORING_ZONES[1], Rotation2d.fromDegrees(120)),
-            new Pose2d(RED_SCORING_ZONES[2], Rotation2d.fromDegrees(60)),
-            new Pose2d(RED_SCORING_ZONES[3], Rotation2d.fromDegrees(0)),
-            new Pose2d(RED_SCORING_ZONES[4], Rotation2d.fromDegrees(-60)),
-            new Pose2d(RED_SCORING_ZONES[5], Rotation2d.fromDegrees(-120)),
+            new Pose2d(RED_SCORING_ZONES[0], Rotation2d.fromDegrees(180)), // 180
+            new Pose2d(RED_SCORING_ZONES[1], Rotation2d.fromDegrees(240)), // 120
+            new Pose2d(RED_SCORING_ZONES[2], Rotation2d.fromDegrees(300)), // 60
+            new Pose2d(RED_SCORING_ZONES[3], Rotation2d.fromDegrees(0)), // 0
+            new Pose2d(RED_SCORING_ZONES[4], Rotation2d.fromDegrees(60)), // -60
+            new Pose2d(RED_SCORING_ZONES[5], Rotation2d.fromDegrees(120)), // -120
           });
 
   public static List<Pose2d> BLUE_SCORING_POSES =
@@ -71,7 +71,7 @@ public class PositionConstants {
             new Pose2d(BLUE_SCORING_ZONES[5], Rotation2d.fromDegrees(120)),
           });
 
-  // All values from the game manual (in meters).  If we need to change change the pose2ds not
+  // All values from the game manual (in meters).  If we need to change, change the pose2ds not
   // these.
   public static final double FIELD_HEIGHT = 8.05;
   public static final double MIDDLE_Y = FIELD_HEIGHT / 2.0;
@@ -85,12 +85,11 @@ public class PositionConstants {
   public static final double BLUE_X = MIDDLE_LINE_X - MIDDLE_TO_START_LINE;
   public static final double RED_X = MIDDLE_LINE_X + MIDDLE_TO_START_LINE;
 
-  public static final Pose2d BLUE_BARGE = new Pose2d(BLUE_X, TOP_Y, Rotation2d.fromDegrees(180));
+  public static final Pose2d BLUE_LEFT = new Pose2d(BLUE_X, TOP_Y, Rotation2d.fromDegrees(180));
   public static final Pose2d BLUE_MIDDLE =
       new Pose2d(BLUE_X, MIDDLE_Y, Rotation2d.fromDegrees(180));
-  public static final Pose2d BLUE_PROCESSOR =
-      new Pose2d(BLUE_X, BOTTOM_Y, Rotation2d.fromDegrees(180));
-  public static final Pose2d RED_BARGE = new Pose2d(RED_X, BOTTOM_Y, Rotation2d.fromDegrees(0));
+  public static final Pose2d BLUE_RIGHT = new Pose2d(BLUE_X, BOTTOM_Y, Rotation2d.fromDegrees(180));
+  public static final Pose2d RED_LEFT = new Pose2d(RED_X, BOTTOM_Y, Rotation2d.fromDegrees(0));
   public static final Pose2d RED_MIDDLE = new Pose2d(RED_X, MIDDLE_Y, Rotation2d.fromDegrees(0));
-  public static final Pose2d RED_PROCESSOR = new Pose2d(RED_X, TOP_Y, Rotation2d.fromDegrees(0));
+  public static final Pose2d RED_RIGHT = new Pose2d(RED_X, TOP_Y, Rotation2d.fromDegrees(0));
 }

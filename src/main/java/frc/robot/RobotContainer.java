@@ -154,6 +154,9 @@ public class RobotContainer {
     delayGyroFix.addRequirements(drivetrain);
     Command resetGyroCommand =
         new InstantCommand(() -> drivetrain.swerveDrive.zeroGyro(), drivetrain)
+            /* .andThen(new InstantCommand(() -> drivetrain.swerveDrive.resetOdometry())) 
+             * TODO figure out a way to reset the odometry?
+            */
             .andThen(delayGyroFix);
     resetGyroCommand.setName("ResetGyro");
     driverX.onTrue(resetGyroCommand);
@@ -195,12 +198,12 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
 
     positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
-    positionChooser.addOption("Blue Processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("Blue Right", PositionConstants.BLUE_RIGHT);
     positionChooser.addOption("Blue Middle", PositionConstants.BLUE_MIDDLE);
-    positionChooser.addOption("Blue Barge", PositionConstants.BLUE_BARGE);
-    positionChooser.addOption("Red Processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("Blue Left", PositionConstants.BLUE_LEFT);
+    positionChooser.addOption("Red Right", PositionConstants.RED_RIGHT);
     positionChooser.addOption("Red Middle", PositionConstants.RED_MIDDLE);
-    positionChooser.addOption("Red Barge", PositionConstants.RED_BARGE);
+    positionChooser.addOption("Red Left", PositionConstants.RED_LEFT);
   }
 
   public void startMatch() {}
