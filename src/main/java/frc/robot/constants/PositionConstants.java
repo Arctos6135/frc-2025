@@ -70,4 +70,28 @@ public class PositionConstants {
             new Pose2d(BLUE_SCORING_ZONES[4], Rotation2d.fromDegrees(60)),
             new Pose2d(BLUE_SCORING_ZONES[5], Rotation2d.fromDegrees(120)),
           });
+
+  // All values from the game manual (in meters).  If we need to change change the pose2ds not
+  // these.
+  public static final double FIELD_HEIGHT = 8.05;
+  public static final double MIDDLE_Y = FIELD_HEIGHT / 2.0;
+  public static final double MIDDLE_TO_OUTSIDE_CAGE = 3.24;
+  public static final double BARGE_Y = MIDDLE_Y + MIDDLE_TO_OUTSIDE_CAGE;
+  public static final double PROCESSOR_Y = MIDDLE_Y - MIDDLE_TO_OUTSIDE_CAGE;
+  public static final double MIDDLE_LINE_X = 8.875;
+  public static final double START_LINE_X = 3.6576 + 1.66 + 2.24;
+  // public static final double MIDDLE_TO_START_LINE = 1.175;
+  public static final double MIDDLE_TO_START_LINE = MIDDLE_LINE_X - START_LINE_X;
+  public static final double BLUE_X = MIDDLE_LINE_X - MIDDLE_TO_START_LINE;
+  public static final double RED_X = MIDDLE_LINE_X + MIDDLE_TO_START_LINE;
+
+  public static final Pose2d BLUE_BARGE = new Pose2d(BLUE_X, BARGE_Y, Rotation2d.fromDegrees(180));
+  public static final Pose2d BLUE_MIDDLE =
+      new Pose2d(BLUE_X, MIDDLE_Y, Rotation2d.fromDegrees(180));
+  public static final Pose2d BLUE_PROCESSOR =
+      new Pose2d(BLUE_X, PROCESSOR_Y, Rotation2d.fromDegrees(180));
+  public static final Pose2d RED_BARGE = new Pose2d(RED_X, BARGE_Y, Rotation2d.fromDegrees(0));
+  public static final Pose2d RED_MIDDLE = new Pose2d(RED_X, MIDDLE_Y, Rotation2d.fromDegrees(0));
+  public static final Pose2d RED_PROCESSOR =
+      new Pose2d(RED_X, PROCESSOR_Y, Rotation2d.fromDegrees(0));
 }
