@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartReef-Leave"
+            "pathName": "StartBarge-Leave"
           }
         }
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }

@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drivetrain.AutoAlign;
-import frc.robot.commands.drivetrain.AutoAlignAuto;
 import frc.robot.commands.drivetrain.ResetGyro;
 import frc.robot.commands.drivetrain.TeleopDrive;
 import frc.robot.commands.elevator.ElevatorPositionSet;
@@ -28,6 +27,7 @@ import frc.robot.constants.ControllerConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.OuttakeConstants;
+import frc.robot.constants.PositionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -170,6 +170,7 @@ public class RobotContainer {
   }
 
   private void configureAuto() {
+
     NamedCommands.registerCommand(
         "elevatorL2", new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
     NamedCommands.registerCommand(
@@ -186,20 +187,27 @@ public class RobotContainer {
     // outtake));
     // "beambreakIntake", IntakePiece.beambreakIntake(intake, outtake, beambreak));
     NamedCommands.registerCommand("outtakePiece", new QuickOuttake(outtake));
-    NamedCommands.registerCommand("autoAlignAuto", new AutoAlignAuto(drivetrain, vision));
+    NamedCommands.registerCommand("autoAlignLeft", new AutoAlign(drivetrain, vision, true));
+    NamedCommands.registerCommand("autoAlignRight", new AutoAlign(drivetrain, vision, false));
     // NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, vision, () -> true));
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    // autoChooser.addOption("StartA_F1_D2", new PathPlannerAuto("A_F1_D2"));
-
     SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    positionChooser = new LoggedDashboardChooser<Pose2d>("position chooser");
+    positionChooser.addOption("Blue Processor", PositionConstants.BLUE_PROCESSOR);
+    positionChooser.addOption("Blue Middle", PositionConstants.BLUE_MIDDLE);
+    positionChooser.addOption("Blue Barge", PositionConstants.BLUE_BARGE);
+    positionChooser.addOption("Red Processor", PositionConstants.RED_PROCESSOR);
+    positionChooser.addOption("Red Middle", PositionConstants.RED_MIDDLE);
+    positionChooser.addOption("Red Barge", PositionConstants.RED_BARGE);
   }
 
   public void startMatch() {}
 
   public Command getAutonomousCommand() {
     // return autoChooser.get();
-    // drivetrain.swerveDrive.resetOdometry(positionChooser.get());
+    drivetrain.swerveDrive.resetOdometry(positionChooser.get());
     return autoChooser.getSelected();
   }
 }
