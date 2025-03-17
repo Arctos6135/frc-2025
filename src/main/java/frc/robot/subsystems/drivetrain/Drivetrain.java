@@ -43,6 +43,7 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
+    swerveDrive.swerveDrivePoseEstimator.update(swerveDrive.getYaw(), swerveDrive.getModulePositions());
     // swerveDrive.addVisionMeasurement(null, 0);
 
     // if (LimelightHelpers.getTV(VisionConstants.LIMELIGHT_NAME)) {
