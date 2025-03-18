@@ -154,9 +154,9 @@ public class RobotContainer {
     delayGyroFix.addRequirements(drivetrain);
     Command resetGyroCommand =
         new InstantCommand(() -> drivetrain.swerveDrive.zeroGyro(), drivetrain)
-            /* .andThen(new InstantCommand(() -> drivetrain.swerveDrive.resetOdometry())) 
+            /* .andThen(new InstantCommand(() -> drivetrain.swerveDrive.resetOdometry()))
              * TODO figure out a way to reset the odometry?
-            */
+             */
             .andThen(delayGyroFix);
     resetGyroCommand.setName("ResetGyro");
     driverX.onTrue(resetGyroCommand);

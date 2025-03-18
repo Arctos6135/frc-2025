@@ -53,12 +53,11 @@ public class AutoAlign extends Command {
       cancel();
     }
 
-    // if (LimelightHelpers.getBotPose2d_wpiBlue("") != Pose2d.kZero) {
-    //   swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""));
-    // }
-    // else {
-    //   cancel();
-    // }
+    if (LimelightHelpers.getBotPose2d_wpiBlue("") != Pose2d.kZero) {
+      swerveDrive.resetOdometry(LimelightHelpers.getBotPose2d_wpiBlue(""));
+    } else {
+      cancel();
+    }
 
     if (DriverStation.getAlliance().get() == Alliance.Red) {
       targetPose = swerveDrive.getPose().nearest(PositionConstants.RED_SCORING_POSES);
