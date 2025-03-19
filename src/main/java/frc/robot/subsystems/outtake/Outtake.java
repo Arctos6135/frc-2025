@@ -10,8 +10,6 @@ public class Outtake extends SubsystemBase {
   private final OuttakeIO io;
   private final OuttakeInputsAutoLogged inputs = new OuttakeInputsAutoLogged();
 
-  // public final DigitalInput beambreak = new DigitalInput(9);
-
   private final SimpleMotorFeedforward feedforward;
 
   private double targetVelocity;
@@ -78,5 +76,9 @@ public class Outtake extends SubsystemBase {
   /** Get the filtered current. */
   public double getFilteredCurrent() {
     return medianCurrent;
+  }
+
+  public boolean getBeambreak() {
+    return io.getBeambreak();
   }
 }

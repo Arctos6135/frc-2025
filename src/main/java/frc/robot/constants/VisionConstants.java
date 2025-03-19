@@ -18,4 +18,3 @@ public class VisionConstants {
   public static final double VISION_Y_TOLERANCE = 0.05;
   public static final double VISION_ANGLE_TOLERANCE = 2;
 }
-
