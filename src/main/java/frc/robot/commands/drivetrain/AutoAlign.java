@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.PositionConstants;
+import frc.robot.constants.VisionConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.vision.LimelightHelpers;
 import frc.robot.subsystems.vision.Vision;
@@ -43,7 +44,7 @@ public class AutoAlign extends Command {
             new PIDController(5, 0, 0),
             new ProfiledPIDController(
                 5, 0, 0, new Constraints(swerveDrive.getMaximumChassisAngularVelocity(), 2.0)));
-    swerveController.setTolerance(new Pose2d(0.05, 0.05, Rotation2d.fromDegrees(0.1)));
+    swerveController.setTolerance(new Pose2d(VisionConstants.VISION_X_TOLERANCE, VisionConstants.VISION_Y_TOLERANCE, Rotation2d.fromDegrees(VisionConstants.VISION_ANGLE_TOLERANCE)));
   }
 
   @Override

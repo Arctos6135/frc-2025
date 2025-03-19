@@ -4,15 +4,15 @@
     {
       "anchor": {
         "x": 7.5576,
-        "y": 4.025
+        "y": 7.265000000000001
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.163226535207424,
-        "y": 5.147523625136462
+        "x": 6.43482988878275,
+        "y": 6.91838470592249
       },
       "isLocked": false,
-      "linkedName": "StartMid"
+      "linkedName": "StartLeft"
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 5.3639879918981475
       },
       "prevControl": {
-        "x": 6.634002165716479,
-        "y": 5.9571307320728195
+        "x": 5.8809907393527805,
+        "y": 6.129131958351965
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Reef-F2"
+      "linkedName": "Reef-I"
     }
   ],
   "rotationTargets": [],

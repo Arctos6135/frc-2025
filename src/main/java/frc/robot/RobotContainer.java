@@ -129,8 +129,8 @@ public class RobotContainer {
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
-    operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
-    // operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L4_HEIGHT));
+    operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
+    operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
 
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
     operatorA.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));

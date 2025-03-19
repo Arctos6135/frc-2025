@@ -21,7 +21,9 @@ public class Drivetrain extends SubsystemBase {
   public final SwerveDrive swerveDrive;
 
   public Drivetrain(File directory) {
-    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+
+    //TODO figure out if this is a problem
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.LOW;
     try {
       this.swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.MAX_SPEED);
       // Alternative method if you don't want to supply the conversion factor via JSON files.

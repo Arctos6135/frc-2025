@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5252170612718343,
-        "y": 7.233648761599345
+        "x": 7.5576,
+        "y": 4.025
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5975440945687773,
-        "y": 7.198373533024018
+        "x": 7.163226535207424,
+        "y": 5.147523625136462
       },
       "isLocked": false,
-      "linkedName": "IntakeL"
+      "linkedName": "StartMid"
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 5.3639879918981475
       },
       "prevControl": {
-        "x": 5.559729257010147,
-        "y": 7.416337712149238
+        "x": 6.634002165716479,
+        "y": 5.9571307320728195
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Reef-F2"
+      "linkedName": "Reef-I"
     }
   ],
   "rotationTargets": [],
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -52.881483726041175
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
