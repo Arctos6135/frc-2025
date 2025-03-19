@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartRight-B2_VISION"
+            "pathName": "StartRight-ReefE_VISION"
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 1.5
           }
         },
         {

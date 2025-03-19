@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartLeft_F1_VISION"
+            "pathName": "StartLeft-ReefJ_VISION"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.0
+                  "waitTime": 5.0
                 }
               }
             ]
@@ -33,6 +33,12 @@
           "type": "named",
           "data": {
             "name": "elevatorL2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
           }
         },
         {
