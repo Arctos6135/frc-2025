@@ -10,6 +10,7 @@ public class OuttakeIO {
     public double temperature;
     public double current;
     public double voltage;
+    //public boolean beamBroken;
   }
 
   public void updateInputs(OuttakeInputs inputs) {}

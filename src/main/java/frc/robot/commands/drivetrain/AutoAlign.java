@@ -44,7 +44,11 @@ public class AutoAlign extends Command {
             new PIDController(5, 0, 0),
             new ProfiledPIDController(
                 5, 0, 0, new Constraints(swerveDrive.getMaximumChassisAngularVelocity(), 2.0)));
-    swerveController.setTolerance(new Pose2d(VisionConstants.VISION_X_TOLERANCE, VisionConstants.VISION_Y_TOLERANCE, Rotation2d.fromDegrees(VisionConstants.VISION_ANGLE_TOLERANCE)));
+    swerveController.setTolerance(
+        new Pose2d(
+            VisionConstants.VISION_X_TOLERANCE,
+            VisionConstants.VISION_Y_TOLERANCE,
+            Rotation2d.fromDegrees(VisionConstants.VISION_ANGLE_TOLERANCE)));
   }
 
   @Override
