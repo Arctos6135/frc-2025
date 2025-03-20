@@ -53,7 +53,7 @@ public class ElevatorConstants {
   public static final double ZERO = 0.0; // TODO: Make sure zero being zero works (it really should)
   public static final double HANDOFF_HEIGHT = 0.059;
   public static final double L2_HEIGHT = 0.109014332950115204;
-  public static final double L3_HEIGHT = 0.258893397212028503;
+  public static final double L3_HEIGHT = 0.247;
   public static final double L4_HEIGHT = 0.45; // Its really 0.47 but didnt want to hit hardstop
 
   // min and max for soft stop

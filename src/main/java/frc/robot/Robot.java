@@ -57,8 +57,8 @@ public class Robot extends LoggedRobot {
     // Set up data receivers & replay source
     if (isReal()) {
       // Running on a real robot, log to a USB stick ("/U/logs")
-      Logger.addDataReceiver(new WPILOGWriter());
-      Logger.addDataReceiver(new NT4Publisher());
+      // Logger.addDataReceiver(new WPILOGWriter());
+      // Logger.addDataReceiver(new NT4Publisher());
     } else if (isSimulation()) {
       // Running a physics simulator, log to NT
       Logger.addDataReceiver(new NT4Publisher());
@@ -83,9 +83,9 @@ public class Robot extends LoggedRobot {
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
     // m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
     //     m_robotContainer.vision.getVisionPose(), m_robotContainer.vision.getTimestamp());
-    m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
-        LimelightHelpers.getBotPose2d_wpiBlue(""),
-        LimelightHelpers.getLatestResults("").timestamp_RIOFPGA_capture);
+    // m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
+    //     LimelightHelpers.getBotPose2d_wpiBlue(""),
+    //     LimelightHelpers.getLatestResults("").timestamp_RIOFPGA_capture);
   }
 
   /** This function is called once when the robot is disabled. */
