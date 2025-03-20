@@ -20,7 +20,6 @@ import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
 import frc.robot.commands.intake.IntakeMove;
 import frc.robot.commands.intake.IntakePiece;
-import frc.robot.commands.outtake.BeambreakTest;
 import frc.robot.commands.outtake.ManualOuttake;
 import frc.robot.commands.outtake.OuttakeSpin;
 import frc.robot.commands.outtake.QuickOuttake;
@@ -118,8 +117,6 @@ public class RobotContainer {
 
     driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
     driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
-
-    driverA.whileTrue(new BeambreakTest(outtake));
 
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
