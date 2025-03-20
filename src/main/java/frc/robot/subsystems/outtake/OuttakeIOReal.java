@@ -8,6 +8,8 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.OuttakeConstants;
 
@@ -60,5 +62,7 @@ public class OuttakeIOReal extends OuttakeIO {
     inputs.current = rightMotor.getOutputCurrent();
     inputs.temperature = rightMotor.getMotorTemperature();
     inputs.voltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
+
   }
+
 }

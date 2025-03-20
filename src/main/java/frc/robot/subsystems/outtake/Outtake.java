@@ -78,4 +78,8 @@ public class Outtake extends SubsystemBase {
   public double getFilteredCurrent() {
     return medianCurrent;
   }
+
+  public boolean getBeambreak() {
+    return io.getBeambreak();
+  }
 }

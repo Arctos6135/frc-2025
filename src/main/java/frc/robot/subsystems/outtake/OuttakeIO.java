@@ -16,4 +16,8 @@ public class OuttakeIO {
   public void updateInputs(OuttakeInputs inputs) {}
 
   public void setVoltage(double voltage) {}
+
+  public boolean getBeambreak() {
+    return true;
+  }
 }
