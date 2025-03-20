@@ -22,7 +22,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain(File directory) {
 
-    //TODO figure out if this is a problem
+    // TODO figure out if this is a problem
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.LOW;
     try {
       this.swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.MAX_SPEED);
