@@ -1,10 +1,10 @@
 {
   "imu": {
-    "type": "adis16470",
+    "type": "xrs540",
     "id": 0,
     "canbus": null
   },
-  "invertedIMU": true,
+  "invertedIMU": false,
   "modules": [
     "frontleft.json",
     "frontright.json",
