@@ -1,6 +1,6 @@
 {
   "imu": {
-    "type": "xrs540",
+    "type": "adxrs450",
     "id": 0,
     "canbus": null
   },
