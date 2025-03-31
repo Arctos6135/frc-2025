@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -61,7 +62,7 @@ public class RobotContainer {
   public final Elevator elevator;
   public final Vision vision;
   //   public final Vision vision;
-  // public final DigitalInput beambreak;
+  public final DigitalInput beambreak = new DigitalInput(9);
 
   public final TeleopDrive teleopDrive;
 
@@ -117,6 +118,9 @@ public class RobotContainer {
 
     driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
     driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
+
+    driverA.whileTrue(new InstantCommand(() -> outtake.setVoltage(beambreak.get() ? 6 : 0)));
+    driverA.onFalse(new InstantCommand(() -> outtake.setVoltage(0)));
 
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
