@@ -29,8 +29,8 @@ public class Outtake extends SubsystemBase {
     io.updateInputs(inputs);
     medianCurrent = filter.calculate(inputs.current);
 
-    // io.setVoltage(
-    //     feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
+    io.setVoltage(
+        feedforward.calculate(targetVelocity, (targetVelocity - lastTargetVelocity) / 0.02));
 
     Logger.processInputs("Outtake", inputs);
     lastTargetVelocity = targetVelocity;

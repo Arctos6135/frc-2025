@@ -119,9 +119,6 @@ public class RobotContainer {
     driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
     driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
 
-    driverA.whileTrue(new InstantCommand(() -> outtake.setVoltage(beambreak.get() ? 6 : 0)));
-    driverA.onFalse(new InstantCommand(() -> outtake.setVoltage(0)));
-
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
     //         .andThen(
