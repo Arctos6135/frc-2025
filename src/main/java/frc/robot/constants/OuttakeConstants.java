@@ -16,8 +16,8 @@ public class OuttakeConstants {
   public static final double QUICK_OUTTAKE_DURATION = 3; // in seconds
 
   public static final LinearSystem<N1, N1, N1> OUTTAKE_LINEAR_SYSTEM =
-  new Matrix<>(new SimpleMatrix(new double[] {-5.17})),
-  new LinearSystem<>( 
+      new LinearSystem<>(
+          new Matrix<>(new SimpleMatrix(new double[] {-5.17})),
           new Matrix<>(new SimpleMatrix(new double[] {35.62})),
           new Matrix<>(new SimpleMatrix(new double[] {1})),
           new Matrix<>(new SimpleMatrix(new double[] {0.0})));

@@ -78,7 +78,7 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during all modes. */
   @Override
   public void robotPeriodic() {
-    m_robotContainer.vision.update();
+    // m_robotContainer.vision.update();
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
     // m_robotContainer.drivetrain.swerveDrive.addVisionMeasurement(
