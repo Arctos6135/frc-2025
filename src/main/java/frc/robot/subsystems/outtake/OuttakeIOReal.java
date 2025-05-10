@@ -5,8 +5,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.constants.CANConstants;
 import frc.robot.constants.OuttakeConstants;
 
@@ -17,7 +15,7 @@ public class OuttakeIOReal extends OuttakeIO {
   private final RelativeEncoder rightEncoder;
   private final RelativeEncoder leftEncoder;
 
-  private final DigitalInput beambreak = new DigitalInput(9);
+  // public final DigitalInput beambreak = new DigitalInput(9);
 
   public OuttakeIOReal() {
     rightMotor = new SparkMax(CANConstants.OUTTAKE_RIGHT, MotorType.kBrushless);
@@ -59,12 +57,5 @@ public class OuttakeIOReal extends OuttakeIO {
     inputs.current = rightMotor.getOutputCurrent();
     inputs.temperature = rightMotor.getMotorTemperature();
     inputs.voltage = rightMotor.getBusVoltage() * rightMotor.getAppliedOutput();
-
-    SmartDashboard.putBoolean("Beambreak", beambreak.get());
-  }
-
-  @Override
-  public boolean getBeambreak() {
-    return beambreak.get();
   }
 }

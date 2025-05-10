@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -20,7 +21,6 @@ import frc.robot.commands.elevator.ElevatorPositionSet;
 import frc.robot.commands.elevator.ManualElevator;
 import frc.robot.commands.intake.IntakeMove;
 import frc.robot.commands.intake.IntakePiece;
-import frc.robot.commands.outtake.BeambreakTest;
 import frc.robot.commands.outtake.ManualOuttake;
 import frc.robot.commands.outtake.OuttakeSpin;
 import frc.robot.commands.outtake.QuickOuttake;
@@ -62,7 +62,7 @@ public class RobotContainer {
   public final Elevator elevator;
   public final Vision vision;
   //   public final Vision vision;
-  // public final DigitalInput beambreak;
+  public final DigitalInput beambreak = new DigitalInput(9);
 
   public final TeleopDrive teleopDrive;
 
@@ -119,8 +119,6 @@ public class RobotContainer {
     driverLeftBumper.whileTrue(new AutoAlign(drivetrain, vision, true));
     driverRightBumper.whileTrue(new AutoAlign(drivetrain, vision, false));
 
-    driverA.whileTrue(new BeambreakTest(outtake));
-
     // driverA.whileTrue(
     //     new MakeNormal(drivetrain, vision)
     //         .andThen(
@@ -132,7 +130,7 @@ public class RobotContainer {
     // operatorA.whileTrue(new QuickOuttake(outtake));
     operatorDpadDown.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.ZERO));
     operatorDpadLeft.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L2_HEIGHT));
-    operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
+    operatorDpadRight.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
     operatorDpadUp.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.L3_HEIGHT));
 
     operatorX.onTrue(new ElevatorPositionSet(elevator, ElevatorConstants.HANDOFF_HEIGHT));
